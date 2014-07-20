@@ -11,13 +11,9 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 
     <!-- Latest compiled and minified JavaScript -->
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <!--<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>-->
 </head>
 <body ng-controller="appCtrl">
-<!--<ul class="menu">
-    <li><a href="#/view1">view1</a></li>
-    <li><a href="#/view2">view2</a></li>
-</ul>-->
 <nav class="navbar navbar-default" role="navigation">
     <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -32,21 +28,16 @@
         </div>
     </div><!-- /.container-fluid -->
 </nav>
-<div class="container" ui-view>
-<div class="col-md-6">
-//TODO: Place Web and Mobile Images.
+<div class="container">
+<div class="col-md-3"></div>
+<div ui-view class="col-md-6"></div>
+<div class="col-md-3"></div>
 </div>
-<div class="col-md-6">
-    <div class="col-md-7">
-    <div class="input-group">
-        <input type="text" placeholder="Enter mobile number" class="form-control">
-      <span class="input-group-btn">
-        <button class="btn btn-success" type="button">Join</button>
-      </span>
-    </div><!-- /input-group -->
-    </div>
-</div>
-</div>
+<!--<ul class="menu">
+    <li><a href="#/view1">view1</a></li>
+    <li><a href="#/view2">view2</a></li>
+</ul>-->
+
 <script src="vendor/requirejs/require.js" data-main="scripts/main.js"></script>
 </body>
 </html>

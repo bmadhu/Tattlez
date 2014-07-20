@@ -4,11 +4,13 @@
 define([
     'angular',
     'angular-route',
+    'angular-ui-router',
     './controllers/index'
 ], function (angular) {
     'use strict';
 
     return angular.module('app', [
-       'tattlez.controllers'
+       'tattlez.controllers',
+        'ui.router'
     ]);
 });
