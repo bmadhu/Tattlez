@@ -3,7 +3,7 @@
  */
 define([
     './appCtrl',
-    './my-ctrl-1',
+    './webHomeController',
     './my-ctrl-2'
 ], function () {
 
