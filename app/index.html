@@ -4,14 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Tattlez</title>
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-
-    <!-- Latest compiled and minified JavaScript -->
-    <!--<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>-->
+	<link href="vendor/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+	<link href="css/tattlez.css" rel="stylesheet" />
 </head>
 <body ng-controller="appCtrl">
 <nav class="navbar navbar-default" role="navigation">
@@ -30,7 +24,9 @@
 </nav>
 <div class="container">
 <div class="col-md-3"></div>
-<div ui-view class="col-md-6"></div>
+<div class="col-md-6 {{phoneTablet}}">
+	<div ui-view class="{{phoneTablet}}-inner"></div>
+</div>
 <div class="col-md-3"></div>
 </div>
 <!--<ul class="menu">

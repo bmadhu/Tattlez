@@ -2,9 +2,9 @@
  * Created by Reddy on 05-07-2014.
  */
 define([
-    './appCtrl',
+    './appController',
     './webHomeController',
-    './my-ctrl-2'
+    './loadingController'
 ], function () {
 
 });

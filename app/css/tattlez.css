@@ -1,0 +1,59 @@
+﻿.nav, .pagination, .carousel, .panel-title a {
+	cursor: pointer;
+}
+
+.phone {
+	height: 551px;
+	width: 290px;
+	background: url(../images/phone.png) no-repeat center;
+	margin-top: 15px;
+}
+.tablet {
+	height: 534px;
+	width: 600px;
+	background: url(../images/tab.png) no-repeat center;
+	margin-top: 15px;
+}
+.content-vertical-middle {
+	position: relative;
+	text-align: center;
+}
+
+.progress-middle {
+	top: 38%;
+}
+
+.div-join {
+	top: 40%;
+}
+
+.loading {
+	top: 40%;
+	color: #ff6a00;
+	font-family: Tahoma;
+	font-weight: bold;
+	font-size: 35pt;
+}
+
+.middle {
+	height: 2px;
+	background-color: yellow;
+}
+
+.navbar {
+	margin-bottom: 0;
+	background-color: #0079a7;
+}
+
+.navbar-brand {
+	color: #fff !important;
+}
+
+.phone-inner {
+	height: 100%;
+	padding: 96px 15px 100px 17px;
+}
+.tablet-inner {
+	height: 100%;
+	padding: 64px 44px 113px 45px;
+}

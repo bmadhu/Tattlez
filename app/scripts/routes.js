@@ -8,12 +8,15 @@ define(['./app'], function (app) {
         $stateProvider
             .state('home', {
                 url: '/',
-                templateUrl: '../views/webHomePage.html',
-                controller: 'WebHomeCtrl',
+                templateUrl: '../views/loading.html',
+                controller: 'LoadingCtrl',
                 module: 'public'
             })
             .state('welcome', {
-
+            	url: '/welcome',
+            	templateUrl: '../views/webHomePage.html',
+            	controller: 'WebHomeCtrl',
+            	module: 'public'
             });
     }]);
 });

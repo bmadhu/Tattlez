@@ -5,12 +5,17 @@ define([
     'angular',
     'angular-route',
     'angular-ui-router',
-    './controllers/index'
+    './controllers/index',
+	'./services/index',
+	'bootstrap',
+	'angular-bootstrap'
 ], function (angular) {
     'use strict';
 
     return angular.module('app', [
        'tattlez.controllers',
-        'ui.router'
+	   'tattlez.services',
+        'ui.router',
+		'ui.bootstrap'
     ]);
 });
