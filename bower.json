@@ -7,19 +7,14 @@
     "libs"
   ],
   "dependencies": {
-    "angular": "~1.0.7",
-    "angular-cookies": "~1.0.7",
-    "angular-local-storage": "~0.0.1",
-    "angular-grid": "2.0.7",
-    "angular-ui": "~0.4.0",
+    "angular": "~1.2.20",
+    "angular-local-storage": "~0.0.5",
     "angular-route": "latest",
-    "bootstrap": "~2.3.2",
-    "bootstrap-css": "~2.3.2",
-    "bootstrap-daterangepicker": "~1.3.2",
     "jquery": "latest",
-    "jquery-ui": "~1.10.3",
     "requirejs": "latest",
     "requirejs-domready": "latest",
-    "angular-ui-router": "~0.2.10"
+    "angular-ui-router": "~0.2.10",
+    "bootstrap": "~3.2.0",
+    "angular-bootstrap": "~0.11.0"
   }
 }

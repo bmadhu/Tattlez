@@ -9,7 +9,9 @@ define([
     'require',
     'angular',
     'app',
-    'routes'
+    'routes',
+	'bootstrap',
+	'angular-bootstrap'
 ], function (require, ng) {
     'use strict';
 

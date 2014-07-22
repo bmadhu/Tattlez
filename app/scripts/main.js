@@ -9,8 +9,9 @@ require.config({
         'angular-route': '../vendor/angular-route/angular-route',
         'angular-ui-router': '../vendor/angular-ui-router/release/angular-ui-router',
         'domReady': '../vendor/requirejs-domready/domReady',
-        'jquery': '../vendor/jquery/jquery',
-        'bootstrap': '//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min'
+        'jquery': '../vendor/jquery/dist/jquery.min',
+        'bootstrap': '../vendor/bootstrap/dist/js/bootstrap.min',
+		'angular-bootstrap':'../vendor/angular-bootstrap/ui-bootstrap-tpls.min'
 
     },
     // angular does not support AMD out of the box, put it in a shim
@@ -26,6 +27,9 @@ require.config({
         },
         'angular-ui-router':{
             deps:['angular']
+        },
+        'angular-bootstrap': {
+			deps:['angular']
         }
 
 
