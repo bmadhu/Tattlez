@@ -25,7 +25,9 @@
 <div class="container">
 <div class="col-md-3"></div>
 <div class="col-md-6 {{phoneTablet}}">
-	<div ui-view class="{{phoneTablet}}-inner"></div>
+	<div class="{{phoneTablet}}-inner">
+		<div class="maindiv-{{phoneTablet}}" ui-view></div>
+	</div>
 </div>
 <div class="col-md-3"></div>
 </div>

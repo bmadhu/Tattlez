@@ -51,9 +51,17 @@
 
 .phone-inner {
 	height: 100%;
-	padding: 96px 15px 100px 17px;
+	padding: 97px 13px 105px 15px;
 }
 .tablet-inner {
 	height: 100%;
-	padding: 64px 44px 113px 45px;
+	padding: 62px 41px 112px 42px;
+}
+.maindiv-phone {
+height:100%;
+background: url(../images/3.jpg) no-repeat center;
+}
+.maindiv-tablet {
+height:100%;
+background: url(../images/1.jpg) no-repeat center;
 }
