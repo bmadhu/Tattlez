@@ -5,7 +5,7 @@ define(['../modules/services'], function (services) {
 	'use strict';
 	services.factory('configSrvc', function () {
 		return {
-			phoneTablet: "phone"//options:"phone","tablet"
+			phoneTablet: "tablet"//options:"phone","tablet"
 		};
 	});
 });
