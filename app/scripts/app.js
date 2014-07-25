@@ -7,7 +7,7 @@ define([
     'angular-ui-router',
     './controllers/index',
 	'./services/index',
-	'bootstrap',
+	'./directives/index',
 	'angular-bootstrap'
 ], function (angular) {
     'use strict';
@@ -15,6 +15,7 @@ define([
     return angular.module('app', [
        'tattlez.controllers',
 	   'tattlez.services',
+	   'tattlez.directives',
         'ui.router',
 		'ui.bootstrap'
     ]);

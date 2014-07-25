@@ -8,7 +8,7 @@ define(['../modules/controller'], function (controllers) {
     		if ($scope.progress != 100)
     			$scope.progress += 2;
     		if ($scope.progress == 100)
-    			$state.go('welcome');
+    			$state.go('join');
     	}
     	// listen on DOM destroy (removal) event, and cancel the next UI update
     	// to prevent updating time after the DOM element was removed.

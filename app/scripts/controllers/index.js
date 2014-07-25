@@ -3,7 +3,7 @@
  */
 define([
     './appController',
-    './webHomeController',
+    './joinController',
     './loadingController'
 ], function () {
 
