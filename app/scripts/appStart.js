@@ -10,7 +10,6 @@ define([
     'angular',
     'app',
     'routes',
-	'bootstrap',
 	'angular-bootstrap'
 ], function (require, ng) {
     'use strict';

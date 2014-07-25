@@ -12,11 +12,13 @@ define(['./app'], function (app) {
                 controller: 'LoadingCtrl',
                 module: 'public'
             })
-            .state('welcome', {
-            	url: '/welcome',
-            	templateUrl: '../views/webHomePage.html',
-            	controller: 'WebHomeCtrl',
+            .state('join', {
+            	url: '/join',
+            	templateUrl: '../views/join.html',
+            	controller: 'JoinCtrl',
             	module: 'public'
             });
+        $locationProvider.html5Mode(true);
     }]);
+    
 });
