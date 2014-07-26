@@ -11,7 +11,7 @@ var otpCtrl = function ($rootScope, $scope, $state, $timeout, configSrvc, joinSr
     $scope.$on("UPDATE_OTP", function (event) {
         $scope.enableResendOtp = true;
     });
-
+alert(joinSrvc.mobileAndOtp.otp);
     // Validates OTP - if valid - go to history page else shows error alert
     $scope.validateOtp = function (otp) {
         if (joinSrvc.mobileAndOtp.otp && joinSrvc.mobileAndOtp.otp ==  $scope.otpInput) {
