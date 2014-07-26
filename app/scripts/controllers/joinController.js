@@ -1,8 +1,16 @@
 define(['../modules/controller'], function (controllers) {
     'use strict';
-    controllers.controller('JoinCtrl', function ($scope) {
+    controllers.controller('JoinCtrl', function ($scope, $state, joinSrvc) {
+        $scope.mobileNumber;
+        /**
+         * Saves mobile number in joinService
+         * generates random number
+         * navigates to Authenticate page
+         */
     	$scope.join = function () {
-    		alert(1);
+            joinSrvc.setMobileNumber($scope.mobileNumber);
+            joinSrvc.setOtp();
+            $state.go('authenticate');
     	};
     });
 });

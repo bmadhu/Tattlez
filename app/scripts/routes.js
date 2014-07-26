@@ -17,6 +17,17 @@ define(['./app'], function (app) {
             	templateUrl: '../views/join.html',
             	controller: 'JoinCtrl',
             	module: 'public'
+            })
+            .state('authenticate', {
+                url: '/authenticate',
+                templateUrl: '../views/otp.html',
+                controller: 'otpCtrl',
+                module: 'public'
+            })
+            .state('history', {
+                url: '/history',
+                templateUrl: '../views/history.html',
+                module: 'public'
             });
         $locationProvider.html5Mode(true);
     }]);

@@ -2,9 +2,10 @@
 <div class="content-vertical-middle div-join content">
 	<form name="joinForm" ng-submit="join()" autocomplete="off">
 		<div class="input-group">
-			<input type="text" placeholder="Enter mobile number" ng-model="mobileNumber" class="form-control" rpattern="/\d{10}/" ng-required="true" autofocus />
+			<input type="text"
+                   placeholder="Enter mobile number" ng-model="mobileNumber" class="form-control" ng-pattern="/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/" ng-required="true" autofocus />
 			<span class="input-group-btn">
-				<button class="btn btn-success" type="submit" ng-disabled="!joinForm.$valid || disable">Join</button>
+				<button class="btn btn-warning" type="submit" ng-disabled="!joinForm.$valid">Join</button>
 			</span>
 		</div>
 	</form>
