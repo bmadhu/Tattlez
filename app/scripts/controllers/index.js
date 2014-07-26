@@ -4,7 +4,8 @@
 define([
     './appController',
     './joinController',
-    './loadingController'
+    './loadingController',
+    './otpController'
 ], function () {
 
 });

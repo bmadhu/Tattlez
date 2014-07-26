@@ -30,6 +30,10 @@ background-color:#DFF2FF;
 	top: 40%;
 }
 
+.div-otp {
+    top: 5%;
+}
+
 .loading {
 	top: 40%;
 	color: #ff6a00;
@@ -95,3 +99,7 @@ padding:0 5px 0 5px;
 		font-family: Helvetica, sans-serif;
 		font-size: 15pt;
 	}
+
+.alert{
+    margin-bottom: 5px;
+}
