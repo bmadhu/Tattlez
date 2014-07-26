@@ -8,7 +8,7 @@
     <span>Enter OTP (one time password) that you have received on your mobile</span>
     <div class="form-group">
     <input type="text"
-           placeholder="Enter OTP number" ng-model="otpInput" class="form-control" ng-required="true" autofocus/>
+           placeholder="Enter OTP number" ng-model="otpInput" class="form-control" ng-enter="validateOtp()" ng-required="true" focus="true" />
     </div>
     <div style="text-align: center">
         <!--Resend otp button displays after timeout-->
