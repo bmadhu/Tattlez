@@ -103,3 +103,8 @@ padding:0 5px 0 5px;
 .alert{
     margin-bottom: 5px;
 }
+
+.addChat{
+    background:url(../images/add_chat.gif) no-repeat left;
+    cursor: pointer;
+}
