@@ -3,7 +3,7 @@
 	<form name="joinForm" ng-submit="join()" autocomplete="off">
 		<div class="input-group">
 			<input type="text"
-                   placeholder="Enter mobile number" ng-model="mobileNumber" class="form-control" ng-pattern="/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/" ng-required="true" autofocus />
+                   placeholder="Enter mobile number" ng-model="mobileNumber" class="form-control" ng-pattern="/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/" ng-required="true" focus="true" />
 			<span class="input-group-btn">
 				<button class="btn btn-warning" type="submit" ng-disabled="!joinForm.$valid">Join</button>
 			</span>
