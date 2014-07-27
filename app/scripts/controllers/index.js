@@ -5,7 +5,8 @@ define([
     './appController',
     './joinController',
     './loadingController',
-    './otpController'
+    './otpController',
+    './historyController'
 ], function () {
 
 });
