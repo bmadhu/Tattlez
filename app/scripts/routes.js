@@ -35,6 +35,12 @@ define(['./app'], function (app) {
                 templateUrl: '../views/contacts.html',
                 controller: 'ContactsCtrl',
                 module: 'public'
+            })
+            .state('addContact', {
+                url: '/addContact',
+                templateUrl: '../views/addNewContact.html',
+                controller: 'addContactCtrl',
+                module: 'public'
             });
         //$locationProvider.html5Mode(true);
     }]);
