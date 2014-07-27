@@ -6,7 +6,9 @@ define([
     './joinController',
     './loadingController',
     './otpController',
-    './historyController'
+    './historyController',
+    './contactsController',
+    './addContactController'
 ], function () {
 
 });
