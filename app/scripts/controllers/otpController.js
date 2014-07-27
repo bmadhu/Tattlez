@@ -15,6 +15,9 @@ alert(joinSrvc.mobileAndOtp.otp);
     // Validates OTP - if valid - go to history page else shows error alert
     $scope.validateOtp = function (otp) {
         if (joinSrvc.mobileAndOtp.otp && joinSrvc.mobileAndOtp.otp ==  $scope.otpInput) {
+            var user = {};
+            user.mobileNumber=joinSrvc.mobileAndOtp.mobileNumber;
+            joinSrvc.addUser(user);
             $state.go('history');
         } else{
             $scope.showAlert =true;
