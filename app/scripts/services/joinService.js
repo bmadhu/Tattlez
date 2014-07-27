@@ -3,7 +3,7 @@
  */
 define(['../modules/services'], function (services) {
     'use strict';
-    services.factory('joinSrvc', function ($rootScope, $timeout, configSrvc) {
+    services.factory('joinSrvc', function ($http,$q,$rootScope, $timeout, configSrvc) {
         var mobileAndOtp = {}; //object to save mobile number and OTP
 
         // Sets mobile number from join form
@@ -28,11 +28,30 @@ define(['../modules/services'], function (services) {
             return mobileAndOtp;
         }
 
+        function getallUsers(){
+            var future = $q.defer();
+            $http.jsonp('/users/getall?callback=JSON_CALLBACK').success(function(data){
+                future.resolve(data);
+
+            },function(err){future.reject(err);});
+        return future.promise;
+        }
+
+        function addUser(user){
+            var future = $q.defer();
+            $http.post('/users/addUser',user).success(function(data){
+                future.resolve(data);
+            },function(err){future.reject(err);});
+            return future.promise;
+        }
+
         return {
             setMobileNumber: setMobileNumber,
             setOtp: setOtp,
             getMobileAndOtp: getMobileAndOtp,
-            mobileAndOtp: mobileAndOtp
+            mobileAndOtp: mobileAndOtp,
+            getallUsers: getallUsers,
+            addUser: addUser
         };
     });
 });
