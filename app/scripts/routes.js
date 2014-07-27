@@ -27,9 +27,16 @@ define(['./app'], function (app) {
             .state('history', {
                 url: '/history',
                 templateUrl: '../views/history.html',
+                controller: 'HistoryCtrl',
+                module: 'public'
+            })
+            .state('contacts', {
+                url: '/contacts',
+                templateUrl: '../views/contacts.html',
+                controller: 'ContactsCtrl',
                 module: 'public'
             });
-        $locationProvider.html5Mode(true);
+        //$locationProvider.html5Mode(true);
     }]);
     
 });
