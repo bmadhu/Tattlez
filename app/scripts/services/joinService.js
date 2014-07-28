@@ -37,6 +37,15 @@ define(['../modules/services'], function (services) {
         return future.promise;
         }
 
+        function getUserIdByMobileNumber(){
+            var future = $q.defer();
+            $http.get('/users/getUserIdByMobileNumber/'+mobileAndOtp.mobileNumber).success(function(data){
+                future.resolve(data);
+
+            },function(err){future.reject(err);});
+            return future.promise;
+        }
+
         function addUser(user){
             var future = $q.defer();
             $http.post('/users/addUser',user).success(function(data){
@@ -51,7 +60,8 @@ define(['../modules/services'], function (services) {
             getMobileAndOtp: getMobileAndOtp,
             mobileAndOtp: mobileAndOtp,
             getallUsers: getallUsers,
-            addUser: addUser
+            addUser: addUser,
+            getUserIdByMobileNumber: getUserIdByMobileNumber
         };
     });
 });

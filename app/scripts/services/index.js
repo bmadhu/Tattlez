@@ -3,7 +3,9 @@
  */
 define([
     './configService',
-    './joinService'
+    './joinService',
+    './addContactService',
+    './contactsService'
 ], function () {
 
 });

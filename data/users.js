@@ -6,7 +6,6 @@ return function(req,res) {
 // find everything
     db.users.find(function (err, docs) {
         // docs is an array of all the documents in users
-        console.log(docs);
         res.jsonp(docs);
         res.end();
         if(err){
@@ -15,19 +14,46 @@ return function(req,res) {
     });
 }
 };
+
+exports.getUserIdByMobileNumber=function(db){
+  return function(req,res){
+      console.log(req.params.mobileNumber);
+      db.users.find({mobileNumber:req.params.mobileNumber},function(err,doc){
+          res.send(doc[0]._id.toString());
+          res.end();
+          if(err)
+          console.log(err);
+      })
+  }
+};
+
 exports.addUser = function(db){
     return function(req,res) {
 // find everything
-        console.log(req.body);
         var doc = req.body;
-        db.users.insert(doc, function (err, docs) {
-            // docs is an array of all the documents in users
-            console.log(docs);
-            res.jsonp('{}');
-            res.end();
+        db.users.find({mobileNumber:doc.mobileNumber},function(err,docs){
+            if(docs.length<1){
+                db.users.insert(doc, function (err, docs) {
+                 // docs is an array of all the documents in users
+                    res.jsonp('');
+                    res.end();
+                 if(err){
+                 console.log(err);
+                     res.jsonp('');
+                     res.end();
+                 }
+                 });
+            }
             if(err){
                 console.log(err);
+                res.jsonp('');
+                res.end();
+            }
+            else{
+                res.jsonp(null);
+                res.end();
             }
         });
+
     }
 };

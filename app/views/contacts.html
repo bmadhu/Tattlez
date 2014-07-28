@@ -5,6 +5,9 @@
         <a class="text addSearch"></a>
     </div>
 </div>
-<div class="content-vertical-middle div-otp content">
-    <span>This is Contacts page.</span>
+<div class="content contacts-list">
+    <div ng-repeat="contact in contacts">
+        <h4 ng-bind="contact.contactName"></h4>
+        <h4 ng-bind="contact.contactNumber"></h4>
+    </div>
 </div>

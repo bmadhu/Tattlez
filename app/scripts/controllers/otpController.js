@@ -17,8 +17,10 @@ alert(joinSrvc.mobileAndOtp.otp);
         if (joinSrvc.mobileAndOtp.otp && joinSrvc.mobileAndOtp.otp ==  $scope.otpInput) {
             var user = {};
             user.mobileNumber=joinSrvc.mobileAndOtp.mobileNumber;
-            joinSrvc.addUser(user);
-            $state.go('history');
+            joinSrvc.addUser(user).then(function(data){
+                $state.go('history');
+            });
+
         } else{
             $scope.showAlert =true;
             $scope.otpInput = null;
