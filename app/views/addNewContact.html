@@ -1,6 +1,10 @@
 <div class="heading">
     <span class="text">Add Contact</span>
 </div>
+<!-- Displays alert when Contact number already exists.-->
+<div ng-if="showAlert" class="alert alert-danger alert-dismissible" role="alert">
+    <strong>Warning!</strong>Contact number already exists.
+</div>
 <div class="content-vertical-middle div-otp content">
     <div class="form-group">
         <span>Name</span>
@@ -10,10 +14,10 @@
     <div class="form-group">
         <span>Mobile Number</span>
         <input type="text"
-               placeholder="Enter mobile number" ng-model="contactMobile" class="form-control" ng-required="true"/>
+               placeholder="Enter mobile number" ng-model="contactNumber" class="form-control" ng-required="true"/>
     </div>
     <div style="text-align: center">
-        <button class="btn btn-warning" type="submit">Save</button>
-        <button class="btn btn-default" type="submit" ng-click="gotoContactsForm()">Cancel</button>
+        <button class="btn btn-warning" type="button" ng-click="addContact()">Save</button>
+        <button class="btn btn-default" type="button" ng-click="gotoContactsForm()">Cancel</button>
     </div>
 </div>
