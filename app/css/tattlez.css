@@ -1,9 +1,11 @@
 ﻿.nav, .pagination, .carousel, .panel-title a {
 	cursor: pointer;
 }
+
 body {
-background-color:#DFF2FF;
+	background-color: #DFF2FF;
 }
+
 .phone {
 	height: 551px;
 	width: 290px;
@@ -31,7 +33,7 @@ background-color:#DFF2FF;
 }
 
 .div-otp {
-    top: 5%;
+	top: 5%;
 }
 
 .loading {
@@ -40,7 +42,7 @@ background-color:#DFF2FF;
 	font-family: Tahoma;
 	font-weight: bold;
 	font-size: 35pt;
-	text-align:center;
+	text-align: center;
 }
 
 .middle {
@@ -80,9 +82,11 @@ background-color:#DFF2FF;
 	/*background: url(../images/1.jpg) no-repeat center;*/
 	background-color: rgb(238, 209, 157);
 }
+
 .content {
-padding:0 5px 0 5px;
+	padding: 0 5px 0 5px;
 }
+
 .heading {
 	background: url(../images/chat-tmp.png) no-repeat left;
 	border: 1px solid rgb(151, 92, 46);
@@ -100,26 +104,66 @@ padding:0 5px 0 5px;
 		font-size: 15pt;
 	}
 
-.alert{
-    margin-bottom: 5px;
+.alert {
+	margin-bottom: 5px;
 }
 
-.addChat{
-    background:url(../images/add_chat.gif) no-repeat left;
-    cursor: pointer;
+.addChat {
+	background: url(../images/add_chat.gif) no-repeat left;
+	cursor: pointer;
 }
 
-.addSearch{
-    background:url(../images/searchIcon.png) no-repeat left;
-    cursor: pointer;
+.addSearch {
+	background: url(../images/searchIcon.png) no-repeat left;
+	cursor: pointer;
 }
 
 .addContact {
-    background:url(../images/addContactIcon.png) no-repeat left;
-    cursor: pointer;
+	background: url(../images/addContactIcon.png) no-repeat left;
+	cursor: pointer;
 }
 
-.contacts-list{
-    overflow-y: scroll;
-    height: 325px;
+.contacts-list {
+	overflow-y: scroll;
+	height: 325px;
+}
+
+.friendsdiv {
+	float: left;
+	width: 100%;
+	border-bottom: 1px solid #eee;
+	padding: 2px;
+	cursor: pointer;
+}
+
+	.friendsdiv:hover {
+		background-color: rgba(255, 188, 113, 0.89);
+	}
+
+	.friendsdiv div {
+		padding: 0px;
+	}
+
+.dropdown-menu-custom {
+	left: -137px;
+}
+
+	.dropdown-menu-custom > li > a:hover,
+	.dropdown-menu-custom > li > a:focus {
+		color: #262626;
+		text-decoration: none;
+		background-color: #ff6a00;
+	}
+
+	.dropdown-menu-custom .divider {
+		margin: 4px;
+	}
+
+.btn-group-custom {
+	top: 7px;
+}
+
+.btn-custom {
+	padding: 0px 6px !important;
+	border-radius: 12px;
 }

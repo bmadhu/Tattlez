@@ -31,14 +31,38 @@ exports.addContact = function(db){
 
 exports.getContactsByMobileNumber = function(db){
     return function(req,res) {
-// find everything
+    	var docs = [];
+    	var internalCnt = 0;
+    	var totalCnt = 0;
         db.users.find({mobileNumber:req.params.mobileNumber},function(err,doc){
             var userId = doc[0]._id.toString();
-            db.contacts.find({userId:userId},function(err,docs){
-                if(err)console.log(err);
-                res.jsonp(docs);
-                res.end();
+            db.contacts.find({ userId: userId }).forEach(function (err, doc) {
+            	if (err) console.log(err);
+            	if (!doc) {
+            		
+            	}
+            	if (doc) {
+            		totalCnt++;
+            		var contact = {};
+            		contact.contactName = doc.contactName;
+            		contact.contactNumber = doc.contactNumber;
+            		db.users.find({ mobileNumber: doc.contactNumber }, function (uerr, udoc) {
+            			if (uerr) console.log(uerr);
+            			if (udoc.length>0)
+            				contact.photo = udoc.mobileNumber;
+						else
+            				contact.photo = 'default_profile_M.jpg';
+            			docs.push(contact);
+            			internalCnt++;
+            			if (internalCnt == totalCnt) {
+            				res.jsonp(docs);
+            				res.end();
+            			}
+            		});
+            	}
+            	
             });
+           
         });
 
     }
