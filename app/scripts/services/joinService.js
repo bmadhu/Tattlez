@@ -50,7 +50,9 @@ define(['../modules/services'], function (services) {
             var future = $q.defer();
             $http.post('/users/addUser',user).success(function(data){
                 future.resolve(data);
-            },function(err){future.reject(err);});
+            },function(err){
+                future.reject(err);
+            });
             return future.promise;
         }
 
