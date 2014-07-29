@@ -5,9 +5,15 @@ exports.getallUsers = function(db){
 return function(req,res) {
 // find everything
     db.users.find(function (err, docs) {
-        // docs is an array of all the documents in users
-        res.jsonp(docs);
-        res.end();
+    	// docs is an array of all the documents in users
+    	if (docs) {
+    		res.jsonp(docs);
+    		res.end();
+    	}
+    	else {
+    		res.jsonp('{}');
+    		res.end();
+    	}
         if(err){
             console.log(err);
         }
@@ -49,7 +55,7 @@ exports.addUser = function(db){
                 res.jsonp('');
                 res.end();
             }
-            else{
+            if(docs.length>0){
                 res.jsonp(null);
                 res.end();
             }

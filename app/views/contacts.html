@@ -1,13 +1,37 @@
 <div class="heading">
-    <span class="text">Contacts</span>
-    <div class="pull-right">
-        <a class="text addContact" ng-click="addNewContact()"></a>
-        <a class="text addSearch"></a>
-    </div>
+	<span class="text">Contacts</span>
+	<div class="pull-right">
+		<a class="text addContact" ng-click="addNewContact()"></a>
+		<a class="text addSearch"></a>
+	</div>
 </div>
 <div class="content contacts-list">
-    <div ng-repeat="contact in contacts">
-        <h4 ng-bind="contact.contactName"></h4>
-        <h4 ng-bind="contact.contactNumber"></h4>
+	<div ng-repeat="contact in contacts">
+		<div class="friendsdiv">
+			<div class="col-md-1">
+				<img ng-src="../images/{{contact.photo}}" class="img-default" width="35px" height="38px" />
+			</div>
+			<div class="col-md-11">
+				<div class="col-md-11">
+					<b ng-bind="contact.contactName"></b>
+					<div>
+						<span ng-bind="contact.contactNumber"></span>
+					</div>
+				</div>
+				<div class="col-md-1">
+					 <div class="btn-group btn-group-custom" dropdown>
+      <button type="button" class="btn btn-default dropdown-toggle btn-custom">
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-custom" role="menu">
+        <li><a href="#"><span class="glyphicon glyphicon-comment"></span> Chat</a></li>
+        <li class="divider"></li>
+        <li><a href="#"><span class="glyphicon glyphicon-trash"></span> Delete Contact</a></li>
+      </ul>
     </div>
+				</div>
+
+			</div>
+		</div>
+	</div>
 </div>
