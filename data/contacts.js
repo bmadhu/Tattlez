@@ -5,7 +5,7 @@ exports.addContact = function(db){
     return function(req,res) {
 // find everything
         var doc = req.body;
-        db.contacts.find({contactNumber:doc.contactNumber},function(err,docs){
+        db.contacts.find({contactNumber:doc.contactNumber, userId: doc.userId}, function(err,docs) {
             if(docs.length<1){
                 db.contacts.insert(doc, function (err, docs) {
                     // docs is an array of all the documents in users

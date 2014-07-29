@@ -10,11 +10,11 @@ define(['../modules/controller'], function (controllers) {
     	$scope.join = function () {
             joinSrvc.setMobileNumber($scope.mobileNumber);
             joinSrvc.setOtp();
-            joinSrvc.getallUsers().then(function(response){
+            /*joinSrvc.getallUsers().then(function(response){
                 console.log(response);
             },function(err){
                 console.log(err);
-            });
+            });*/
             $state.go('authenticate');
     	};
     });

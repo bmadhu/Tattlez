@@ -41,13 +41,13 @@ exports.addUser = function(db){
             if(docs.length<1){
                 db.users.insert(doc, function (err, docs) {
                  // docs is an array of all the documents in users
-                    res.jsonp('');
-                    res.end();
-                 if(err){
-                 console.log(err);
                      res.jsonp('');
                      res.end();
-                 }
+                     if(err){
+                     console.log(err);
+                         res.jsonp('');
+                         res.end();
+                     }
                  });
             }
             if(err){
