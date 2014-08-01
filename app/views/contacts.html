@@ -5,33 +5,44 @@
 		<a class="text addSearch"></a>
 	</div>
 </div>
+<div id="overlay" class="{{showModal}}">
+	<div class="modal-header">
+		<h3 class="modal-title">Delete Contact?</h3>
+	</div>
+	<div class="modal-body">
+		Are you sure, you want to delete the contact?
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-primary" ng-click="confirmDeleteContact()">Ok</button>
+		<button class="btn btn-warning" ng-click="cancelDeleteContact()">Cancel</button>
+	</div>
+</div>
+<div id="fade" class="{{showModal}}"></div>
 <div class="content contacts-list">
 	<div ng-repeat="contact in contacts">
 		<div class="friendsdiv">
-			<div class="col-md-1">
+			<div style="float: left">
 				<img ng-src="../images/{{contact.photo}}" class="img-default" width="35px" height="38px" />
 			</div>
-			<div class="col-md-11">
-				<div class="col-md-11">
-					<b ng-bind="contact.contactName"></b>
-					<div>
-						<span ng-bind="contact.contactNumber"></span>
-					</div>
+			<div style="float: left; margin-left: 5px;">
+				<b ng-bind="contact.contactName"></b>
+				<div>
+					<span ng-bind="contact.contactNumber"></span>
 				</div>
-				<div class="col-md-1">
-					 <div class="btn-group btn-group-custom" dropdown>
-      <button type="button" class="btn btn-default dropdown-toggle btn-custom">
-        <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu dropdown-menu-custom" role="menu">
-        <li><a href="#"><span class="glyphicon glyphicon-comment"></span> Chat</a></li>
-        <li class="divider"></li>
-        <li><a href="#"><span class="glyphicon glyphicon-trash"></span> Delete Contact</a></li>
-      </ul>
-    </div>
+			</div>
+			<div style="float: right;">
+				<div class="btn-group btn-group-custom" dropdown is-open="contact.isopen">
+					<button type="button" class="btn btn-default dropdown-toggle btn-custom">
+						<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu dropdown-menu-custom" role="menu">
+						<li><a ng-click="chat()"><span class="glyphicon glyphicon-comment"></span>&nbsp;Chat</a></li>
+						<li class="divider"></li>
+						<li><a ng-click="deleteContact($index)"><span class="glyphicon glyphicon-trash"></span>&nbsp;Delete Contact</a></li>
+					</ul>
 				</div>
-
 			</div>
 		</div>
 	</div>
 </div>
+

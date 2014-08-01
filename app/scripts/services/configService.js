@@ -7,7 +7,8 @@ define(['../modules/services'], function (services) {
 		return {
 			phoneTablet: "tablet", //options:"phone","tablet"
 			otpDelay: 30000, //timeout delay for otp validation
-            alertDelay: 5000 //timeout delay for otp alert
+			alertDelay: 5000, //timeout delay for otp alert
+			uidLocalStorage:"_id_tattlez"
 		};
 	});
 });

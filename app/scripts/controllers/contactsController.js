@@ -4,15 +4,53 @@
 
 define(['../modules/controller'], function (controllers) {
     'use strict';
-    controllers.controller('ContactsCtrl', function ($scope, $state, contactsSrvc) {
-        contactsSrvc.getallContacts().then(function(result){
-            $scope.contacts=result;
-        });
+    controllers.controller('ContactsCtrl', function ($scope, $state, contactsSrvc, joinSrvc) {
+    	$scope.showModal = 'display-none';
+    	contactsSrvc.getallContacts().then(function (result) {
+    		$scope.contacts = result;
+    	});
         /**
          * Loads Adding new contact page from Contacts
          */
         $scope.addNewContact = function () {
             $state.go('addContact');
+        };
+
+    	/**
+		* Loads chatting page from contacts
+		**/
+        $scope.chat = function () {
+        	$state.go('chat');
+        };
+        $scope.confirmDeleteContact = function () {
+        	var index = $scope.index;
+        	var contact = {};
+        	contact.contactNumber = $scope.contacts[index].contactNumber;
+        	contact.userId = joinSrvc.getUserId();
+        	contactsSrvc.deleteContact(contact).then(function (result) {
+        		if (result == 'OK') {
+        			$scope.contacts.splice(index, 1);
+        		}
+        		else {
+        			console.log('not ok');
+        		}
+        		deleteContactCloseModal();
+        	});
+        };
+        $scope.cancelDeleteContact = function () {
+        	deleteContactCloseModal();
+        }
+        function deleteContactCloseModal() {
+        	$scope.index = null;
+        	$scope.showModal = 'display-none';
+        }
+    	/**
+		* Delete contact
+		**/
+        $scope.deleteContact = function (index) {
+        	$scope.index = index;
+        	$scope.contacts[index].isopen = false;
+        	$scope.showModal = 'display-block';
         };
     });
 });
