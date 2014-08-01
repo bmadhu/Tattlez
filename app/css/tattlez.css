@@ -22,6 +22,7 @@ body {
 
 .content-vertical-middle {
 	position: relative;
+
 }
 
 .progress-middle {
@@ -85,6 +86,7 @@ body {
 
 .content {
 	padding: 0 5px 0 5px;
+    height: 81%;
 }
 
 .heading {
@@ -103,6 +105,22 @@ body {
 		font-family: Helvetica, sans-serif;
 		font-size: 15pt;
 	}
+
+.footer {
+    border: 1px solid rgb(151, 92, 46);
+    height: 2.5em;
+    background-color: rgba(223, 126, 18, 0.89);
+}
+    /*Image is not visible if below style is not provided.*/
+    .footer .text {
+        position: relative;
+        top: 10%;
+        padding-left: 1.8em;
+        color: #fff;
+        font-weight: bold;
+        font-family: Helvetica, sans-serif;
+        font-size: 15pt;
+    }
 
 .alert {
 	margin-bottom: 5px;
@@ -123,9 +141,23 @@ body {
 	cursor: pointer;
 }
 
+.addMenu {
+    background: url(../images/menu.gif) no-repeat left;
+    cursor: pointer;
+}
+
+.addHome {
+    background: url(../images/icon_home.gif) no-repeat left;
+    cursor: pointer;
+}
+
+.addBack {
+    background: url(../images/android_back_key.png) no-repeat left;
+    cursor: pointer;
+}
+
 .contacts-list {
 	overflow-y: scroll;
-	height: 325px;
 }
 
 .friendsdiv {

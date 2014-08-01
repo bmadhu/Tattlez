@@ -14,6 +14,14 @@ define(['../modules/controller'], function (controllers) {
         $scope.addNewContact = function () {
             $state.go('addContact');
         };
+
+        $scope.openMenu = function () {
+
+        }
+
+        $scope.goHome = function () {
+            $state.go('history');
+        }
     });
 });
 
