@@ -8,7 +8,8 @@ define([
     './otpController',
     './historyController',
     './contactsController',
-    './addContactController'
+    './addContactController',
+	'./chatController'
 ], function () {
 
 });

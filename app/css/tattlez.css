@@ -67,10 +67,79 @@ body {
 	padding: 97px 13px 105px 15px;
 }
 
+	.phone-inner .contacts-list {
+		overflow-y: scroll;
+		height: 314px;
+	}
+
+	.phone-inner #overlay {
+		position: absolute; /* makes the div go into a position that’s absolute to the browser viewing area */
+		left: 15%; /* positions the div half way horizontally */
+		top: 25%; /* positions the div half way vertically */
+		background-color: #ffffff;
+		width: 70%;
+		z-index: 100; /* makes the div the top layer, so it’ll lay on top of the other content */
+		font-size: smaller;
+	}
+
+	.phone-inner #fade {
+		position: absolute; /* makes the div go into a position that’s absolute to the browser viewing area */
+		background-color: black;
+		-moz-opacity: 0.7; /* makes the div transparent, so you have a cool overlay effect */
+		opacity: .70;
+		filter: alpha(opacity=70);
+		width: 232px;
+		height: 349px;
+		z-index: 90; /* makes the div the second most top layer, so it’ll lay on top of everything else EXCEPT for divs with a higher z-index (meaning the #overlay ruleset) */
+		top: 97px;
+	}
+
+	.phone-inner .modal-header {
+		padding: 10px !important;
+	}
+
+	.phone-inner .modal-header h3{
+		font-size:20px;
+	}
+
+	.phone-inner .modal-title {
+		padding: 10px !important;
+	}
+
+	.phone-inner .modal-footer {
+		padding: 10px !important;
+	}
+
 .tablet-inner {
 	height: 100%;
 	padding: 62px 41px 112px 42px;
 }
+
+	.tablet-inner .contacts-list {
+		overflow-y: scroll;
+		height: 325px;
+	}
+
+	.tablet-inner #overlay {
+		position: absolute; /* makes the div go into a position that’s absolute to the browser viewing area */
+		left: 25%; /* positions the div half way horizontally */
+		top: 25%; /* positions the div half way vertically */
+		background-color: #ffffff;
+		width: 50%;
+		z-index: 100; /* makes the div the top layer, so it’ll lay on top of the other content */
+	}
+
+	.tablet-inner #fade {
+		position: absolute; /* makes the div go into a position that’s absolute to the browser viewing area */
+		background-color: black;
+		-moz-opacity: 0.7; /* makes the div transparent, so you have a cool overlay effect */
+		opacity: .70;
+		filter: alpha(opacity=70);
+		width: 487px;
+		height: 360px;
+		z-index: 90; /* makes the div the second most top layer, so it’ll lay on top of everything else EXCEPT for divs with a higher z-index (meaning the #overlay ruleset) */
+		top: 62px;
+	}
 
 .maindiv-phone {
 	height: 100%;
@@ -156,9 +225,7 @@ body {
     cursor: pointer;
 }
 
-.contacts-list {
-	overflow-y: scroll;
-}
+
 
 .friendsdiv {
 	float: left;
@@ -198,4 +265,14 @@ body {
 .btn-custom {
 	padding: 0px 6px !important;
 	border-radius: 12px;
+}
+
+
+
+.display-none {
+	display: none;
+}
+
+.display-block {
+	display: block;
 }

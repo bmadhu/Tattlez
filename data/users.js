@@ -23,7 +23,6 @@ return function(req,res) {
 
 exports.getUserIdByMobileNumber=function(db){
   return function(req,res){
-      console.log(req.params.mobileNumber);
       db.users.find({mobileNumber:req.params.mobileNumber},function(err,doc){
           res.send(doc[0]._id.toString());
           res.end();
@@ -40,11 +39,11 @@ exports.addUser = function(db){
         db.users.find({mobileNumber:doc.mobileNumber},function(err,docs){
             if(docs.length<1){
                 db.users.insert(doc, function (err, docs) {
-                 // docs is an array of all the documents in users
-                     res.jsonp('');
+                	// docs is an array of all the documents in users
+                     res.jsonp(doc);
                      res.end();
                      if(err){
-                     console.log(err);
+						console.log(err);
                          res.jsonp('');
                          res.end();
                      }
