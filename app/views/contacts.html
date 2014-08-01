@@ -21,14 +21,17 @@
 <div class="content contacts-list">
 	<div ng-repeat="contact in contacts">
 		<div class="friendsdiv">
+			
 			<div style="float: left">
 				<img ng-src="../images/{{contact.photo}}" class="img-default" width="35px" height="38px" />
 			</div>
+			
 			<div style="float: left; margin-left: 5px;">
 				<b ng-bind="contact.contactName"></b>
 				<div>
 					<span ng-bind="contact.contactNumber"></span>
 				</div>
+				
 			</div>
 			<div style="float: right;">
 				<div class="btn-group btn-group-custom" dropdown is-open="contact.isopen">
@@ -45,4 +48,14 @@
 		</div>
 	</div>
 </div>
-
+<div class="footer">
+    <div class="pull-right">
+        <a class="text addBack"></a>
+    </div>
+    <div class="pull-left">
+        <a class="text addMenu" ng-click="openMenu()"></a>
+    </div>
+    <div style="text-align: center">
+        <a class="text addHome" ng-click="goHome()"></a>
+    </div>
+</div>
