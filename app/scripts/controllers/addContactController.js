@@ -13,6 +13,7 @@ define(['../modules/controller'], function (controllers) {
 		$scope.gotoContactsForm = function () {
 			$state.go('contacts');
 		};
+
 		/**
          * Clicking Save will save contact to database
          */

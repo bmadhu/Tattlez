@@ -1,13 +1,15 @@
+<!-- HEADER SECTION -->
 <div class="heading">
     <span class="text">Chats</span>
     <div class="pull-right">
     <a class="text addChat" ng-click="loadContacts()"></a>
     </div>
 </div>
+<!-- BODY SECTION -->
 <div class="content-vertical-middle div-otp content">
     <span>This is history page.</span>
 </div>
-<div class="footer">
+<!--<div class="footer">
     <div class="pull-right">
         <a class="text addBack"></a>
     </div>
@@ -16,5 +18,33 @@
     </div>
     <div style="text-align: center">
         <a class="text addHome"></a>
+    </div>
+</div>-->
+<!-- FOOTER SECTION -->
+<div class="footer" data-align="center">
+    <div class="pull-right padding-top-small padding-right-mini">
+        <button type="button" class="btn btn-default dropdown-toggle btn-custom" ng-disabled="true">
+            <i class="fa fa-mail-reply"></i>
+        </button>
+        <!--<a class="fa fa-undo"></a>-->
+    </div>
+    <div class="btn-group dropup pull-left padding-top-small padding-left-mini" dropdown is-open="status.isopen">
+        <button type="button" class="btn btn-default dropdown-toggle btn-custom">
+            <i class="fa fa-align-justify"></i>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+            <li><a class="cursor-pointer" ng-click="createNewChat()"><i class="fa fa-pencil"></i>&nbsp;New chat</a></li>
+            <li><a class="cursor-pointer" ng-click="createNewGroup()"><i class="fa fa-group"></i>&nbsp;New group</a></li>
+            <li><a class="cursor-pointer" ng-click="createBroadcastList()"><i class="fa fa-bullhorn"></i>&nbsp;New broadcast list</a></li>
+            <li><a class="cursor-pointer" ng-click="goToContactsPage()"><i class="fa fa-list-alt"></i>&nbsp;Contacts</a></li>
+            <li><a class="cursor-pointer" ng-click="goToSettingsPage()"><i class="fa fa-cog"></i>&nbsp;Settings</a></li>
+            <li><a class="cursor-pointer" ng-click="setStatus()"><i class="fa fa-comment"></i>&nbsp;Status</a></li>
+        </ul>
+    </div>
+    <div class="padding-top-small" style="text-align: center;padding-left: 2px;">
+        <button type="button" class="btn btn-default dropdown-toggle btn-custom" ng-disabled="true">
+            <i class="fa fa-home"></i>
+        </button>
+        <!--<a class="text addHome" ng-click="goHome()"></a>-->
     </div>
 </div>

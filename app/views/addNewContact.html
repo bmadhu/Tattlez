@@ -6,18 +6,20 @@
     <strong>Warning!</strong>Contact number already exists.
 </div>
 <div class="content">
-    <div class="form-group">
-        <span>Name</span>
-        <input type="text"
-               placeholder="Enter Name" ng-model="contactName" class="form-control" ng-required="true" focus="true" />
-    </div>
-    <div class="form-group">
-        <span>Mobile Number</span>
-        <input type="text"
-               placeholder="Enter mobile number" ng-model="contactNumber" class="form-control" ng-required="true"/>
-    </div>
-    <div style="text-align: center">
-        <button class="btn btn-warning" type="button" ng-click="addContact()">Save</button>
-        <button class="btn btn-default" type="button" ng-click="gotoContactsForm()">Cancel</button>
-    </div>
+    <form name="newContactForm">
+        <div class="form-group">
+            <span>Name</span>
+            <input type="text"
+                   placeholder="Enter Name" ng-model="contactName" name="req_contactname" class="form-control" ng-required="true" focus="true" />
+        </div>
+        <div class="form-group">
+            <span>Mobile Number</span>
+            <input type="text"
+                   placeholder="Enter mobile number" ng-model="contactNumber" name="req_mobilenumber" class="form-control" ng-pattern="/^\+?\d{2}[- ]?\d{3}[- ]?\d{5}$/" ng-required="true"/>
+        </div>
+        <div style="text-align: center">
+            <button class="btn btn-warning" type="submit" ng-disabled="!newContactForm.$valid" ng-click="addContact()">Save</button>
+            <button class="btn btn-default" type="submit" ng-click="gotoContactsForm()">Cancel</button>
+        </div>
+    </form>
 </div>

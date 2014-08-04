@@ -9,6 +9,13 @@ define(['../modules/controller'], function (controllers) {
     	contactsSrvc.getallContacts().then(function (result) {
     		$scope.contacts = result;
     	});
+
+        /**
+         * Clicking on Home and Back button will navigate to history page
+         */
+        $scope.gotoHistory = function () {
+            $state.go('history');
+        }
         /**
          * Loads Adding new contact page from Contacts
          */

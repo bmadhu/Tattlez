@@ -48,14 +48,30 @@
 		</div>
 	</div>
 </div>
-<div class="footer">
-    <div class="pull-right">
-        <a class="text addBack"></a>
+<!-- FOOTER SECTION -->
+<div class="footer" data-align="center">
+    <div class="pull-right padding-top-small padding-right-mini">
+        <button type="button" class="btn btn-default dropdown-toggle btn-custom" ng-click="gotoHistory()">
+            <i class="fa fa-mail-reply"></i>
+        </button>
+        <!--<a class="fa fa-undo"></a>-->
     </div>
-    <div class="pull-left">
-        <a class="text addMenu" ng-click="openMenu()"></a>
+    <div class="btn-group dropup pull-left padding-top-small padding-left-mini" dropdown is-open="status.isopen">
+        <button type="button" class="btn btn-default dropdown-toggle btn-custom"  ng-disabled="true">
+            <i class="fa fa-align-justify"></i>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+            <li><a ng-click="tellFriend()"><i class="fa fa-share-alt"></i>&nbsp;Tell a friend</a></li>
+            <li><a ng-click="goToPhoneContactsPage()"><i class="fa fa-th-list"></i>&nbsp;Contacts</a></li>
+            <li><a ng-click="refreshContacts()"><i class="fa fa-refresh"></i>&nbsp;Refresh</a></li>
+            <li><a ng-click="goToHelpPage()"><i class="fa fa-question-circle"></i>&nbsp;Help</a></li>
+        </ul>
     </div>
-    <div style="text-align: center">
-        <a class="text addHome" ng-click="goHome()"></a>
+    <div class="padding-top-small" style="text-align: center;padding-left: 2px;">
+        <button type="button" class="btn btn-default dropdown-toggle btn-custom" ng-click="gotoHistory()">
+            <i class="fa fa-home"></i>
+        </button>
+        <!--<a class="text addHome" ng-click="goHome()"></a>-->
     </div>
 </div>
+
