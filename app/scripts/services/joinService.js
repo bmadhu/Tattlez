@@ -16,7 +16,7 @@ define(['../modules/services'], function (services) {
          * Broadcasts Event to generate new OTP
          */
 		function setOtp() {
-			mobileAndOtp.otp = Math.floor(Math.random() * 10000);
+			mobileAndOtp.otp = Math.floor(Math.random()*9000) + 1000;
 			$timeout(function () {
 				mobileAndOtp.otp = null;
 				$rootScope.$broadcast("UPDATE_OTP");
