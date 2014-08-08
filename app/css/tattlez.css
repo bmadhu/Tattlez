@@ -1,4 +1,8 @@
-﻿.nav, .pagination, .carousel, .panel-title a {
+﻿* {
+	outline: none;
+}
+
+.nav, .pagination, .carousel, .panel-title a {
 	cursor: pointer;
 }
 
@@ -22,7 +26,6 @@ body {
 
 .content-vertical-middle {
 	position: relative;
-
 }
 
 .progress-middle {
@@ -67,11 +70,6 @@ body {
 	padding: 97px 13px 105px 15px;
 }
 
-	.phone-inner .contacts-list {
-		overflow-y: scroll;
-		height: 81%;
-	}
-
 	.phone-inner #overlay {
 		position: absolute; /* makes the div go into a position that’s absolute to the browser viewing area */
 		left: 15%; /* positions the div half way horizontally */
@@ -89,7 +87,7 @@ body {
 		opacity: .70;
 		filter: alpha(opacity=70);
 		width: 232px;
-		height: 349px;
+		height: 353px;
 		z-index: 90; /* makes the div the second most top layer, so it’ll lay on top of everything else EXCEPT for divs with a higher z-index (meaning the #overlay ruleset) */
 		top: 97px;
 	}
@@ -98,9 +96,9 @@ body {
 		padding: 10px !important;
 	}
 
-	.phone-inner .modal-header h3{
-		font-size:20px;
-	}
+		.phone-inner .modal-header h3 {
+			font-size: 20px;
+		}
 
 	.phone-inner .modal-title {
 		padding: 10px !important;
@@ -114,11 +112,6 @@ body {
 	height: 100%;
 	padding: 62px 41px 112px 42px;
 }
-
-	.tablet-inner .contacts-list {
-		overflow-y: scroll;
-		height: 81%;
-	}
 
 	.tablet-inner #overlay {
 		position: absolute; /* makes the div go into a position that’s absolute to the browser viewing area */
@@ -136,7 +129,7 @@ body {
 		opacity: .70;
 		filter: alpha(opacity=70);
 		width: 487px;
-		height: 360px;
+		height: 362px;
 		z-index: 90; /* makes the div the second most top layer, so it’ll lay on top of everything else EXCEPT for divs with a higher z-index (meaning the #overlay ruleset) */
 		top: 62px;
 	}
@@ -155,7 +148,7 @@ body {
 
 .content {
 	padding: 0 5px 0 5px;
-    height: 81%;
+	height: 81%;
 }
 
 .heading {
@@ -176,20 +169,20 @@ body {
 	}
 
 .footer {
-    border: 1px solid rgb(151, 92, 46);
-    height: 2.5em;
-    background-color: rgba(223, 126, 18, 0.89);
+	border: 1px solid rgb(151, 92, 46);
+	height: 2.5em;
+	background-color: rgba(223, 126, 18, 0.89);
 }
-    /*Image is not visible if below style is not provided.*/
-    .footer .text {
-        position: relative;
-        top: 10%;
-        padding-left: 1.8em;
-        color: #fff;
-        font-weight: bold;
-        font-family: Helvetica, sans-serif;
-        font-size: 15pt;
-    }
+	/*Image is not visible if below style is not provided.*/
+	.footer .text {
+		position: relative;
+		top: 10%;
+		padding-left: 1.8em;
+		color: #fff;
+		font-weight: bold;
+		font-family: Helvetica, sans-serif;
+		font-size: 15pt;
+	}
 
 .alert {
 	margin-bottom: 5px;
@@ -226,6 +219,16 @@ body {
 		padding: 0px;
 	}
 
+.contacts-list {
+	overflow-y: scroll;
+	height: 81%;
+}
+
+.chat-form {
+	overflow-y: scroll;
+	height: 70%;
+}
+
 .dropdown-menu-custom {
 	left: -137px;
 }
@@ -242,10 +245,10 @@ body {
 	}
 
 .dropdown-menu.bottom-up:after {
-    border-bottom: 0px solid transparent !important;
-    border-top: 6px solid white;
-    top: auto !important;
-    bottom: -6px;
+	border-bottom: 0px solid transparent !important;
+	border-top: 6px solid white;
+	top: auto !important;
+	bottom: -6px;
 }
 
 .btn-group-custom {
@@ -266,18 +269,25 @@ body {
 }
 
 .padding-top-small {
-    padding-top: 5px;
+	padding-top: 5px;
 }
 
 .padding-right-mini {
-    padding-right: 2px;
+	padding-right: 2px;
 }
 
 .padding-left-mini {
-    padding-left: 2px;
+	padding-left: 2px;
 }
 
 .cursor-pointer {
-    cursor: pointer;
+	cursor: pointer;
 }
 
+.div-chat-message {
+	height: 11%;
+}
+
+	.div-chat-message .col-md-10, .div-chat-message .col-md-1 {
+		padding: 0;
+	}

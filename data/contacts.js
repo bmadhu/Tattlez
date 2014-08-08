@@ -55,6 +55,7 @@ exports.getContactsByUserId = function(db){
     			var contact = {};
     			contact.contactName = doc.contactName;
     			contact.contactNumber = doc.contactNumber;
+    			contact.id = doc._id.toString();
     			contact.ispoen = false;//to control drop-down menu in html page.
     			db.users.find({ mobileNumber: doc.contactNumber }, function (uerr, udoc) {
     				if (uerr) console.log(uerr);
