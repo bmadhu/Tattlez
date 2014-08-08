@@ -8,7 +8,9 @@ define([
     './controllers/index',
 	'./services/index',
 	'./directives/index',
-	'angular-bootstrap'
+	'angular-bootstrap',
+    'text-angular-sanitize',
+    'text-angular'
 ], function (angular) {
     'use strict';
 
@@ -17,6 +19,7 @@ define([
 	   'tattlez.services',
 	   'tattlez.directives',
         'ui.router',
-		'ui.bootstrap'
+		'ui.bootstrap',
+        'textAngular'
     ]);
 });
