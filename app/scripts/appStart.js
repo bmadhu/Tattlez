@@ -10,7 +10,9 @@ define([
     'angular',
     'app',
     'routes',
-	'angular-bootstrap'
+	'angular-bootstrap',
+    'text-angular-sanitize',
+    'text-angular'
 ], function (require, ng) {
     'use strict';
 
