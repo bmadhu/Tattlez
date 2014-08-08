@@ -5,7 +5,8 @@ define([
     './configService',
     './joinService',
     './addContactService',
-    './contactsService'
+    './contactsService',
+	'./chatService'
 ], function () {
 
 });

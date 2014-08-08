@@ -26,7 +26,8 @@ define(['../modules/controller'], function (controllers) {
     	/**
 		* Loads chatting page from contacts
 		**/
-        $scope.chat = function () {
+        $scope.chat = function (contactId) {
+        	contactsSrvc.setSelectedContactForChat(contactId);
         	$state.go('chat');
         };
         $scope.confirmDeleteContact = function () {
