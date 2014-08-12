@@ -20,14 +20,14 @@ define(['../modules/controller'], function (controllers) {
          *  Creating New Group will navigate to New group page
          */
         $scope.createNewGroup = function () {
-           // $state.go('newGroup');
+            $state.go('newGroup');
         }
         /**
          *  Creating New broadcast list will navigate to New broadcast list page
          *  where user can broadcast a message to number of contacts
          */
         $scope.createBroadcastList = function () {
-            // $state.go('newGroup');
+            //$state.go('broadcast');
         }
         /**
          *  Navigate to contacts list page.

@@ -277,6 +277,10 @@ body {
     padding-left: 2px;
 }
 
+.margin-bottom-small {
+    margin-bottom: 5px;
+}
+
 .cursor-pointer {
     cursor: pointer;
 }
