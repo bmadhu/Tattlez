@@ -3,6 +3,7 @@
  */
 var express = require('express');
 var bodyParser = require('body-parser');
+var databaseUrl = "mongodb://srikanth:6036@proximus.modulusmongo.net:27017/zuWodo4b";
 var collections = ["users","contacts","communications"];//["users","reports"]
 var db = require("mongojs").connect(databaseUrl, collections);
 var usersData = require('./data/users');

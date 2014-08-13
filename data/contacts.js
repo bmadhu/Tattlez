@@ -5,16 +5,6 @@ exports.addContact = function(db){
     return function(req,res) {
     	// find everything
         var doc = req.body;
-        if(doc.groupContacts) {
-            db.contacts.insert(doc, function (err, docs) {
-                // docs is an array of all the documents in users
-                res.send('OK');
-                res.end();
-                if(err){
-                    console.log(err);
-                }
-            });
-        } else {
             db.contacts.find({contactNumber:doc.contactNumber, userId: doc.userId}, function(err,docs) {
                 if(docs.length<1){
                     db.contacts.insert(doc, function (err, docs) {
@@ -36,7 +26,6 @@ exports.addContact = function(db){
                 }
             });
         }
-    }
 };
 
 exports.deleteContact = function (db) {
@@ -63,10 +52,11 @@ exports.getContactsByUserId = function(db){
     		if (doc) {
     			totalCnt++;
     			var contact = {};
-    			contact.contactName = doc.contactName ? doc.contactName : doc.groupName;
+    			contact.contactName = doc.contactName;
     			contact.contactNumber = doc.contactNumber;
 				contact.id = doc._id.toString();
-                contact.ispoen = false;//to control drop-down menu in html page.
+				contact.ispoen = false;//to control drop-down menu in html page.
+				contact.group = doc.group;
                // if (doc.contactNumber) {
                     db.users.find({ mobileNumber: doc.contactNumber , userId: doc.userId}, function (uerr, udoc) {
                         if (uerr) console.log(uerr);

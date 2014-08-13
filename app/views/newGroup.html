@@ -16,7 +16,7 @@
             <div class="form-group">
                 <span>Add Group Participants</span>
                 <div style="height: 82px;overflow-y: scroll;" class="form-group">
-                    <div ng-repeat="contact in contactsList">
+                    <div ng-repeat="contact in contactsList | filter:{group:false}">
                         <ul class="margin-bottom-small">
                             <input type="checkbox" ng-model="contact.selected" ng-change="handleAddedGroupContacts(contact)">{{ contact.contactName }} - {{ contact.contactNumber }}</input>
                         </ul>
@@ -24,8 +24,8 @@
                 </div>
                     <!--<input type="checkbox" placeholder="Type contact name..." ng-model="contactObject" class="form-control" ng-required="true"/>-->
                 <div style="text-align: center" class="form-group">
-                    <button class="btn btn-warning" type="submit" ng-disabled="!newGroupForm.$valid" ng-click="createGroup()">Create</button>
-                    <button class="btn btn-default" type="submit">Cancel</button>
+                    <button class="btn btn-warning" type="submit" ng-disabled="!newGroupForm.$valid">Create</button>
+                    <button class="btn btn-default" type="button" ng-click="gotoContacts()">Cancel</button>
                 </div>
             </div>
         </form>
@@ -35,7 +35,7 @@
 <!-- FOOTER SECTION -->
 <div class="footer" data-align="center">
     <div class="pull-right padding-top-small padding-right-mini">
-        <button type="button" class="btn btn-default dropdown-toggle btn-custom" ng-click="gotoHistory()">
+        <button type="button" class="btn btn-default dropdown-toggle btn-custom" ng-click="gotoContacts()">
             <i class="fa fa-mail-reply"></i>
         </button>
         <!--<a class="fa fa-undo"></a>-->
@@ -55,6 +55,5 @@
         <button type="button" class="btn btn-default dropdown-toggle btn-custom" ng-click="gotoHistory()">
             <i class="fa fa-home"></i>
         </button>
-        <!--<a class="text addHome" ng-click="goHome()"></a>-->
     </div>
 </div>
