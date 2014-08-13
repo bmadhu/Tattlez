@@ -18,7 +18,8 @@ define(['../modules/controller'], function (controllers) {
 
 		$scope.addMessage = function (contactId) {
 			console.log($scope.newMsg);
-			$scope.newMsg = '';
+			$("text-angular div[contenteditable=true]").html('');
+			$("textarea").val('');
 		};
 	});
 });
