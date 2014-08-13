@@ -12,7 +12,9 @@ define([
     'routes',
 	'angular-bootstrap',
     'text-angular-sanitize',
-    'text-angular'
+	'text-angular-setup',
+    'text-angular',
+	'jquery',
 ], function (require, ng) {
     'use strict';
 
