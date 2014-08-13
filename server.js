@@ -3,11 +3,11 @@
  */
 var express = require('express');
 var bodyParser = require('body-parser');
-var databaseUrl = "mongodb://srikanth:6036@novus.modulusmongo.net:27017/Q4apupob"; // "username:password@example.com/mydb"
-var collections = ["users","contacts"];//["users","reports"]
+var collections = ["users","contacts","communications"];//["users","reports"]
 var db = require("mongojs").connect(databaseUrl, collections);
 var usersData = require('./data/users');
 var contactsData = require('./data/contacts');
+var communicationsData = require('./data/communications');
 var app = express();
 
 // parse application/x-www-form-urlencoded
@@ -29,6 +29,7 @@ app.post('/users/addUser',usersData.addUser(db));
 app.get('/contacts/getAllContacts/:userId', contactsData.getContactsByUserId(db));
 app.post('/contacts/addContact', contactsData.addContact(db));
 app.post('/contacts/deleteContact', contactsData.deleteContact(db));
+app.get('/communications/getCommunicationId/:userId/:contactId', communicationsData.getCommunicationId(db));
 
 /*Start express server*/
 var port = process.env.PORT||3000;

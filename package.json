@@ -5,7 +5,8 @@
   "dependencies": {
     "body-parser": "^1.5.1",
     "express": "^4.6.1",
-    "mongojs": "^0.13.1"
+    "mongojs": "^0.13.1",
+    "socket.io": "^1.0.6"
   },
   "devDependencies": {
     "grunt": "^0.4.5",

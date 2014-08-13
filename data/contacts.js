@@ -65,8 +65,8 @@ exports.getContactsByUserId = function(db){
     			var contact = {};
     			contact.contactName = doc.contactName ? doc.contactName : doc.groupName;
     			contact.contactNumber = doc.contactNumber;
-                //contact.groupNumbers =  doc.groupContacts ? doc.groupContacts : undefined;
-    			contact.ispoen = false;//to control drop-down menu in html page.
+				contact.id = doc._id.toString();
+                contact.ispoen = false;//to control drop-down menu in html page.
                // if (doc.contactNumber) {
                     db.users.find({ mobileNumber: doc.contactNumber , userId: doc.userId}, function (uerr, udoc) {
                         if (uerr) console.log(uerr);

@@ -3,8 +3,7 @@
  */
 define(['../modules/services'], function (services) {
     'use strict';
-    services.factory('contactsSrvc', function ($http, $q, joinSrvc) {
-
+    services.factory('contactsSrvc', function ($http, $q, joinSrvc, configSrvc) {
 		//get all contacts
         function getallContacts(){
         	var future = $q.defer();
@@ -21,10 +20,20 @@ define(['../modules/services'], function (services) {
         	}, function (err) { future.reject(err); });
         	return future.promise;
         }
+    	//set Selected Contact for chat.
+        function setSelectedContactForChat(contactId) {
+        	localStorage.setItem(configSrvc.cidLocalStorage, contactId);
+        }
+    	//get Selected Contact for chat.
+        function getSelectedContactForChat() {
+        	return localStorage.getItem(configSrvc.cidLocalStorage);
+        }
 
         return {
         	getallContacts: getallContacts,
-        	deleteContact: deleteContact
+        	deleteContact: deleteContact,
+        	setSelectedContactForChat: setSelectedContactForChat,
+        	getSelectedContactForChat: getSelectedContactForChat
         };
     });
 });
