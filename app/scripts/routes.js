@@ -53,7 +53,13 @@ define(['./app'], function (app) {
     			templateUrl: '../views/chat.html',
     			controller: 'chatCtrl',
     			module: 'private'
-    		});
+    		})
+            .state('newGroup', {
+                url: '/newGroup',
+                templateUrl: '../views/newGroup.html',
+                controller: 'newGroupCtrl',
+                module: 'private'
+            });
 		//$locationProvider.html5Mode(true);
 	}]);
 

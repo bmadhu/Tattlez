@@ -3,7 +3,6 @@
  */
 var express = require('express');
 var bodyParser = require('body-parser');
-var databaseUrl = "mongodb://srikanth:6036@novus.modulusmongo.net:27017/Q4apupob"; // "username:password@example.com/mydb"
 var collections = ["users","contacts","communications"];//["users","reports"]
 var db = require("mongojs").connect(databaseUrl, collections);
 var usersData = require('./data/users');
