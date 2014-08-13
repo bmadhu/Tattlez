@@ -19,6 +19,7 @@ define(['../modules/controller'], function (controllers) {
          */
 		$scope.addContact = function () {
 			var contact = {};
+			contact.group = false;
 			contact.contactName = $scope.contactName;
 			contact.contactNumber = $scope.contactNumber;
 			contact.userId = joinSrvc.getUserId();
