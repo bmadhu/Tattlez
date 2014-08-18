@@ -26,16 +26,16 @@
       <file leaf-file-name="contactsController.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/scripts/controllers/contactsController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="32" selection-start="340" selection-end="340" vertical-scroll-proportion="0.0" vertical-offset="17" max-vertical-offset="1207">
+            <state line="28" column="44" selection-start="811" selection-end="811" vertical-scroll-proportion="0.0" vertical-offset="438" max-vertical-offset="1207">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="server.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="server.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="49" selection-start="970" selection-end="970" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="714">
+            <state line="10" column="46" selection-start="540" selection-end="540" vertical-scroll-proportion="0.34412956" vertical-offset="0" max-vertical-offset="1224">
               <folding />
             </state>
           </provider>
@@ -44,68 +44,63 @@
       <file leaf-file-name="contacts.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/contacts.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="61" selection-start="833" selection-end="833" vertical-scroll-proportion="-9.038462" vertical-offset="190" max-vertical-offset="1411">
+            <state line="40" column="79" selection-start="1373" selection-end="1373" vertical-scroll-proportion="-1.9090909" vertical-offset="575" max-vertical-offset="1394">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="default_profile_M.jpg" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/images/default_profile_M.jpg">
-          <provider selected="true" editor-type-id="images">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="newGroup.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/newGroup.html">
+      <file leaf-file-name="chat.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/chat.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="86" selection-start="1086" selection-end="1086" vertical-scroll-proportion="-0.0" vertical-offset="340" max-vertical-offset="1122">
-              <folding />
+            <state line="3" column="31" selection-start="125" selection-end="125" vertical-scroll-proportion="-1.9615384" vertical-offset="0" max-vertical-offset="663">
+              <folding>
+                <element signature="n#style#0;n#div#2;n#div#3;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="newGroupController.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/scripts/controllers/newGroupController.js">
+      <file leaf-file-name="tattlez.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/css/tattlez.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="0" selection-start="414" selection-end="414" vertical-scroll-proportion="0.0" vertical-offset="111" max-vertical-offset="663">
+            <state line="228" column="14" selection-start="4681" selection-end="4681" vertical-scroll-proportion="-7.3448277" vertical-offset="3663" max-vertical-offset="5151">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="addNewContact.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/addNewContact.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="0" selection-start="1209" selection-end="1209" vertical-scroll-proportion="-15.461538" vertical-offset="23" max-vertical-offset="527">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="addContactController.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/scripts/controllers/addContactController.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="35" selection-start="727" selection-end="727" vertical-scroll-proportion="0.0" vertical-offset="80" max-vertical-offset="697">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="contacts.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="contacts.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/data/contacts.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="23" selection-start="975" selection-end="975" vertical-scroll-proportion="0.8599222" vertical-offset="0" max-vertical-offset="1598">
+            <state line="79" column="46" selection-start="2639" selection-end="2639" vertical-scroll-proportion="-5.6551723" vertical-offset="1179" max-vertical-offset="1683">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="users.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data/users.js">
+      <file leaf-file-name="chatController.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/scripts/controllers/chatController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="49" column="20" selection-start="1278" selection-end="1278" vertical-scroll-proportion="0.0" vertical-offset="647" max-vertical-offset="1190">
+            <state line="15" column="39" selection-start="592" selection-end="592" vertical-scroll-proportion="0.0" vertical-offset="100" max-vertical-offset="884">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="contactsService.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/scripts/services/contactsService.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="31" column="17" selection-start="1310" selection-end="1310" vertical-scroll-proportion="0.0" vertical-offset="368" max-vertical-offset="935">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="configService.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/scripts/services/configService.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="11" column="12" selection-start="366" selection-end="366" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="357">
               <folding />
             </state>
           </provider>
@@ -157,19 +152,20 @@
         <option value="$PROJECT_DIR$/app/scripts/main.js" />
         <option value="$PROJECT_DIR$/app/index.html" />
         <option value="$PROJECT_DIR$/app/scripts/services/joinService.js" />
-        <option value="$PROJECT_DIR$/app/scripts/controllers/addContactController.js" />
         <option value="$PROJECT_DIR$/app/scripts/controllers/contactsController.js" />
         <option value="$PROJECT_DIR$/app/views/history.html" />
         <option value="$PROJECT_DIR$/app/scripts/controllers/historyController.js" />
         <option value="$PROJECT_DIR$/app/scripts/routes.js" />
         <option value="$PROJECT_DIR$/app/scripts/controllers/index.js" />
-        <option value="$PROJECT_DIR$/app/css/tattlez.css" />
         <option value="$PROJECT_DIR$/app/views/newGroup.html" />
         <option value="$PROJECT_DIR$/app/scripts/controllers/newGroupController.js" />
-        <option value="$PROJECT_DIR$/server.js" />
-        <option value="$PROJECT_DIR$/app/views/addNewContact.html" />
-        <option value="$PROJECT_DIR$/app/views/contacts.html" />
         <option value="$PROJECT_DIR$/data/contacts.js" />
+        <option value="$PROJECT_DIR$/server.js" />
+        <option value="$PROJECT_DIR$/app/views/contacts.html" />
+        <option value="$PROJECT_DIR$/app/scripts/controllers/addContactController.js" />
+        <option value="$PROJECT_DIR$/app/views/addNewContact.html" />
+        <option value="$PROJECT_DIR$/app/views/chat.html" />
+        <option value="$PROJECT_DIR$/app/css/tattlez.css" />
       </list>
     </option>
   </component>
@@ -213,7 +209,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -262,6 +257,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -283,14 +279,6 @@
       <ConfigurationWrapper RunnerId="JavascriptDebugRunner" />
       <method />
     </configuration>
-    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
-      <option name="VMOptions" />
-      <option name="arguments" />
-      <option name="filePath" />
-      <option name="scope" value="ALL" />
-      <option name="testName" />
-      <method />
-    </configuration>
     <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
       <option name="VMOptions" />
       <option name="arguments" />
@@ -301,8 +289,12 @@
       <option name="showConsoleOnStdOut" value="false" />
       <method />
     </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" singleton="true" config-file="">
-      <envs />
+    <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
+      <option name="VMOptions" />
+      <option name="arguments" />
+      <option name="filePath" />
+      <option name="scope" value="ALL" />
+      <option name="testName" />
       <method />
     </configuration>
     <configuration default="true" type="JSTestDriver:ConfigurationType" factoryName="JsTestDriver">
@@ -310,6 +302,10 @@
       <setting name="settingsFile" value="" />
       <setting name="serverType" value="INTERNAL" />
       <setting name="preferredDebugBrowser" value="CHROME" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" singleton="true" config-file="">
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
@@ -342,13 +338,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1384" height="738" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.07239057" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2267658" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2267658" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39937106" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
@@ -356,21 +353,20 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15151516" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Grunt" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="JsTestDriver Server" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15151516" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15151516" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39937106" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
@@ -380,8 +376,8 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2267658" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="JsTestDriver Server" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
     </layout-to-restore>
@@ -405,26 +401,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/views/loading.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="238" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/scripts/services/contactsService.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="612" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.bowerrc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.bowerrc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/vendor/requirejs/.bower.json">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
@@ -490,11 +466,6 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/scripts/controllers/joinController.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
@@ -528,11 +499,6 @@
     <entry file="file://$PROJECT_DIR$/bower.json">
       <provider selected="true" editor-type-id="text-editor">
         <state line="21" column="0" selection-start="449" selection-end="449" vertical-scroll-proportion="0.0" vertical-offset="357" max-vertical-offset="459" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/scripts/services/configService.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="0" selection-start="375" selection-end="375" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="340" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/scripts/controllers/otpController.js">
@@ -590,28 +556,14 @@
         <state line="13" column="16" selection-start="298" selection-end="298" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="374" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/css/tattlez.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="279" column="20" selection-start="5496" selection-end="5515" vertical-scroll-proportion="-11.275862" vertical-offset="4416" max-vertical-offset="4981" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/scripts/services/addContactService.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="17" selection-start="261" selection-end="261" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="442">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/scripts/services/contactsService.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="17" selection-start="224" selection-end="224" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="612" />
+        <state line="7" column="17" selection-start="261" selection-end="261" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="442" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/join.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="0" selection-start="572" selection-end="572" vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="306">
-          <folding />
-        </state>
+        <state line="12" column="0" selection-start="572" selection-end="572" vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="306" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/images/default_profile_M.jpg">
@@ -619,65 +571,123 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/addNewContact.html">
+    <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="0" selection-start="1209" selection-end="1209" vertical-scroll-proportion="-15.461538" vertical-offset="23" max-vertical-offset="527">
-          <folding />
-        </state>
+        <state line="18" column="22" selection-start="437" selection-end="437" vertical-scroll-proportion="0.5918762" vertical-offset="0" max-vertical-offset="517" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data/users.js">
+    <entry file="file://$PROJECT_DIR$/app/scripts/controllers/newGroupController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="20" selection-start="1278" selection-end="1278" vertical-scroll-proportion="0.0" vertical-offset="647" max-vertical-offset="1190">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/scripts/controllers/addContactController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="35" selection-start="727" selection-end="727" vertical-scroll-proportion="0.0" vertical-offset="80" max-vertical-offset="697">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/scripts/controllers/contactsController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="32" selection-start="340" selection-end="340" vertical-scroll-proportion="0.0" vertical-offset="17" max-vertical-offset="1207">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/contacts.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="61" selection-start="833" selection-end="833" vertical-scroll-proportion="-9.038462" vertical-offset="190" max-vertical-offset="1411">
+        <state line="9" column="64" selection-start="357" selection-end="357" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="901">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/newGroup.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="86" selection-start="1086" selection-end="1086" vertical-scroll-proportion="0.0" vertical-offset="340" max-vertical-offset="1122">
+        <state line="21" column="29" selection-start="1241" selection-end="1241" vertical-scroll-proportion="0.0" vertical-offset="28" max-vertical-offset="1105">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/scripts/controllers/newGroupController.js">
+    <entry file="file://$PROJECT_DIR$/app/scripts/controllers/addContactController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="0" selection-start="414" selection-end="414" vertical-scroll-proportion="0.0" vertical-offset="111" max-vertical-offset="663">
+        <state line="2" column="3" selection-start="40" selection-end="40" vertical-scroll-proportion="0.0" vertical-offset="36" max-vertical-offset="850">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server.js">
+    <entry file="file://$PROJECT_DIR$/app/views/addNewContact.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="49" selection-start="970" selection-end="970" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="714">
+        <state line="31" column="0" selection-start="1515" selection-end="1515" vertical-scroll-proportion="-8.269231" vertical-offset="312" max-vertical-offset="816">
+          <folding>
+            <element signature="n#style#0;n#div#2;n#div#3;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/users.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="77" selection-start="566" selection-end="566" vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="1190">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/services/configService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="12" selection-start="366" selection-end="366" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="357">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/HTML5.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1342" column="0" selection-start="23543" selection-end="23543" vertical-scroll-proportion="0.33215547" vertical-offset="22626" max-vertical-offset="37060">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/css/tattlez.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="228" column="14" selection-start="4681" selection-end="4681" vertical-scroll-proportion="-7.3448277" vertical-offset="3663" max-vertical-offset="5151">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/controllers/contactsController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="44" selection-start="811" selection-end="811" vertical-scroll-proportion="0.0" vertical-offset="438" max-vertical-offset="1207">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/contacts.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="40" column="79" selection-start="1373" selection-end="1373" vertical-scroll-proportion="-1.9090909" vertical-offset="575" max-vertical-offset="1394">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/chat.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="31" selection-start="125" selection-end="125" vertical-scroll-proportion="-1.9615384" vertical-offset="0" max-vertical-offset="663">
+          <folding>
+            <element signature="n#style#0;n#div#2;n#div#3;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/controllers/chatController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="39" selection-start="592" selection-end="592" vertical-scroll-proportion="0.0" vertical-offset="100" max-vertical-offset="884">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/scripts/services/contactsService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="17" selection-start="1310" selection-end="1310" vertical-scroll-proportion="0.0" vertical-offset="368" max-vertical-offset="935">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/data/contacts.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="23" selection-start="975" selection-end="975" vertical-scroll-proportion="0.8599222" vertical-offset="0" max-vertical-offset="1598">
+        <state line="79" column="46" selection-start="2639" selection-end="2639" vertical-scroll-proportion="-5.6551723" vertical-offset="1179" max-vertical-offset="1683">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/mongojs/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="8959">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="46" selection-start="540" selection-end="540" vertical-scroll-proportion="0.34412956" vertical-offset="0" max-vertical-offset="1224">
           <folding />
         </state>
       </provider>
