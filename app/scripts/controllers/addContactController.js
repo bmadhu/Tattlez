@@ -8,11 +8,19 @@ define(['../modules/controller'], function (controllers) {
 		$scope.contactNumber;
 		$scope.showAlert = false;
 		/**
-         * Clicking cancel will navigate to Contacts form
+         * Clicking cancel and back button in the Footer will navigate to Contacts form
          */
 		$scope.gotoContactsForm = function () {
 			$state.go('contacts');
 		};
+
+        /**
+         * Clicking Home button in the Footer will navigate to History page
+         */
+        $scope.gotoHistory = function () {
+            $state.go('history');
+        };
+
 
 		/**
          * Clicking Save will save contact to database

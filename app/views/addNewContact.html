@@ -23,3 +23,21 @@
         </div>
     </form>
 </div>
+<!-- FOOTER SECTION -->
+<div class="footer" data-align="center">
+    <div class="pull-right padding-top-small padding-right-mini">
+        <button type="button" class="btn btn-default dropdown-toggle btn-custom" ng-click="gotoContactsForm()">
+            <i class="fa fa-mail-reply"></i>
+        </button>
+    </div>
+    <div class="btn-group dropup pull-left padding-top-small padding-left-mini" dropdown is-open="status.isopen">
+        <button type="button" class="btn btn-default dropdown-toggle btn-custom"  ng-disabled="true">
+            <i class="fa fa-align-justify"></i>
+        </button>
+    </div>
+    <div class="padding-top-small" style="text-align: center;padding-left: 2px;">
+        <button type="button" class="btn btn-default dropdown-toggle btn-custom" ng-click="gotoHistory()">
+            <i class="fa fa-home"></i>
+        </button>
+    </div>
+</div>
