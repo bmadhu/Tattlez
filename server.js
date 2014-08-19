@@ -58,7 +58,7 @@ app.post('/users/addUser',usersData.addUser(db));
 app.get('/contacts/getAllContacts/:userId', contactsData.getContactsByUserId(db,mongojs));
 app.post('/contacts/addContact', contactsData.addContact(db));
 app.post('/contacts/deleteContact', contactsData.deleteContact(db));
-app.get('/communications/getCommunicationId/:userId/:contactId', communicationsData.getCommunicationId(db));
+app.get('/communications/getCommunicationId/:loginNumber/:contactNumber', communicationsData.getCommunicationId(db));
 app.get('/contacts/getChatContactDetails/:contactId', contactsData.getChatContactDetails(db, mongojs));
 app.post('/messages/addMessage',messagesData.addMessage(db));
 /*Start express server*/

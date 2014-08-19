@@ -4,24 +4,33 @@
 exports.getCommunicationId = function (db) {
 	return function (req, res) {
 		var doc = {};
-		doc.userId = req.params.userId;
-		doc.contactId = req.params.contactId;
-		db.communications.find(doc, function (err, docs) {
-			if (docs.length < 1) {
-				db.communications.insert(doc, function (err, docs) {
-					res.send(doc);
-					res.end();
-					if (err) {
-						console.log(err);
-					}
-				});
-			}
+		doc.loginNumber = req.params.loginNumber;
+		doc.contactNumber = req.params.contactNumber;
+		db.communications.find({loginNumber: doc.loginNumber, contactNumber: doc.contactNumber}, function (err, udoc) {
+			if (udoc.length > 0) {
+               res.send(udoc);
+               res.end();
+			}else{
+                db.communications.find({loginNumber: doc.contactNumber, contactNumber: doc.loginNumber}, function (err, udoc) {
+                    if(udoc.length > 0) {
+                        res.send(udoc);
+                        res.end();
+                    } else {
+                        var sdoc = {};
+                        sdoc.loginNumber = doc.contactNumber;
+                        sdoc.contactNumber = doc.loginNumber;
+                        db.communications.insert(sdoc, function (err, docs) {
+                            res.send(docs);
+                            res.end();
+                            if (err) {
+                                console.log(err);
+                            }
+                        });
+                    }
+                });
+            }
 			if (err) {
 				console.log(err);
-			}
-			if (docs.length > 0) {
-				res.send(docs);
-				res.end();
 			}
 		});
 
