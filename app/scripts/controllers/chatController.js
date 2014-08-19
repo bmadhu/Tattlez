@@ -10,21 +10,36 @@ define(['../modules/controller'], function (controllers) {
         $scope.contactId = contactsSrvc.getSelectedContactForChat();
         $scope.newMsg;
         $scope.msgs = [];
+
+        /**
+         * Clicking on Home button will navigate to history page
+         */
+        $scope.gotoHistory = function () {
+            $state.go('history');
+        }
+
+        /**
+         * Clicking on Back button will navigate to history page
+         */
+        $scope.gotoContacts = function () {
+            $state.go('contacts');
+        }
+
         /**
         * Get details of the contact
         */
         contactsSrvc.getChatContactDetails($scope.contactId).then(function (result) {
             $scope.contactDetails = result[0];
-        });
-        /**
-        * get the communicationId.
-        * If the user and the contact has a communicationId established, we'll get that.
-        * If the user and the contact don't have communicationId established, then create new and get that.
-        */
-        chatSrvc.getCommunicationId($scope.contactId).then(function (result) {
-            //console.log(result);
-            $scope.communicationId = result[0]._id;
-            chat.emit('connected to chat', result[0]._id);
+            /**
+             * get the communicationId.
+             * If the user and the contact has a communicationId established, we'll get that.
+             * If the user and the contact don't have communicationId established, then create new and get that.
+             */
+            chatSrvc.getCommunicationId($scope.contactDetails.contactNumber).then(function (result) {
+                console.log(result);
+                $scope.communicationId = result[0]._id;
+                chat.emit('connected to chat', result[0]._id);
+            });
         });
 
         $scope.addMessage = function (contactId) {

@@ -5,9 +5,9 @@ define(['../modules/services'], function (services) {
     'use strict';
     services.factory('chatSrvc', function ($http, $q, $rootScope, $timeout, joinSrvc) {
         //Adds Contact to database
-        function getCommunicationId(contactId) {
+        function getCommunicationId(contactNumber) {
             var future = $q.defer();
-            $http.get('/communications/getCommunicationId/' + joinSrvc.getUserId() + '/' + contactId).success(function (data) {
+            $http.get('/communications/getCommunicationId/' + joinSrvc.mobileAndOtp.mobileNumber + '/' + contactNumber).success(function (data) {
                 future.resolve(data);
             }, function (err) { future.reject(err); });
             return future.promise;
