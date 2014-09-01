@@ -37,9 +37,13 @@ var Chat = io
       socket.on('connected to chat', function (data) {
           socket.join(data);
           joinedRoom = data;
+
       });
       socket.on('message', function (data) {
           if (joinedRoom) {
+              // Displays message to the sender who sent the message
+              socket.send(data);
+              // Broadcasts the message to the other contact
               socket.broadcast.to(joinedRoom).send(data);
           } else {
               socket.send(
