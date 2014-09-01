@@ -7,6 +7,7 @@ exports.getCommunicationId = function (db) {
 		doc.loginNumber = req.params.loginNumber;
 		doc.contactNumber = req.params.contactNumber;
 		db.communications.find({loginNumber: doc.loginNumber, contactNumber: doc.contactNumber}, function (err, udoc) {
+            console.log("udoc::"+udoc.length);
 			if (udoc.length > 0) {
                res.send(udoc);
                res.end();
@@ -17,8 +18,8 @@ exports.getCommunicationId = function (db) {
                         res.end();
                     } else {
                         var sdoc = {};
-                        sdoc.loginNumber = doc.contactNumber;
-                        sdoc.contactNumber = doc.loginNumber;
+                        sdoc.loginNumber = doc.loginNumber;
+                        sdoc.contactNumber = doc.contactNumber;
                         db.communications.insert(sdoc, function (err, docs) {
                             res.send(docs);
                             res.end();

@@ -5,7 +5,7 @@ define(['../modules/controller'], function (controllers) {
     'use strict';
     controllers.controller('chatCtrl', function ($scope, $state, contactsSrvc, chatSrvc) {
         var joined = false;
-        var chat = io.connect('http://localhost:3000/chat');
+        var chat = io.connect("/chat");
         //get the contactId of the user to which we are trying to start chat.
         $scope.contactId = contactsSrvc.getSelectedContactForChat();
         $scope.newMsg;
@@ -36,7 +36,7 @@ define(['../modules/controller'], function (controllers) {
              * If the user and the contact don't have communicationId established, then create new and get that.
              */
             chatSrvc.getCommunicationId($scope.contactDetails.contactNumber).then(function (result) {
-                console.log(result);
+                console.log(result[0]._id);
                 $scope.communicationId = result[0]._id;
                 chat.emit('connected to chat', result[0]._id);
             });
@@ -55,7 +55,7 @@ define(['../modules/controller'], function (controllers) {
         };
         chat.on('message', function (msg) {
             $scope.msgs.push(msg);
-            console.log($scope.msgs);
+            $('#messages').append($('<li>').text(msg));
         });
     });
 });
