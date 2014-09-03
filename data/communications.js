@@ -7,7 +7,6 @@ exports.getCommunicationId = function (db) {
 		doc.loginNumber = req.params.loginNumber;
 		doc.contactNumber = req.params.contactNumber;
 		db.communications.find({loginNumber: doc.loginNumber, contactNumber: doc.contactNumber}, function (err, udoc) {
-            console.log("udoc::"+udoc.length);
 			if (udoc.length > 0) {
                res.send(udoc);
                res.end();

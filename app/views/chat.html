@@ -2,13 +2,14 @@
 	<span class="text" ng-bind="contactDetails.contactName"></span>
 </div>
 <div class="content chat-form">
-	This is chat page.
-    <ul id="messages"></ul>
+	<div ng-repeat="msg in msgs track by $index">
+		{{msg}}
+	</div>
 </div>
 <div class="form-group div-chat-message">
 	<div class="col-md-1">s</div>
 	<div class="col-md-10">
-		<text-angular ng-model="newMsg" placeholder="Enter message" ng-enter="addMessage(contactId)" ta-toolbar="[]"></text-angular>
+		<text-angular name="chatEditor" ng-model="newMsg" placeholder="Enter message" ng-enter="addMessage(contactId)" ta-toolbar="[]"></text-angular>
 		<textarea class="form-control input-lg" style="display: none;" ng-model="newMsg" placeholder="Enter message"></textarea>
 	</div>
 	<div class="col-md-1">f</div>
