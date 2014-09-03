@@ -34,6 +34,7 @@ alert(joinSrvc.mobileAndOtp.otp);
     $scope.resendOtp = function () {
         joinSrvc.setOtp();
         $scope.enableResendOtp = false;
+        alert(joinSrvc.mobileAndOtp.otp);
     };
 
     //Go to join form
