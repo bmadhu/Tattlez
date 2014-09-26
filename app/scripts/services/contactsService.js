@@ -5,11 +5,19 @@ define(['../modules/services'], function (services) {
     'use strict';
     services.factory('contactsSrvc', function ($http, $q, joinSrvc, configSrvc) {
         //get all contacts
-        function getallContacts() {
-            var future = $q.defer();
-            $http.jsonp('/contacts/getallContacts/' + joinSrvc.getUserId() + '?callback=JSON_CALLBACK').success(function (data) {
-                future.resolve(data);
-            }, function (err) { future.reject(err); });
+    	function getallContacts() {
+    		var userId = joinSrvc.getUserId();
+    		var future = $q.defer();
+    		if (localStorage.getItem(userId + '_C')) {
+    			future.resolve(JSON.parse(localStorage.getItem(userId + '_C')));
+    		}
+    		else {
+    			$http.jsonp('/contacts/getallContacts/' + userId + '?callback=JSON_CALLBACK').success(function (data) {
+    				localStorage.setItem(userId + '_C', JSON.stringify(data));
+    				future.resolve(data);
+    			}, function (err) { future.reject(err); });
+    		}
+
             return future.promise;
         }
         //Delete Contact from database

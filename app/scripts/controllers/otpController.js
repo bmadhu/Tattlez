@@ -17,7 +17,9 @@ alert(joinSrvc.mobileAndOtp.otp);
         if (joinSrvc.mobileAndOtp.otp && joinSrvc.mobileAndOtp.otp ==  $scope.otpInput) {
             var user = {};
             user.mobileNumber=joinSrvc.mobileAndOtp.mobileNumber;
-            joinSrvc.addUser(user).then(function(data){
+            joinSrvc.addUser(user).then(function (data) {
+				//Broadcast to appController
+            	$rootScope.$broadcast("USER_AUTHENTICATED");
                 $state.go('history');
             });
 

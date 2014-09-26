@@ -53,12 +53,17 @@ define(['../modules/services'], function (services) {
 		function addUser(user) {
 			var future = $q.defer();
 			$http.post('/users/addUser', user).success(function (data) {
-				if (data!='null')
+				if (data != 'null') {
 					localStorage.setItem(configSrvc.uidLocalStorage, data._id);
-				else {
-					getUserIdByMobileNumber();
+					future.resolve(data);
 				}
-				future.resolve(data);
+				else {
+					var promises = [];
+					promises.push(getUserIdByMobileNumber());
+					$q.all(promises).then(function (result) {
+						future.resolve(result[0]);
+					});
+				}
 			}, function (err) {
 				future.reject(err);
 			});
