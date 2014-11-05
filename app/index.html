@@ -35,11 +35,14 @@
         <div class="col-md-3">
         </div>
     </div>
-    <!--<ul class="menu">
-    <li><a href="#/view1">view1</a></li>
-    <li><a href="#/view2">view2</a></li>
-</ul>-->
     <script src="scripts/socket.io.client.js" type="text/javascript"></script>
     <script src="vendor/requirejs/require.js" data-main="scripts/main.js"></script>
+	<script type="text/javascript">
+		var chat;
+		function connectToChat() {
+			//Connect to chat
+			chat = io.connect("/chat");
+		}
+	</script>
 </body>
 </html>

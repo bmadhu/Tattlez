@@ -3,9 +3,8 @@
  */
 define(['../modules/controller'], function (controllers) {
 	'use strict';
-	controllers.controller('chatCtrl', function ($scope, $state, contactsSrvc, chatSrvc, textAngularManager) {
+	controllers.controller('chatCtrl', function ($scope, $state, contactsSrvc, chatSrvc, textAngularManager,$timeout) {
 		var joined = false;
-		var chat = io.connect("/chat");
 		//get the contactId of the user to which we are trying to start chat.
 		$scope.contactId = contactsSrvc.getSelectedContactForChat();
 		$scope.newMsg;
@@ -25,31 +24,22 @@ define(['../modules/controller'], function (controllers) {
             $state.go('contacts');
         }
 
-        /**
-        * Get details of the contact
-        */
-        contactsSrvc.getChatContactDetails($scope.contactId).then(function (result) {
-            $scope.contactDetails = result[0];
-            /**
-             * get the communicationId.
-             * If the user and the contact has a communicationId established, we'll get that.
-             * If the user and the contact don't have communicationId established, then create new and get that.
-             */
-			chatSrvc.getCommunicationId($scope.contactDetails.contactNumber).then(function (result) {
-				console.log(result[0]._id);
-				$scope.communicationId = result[0]._id;
-				chat.emit('connected to chat', result[0]._id);
-				/**
-				* Place focus in chat message area using textAngularManager Service.
-				*/
-				var editorScope = textAngularManager.retrieveEditor('chatEditor').scope;
-				editorScope.displayElements.text[0].focus();
-			});
-		});
-
+		/**
+		* Get the communicationId for the contact(with whom started chat).
+		*/
+        chatSrvc.getContactCommunicationIdMappings($scope.contactId).then(function (result) {
+        	$scope.communicationId = result[0].communicationId;
+        	/**
+			* Place focus in chat message area using textAngularManager Service.
+			*/
+        	$timeout(function () {
+        		var editorScope = textAngularManager.retrieveEditor('chatEditor').scope;
+        		editorScope.displayElements.text[0].focus();
+        	}, 1000);
+        });
 		$scope.addMessage = function (contactId) {
 			/**
-			* Add messages to array.
+			* Add messages to array to show it on the window immediately.
 			*/
 			$scope.msgs.push($scope.newMsg);
 			/**
@@ -61,9 +51,9 @@ define(['../modules/controller'], function (controllers) {
 			/**
 			* Emit the message to socket.
 			*/
-			chat.emit('message', $scope.newMsg);
+			chat.emit('message', doc);
 			/**
-			* Call chatSrvc to add new message in dtabase
+			* Call chatSrvc to add new message in database
 			*/
 			chatSrvc.addMessage(doc).then(function (result) {
 				console.log(result);
@@ -83,7 +73,9 @@ define(['../modules/controller'], function (controllers) {
 		* Add the messages to array
 		*/
 		chat.on('message', function (msg) {
-			$scope.msgs.push(msg);
+			$timeout(function () {
+				$scope.msgs.push(msg);
+			}, 0);
 		});
 	});
 });

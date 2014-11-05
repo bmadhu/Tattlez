@@ -33,19 +33,18 @@ app.use(express.static(__dirname + '/app'));
 var Chat = io
   .of('/chat')
   .on('connection', function (socket) {
-      var joinedRoom = null;
+  	var joinedRoom = {};
       socket.on('connected to chat', function (data) {
           socket.join(data);
-          joinedRoom = data;
-
+          joinedRoom[data] = data;
       });
       socket.on('message', function (data) {
-          if (joinedRoom) {
+      	if (joinedRoom[data.communicationId]) {
               // Displays message to the sender who sent the message
-          	  //socket.send(data);
+      		//socket.send(data);
 
-              // Broadcasts the message to the other contact
-              socket.broadcast.to(joinedRoom).send(data);
+      		// Broadcasts the message to the other contact
+      		socket.broadcast.to(joinedRoom[data.communicationId]).send(data.message);
           } else {
               socket.send(
 			   "you're not connected to chat." +
