@@ -10,7 +10,8 @@ define([
 	'./directives/index',
 	'angular-bootstrap',
     'text-angular-sanitize',
-    'text-angular'
+    'text-angular',
+    'ng-audio'
 ], function (angular) {
     'use strict';
 
@@ -20,6 +21,7 @@ define([
 	   'tattlez.directives',
         'ui.router',
 		'ui.bootstrap',
-        'textAngular'
+        'textAngular',
+        'ngAudio'
     ]);
 });

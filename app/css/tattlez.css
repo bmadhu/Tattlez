@@ -110,7 +110,7 @@ body {
 
 .tablet-inner {
 	height: 100%;
-	padding: 62px 41px 112px 42px;
+	padding: 48px 41px 112px 42px;
 }
 
 	.tablet-inner #overlay {
@@ -167,6 +167,11 @@ body {
 		font-family: Helvetica, sans-serif;
 		font-size: 15pt;
 	}
+	.heading img{
+		margin-left: 35px;
+		margin-right:4px;
+	}
+	
 
 .footer {
 	border: 1px solid rgb(151, 92, 46);
@@ -295,3 +300,57 @@ body {
 	.div-chat-message .col-md-10, .div-chat-message .col-md-1 {
 		padding: 0;
 	}
+.msg-left{
+	float:left;
+}
+.msg-right{
+	float:right;
+}
+.mymessage-style {
+	background-color: #DFF1FC;
+	padding: 4px;
+	display: inline-block;
+	word-break: break-word;
+	border-radius: 4px;
+	border: 1px solid #8DC0DF;
+	text-align:left;
+}
+.mymessage-div-style {
+	margin: 10px 10px 12px 10px;
+	text-align: right;
+}
+
+.yourmessage-style {
+	background-color: #EBFFE0;
+	padding: 4px;
+	display: inline-block;
+	word-break: break-word;
+	border-radius: 4px;
+	border: 1px solid #69B83C;
+}
+.yourmessage-div-style {
+	margin: 10px 10px 12px 10px;
+	text-align: left;
+}
+.msg-date-time{
+	font-size: 10px;
+	color: gray;
+	font-family: arial;
+	float:right;
+}
+.notify-bar{
+	background-color: #343232;
+	height: 14px;
+	border-radius: 2px 2px 0px 0px;
+	color: #fff;
+	padding: 0px 0px 0px 5px;
+	font-size: 11px;
+	font-family: verdana;
+}
+.notify-time{
+	text-align:right;
+	padding-right:5px;
+}
+.no-padding{
+	padding:0 !important;
+}

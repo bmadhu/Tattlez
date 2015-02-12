@@ -13,7 +13,8 @@ require.config({
 		'angular-bootstrap':'../vendor/angular-bootstrap/ui-bootstrap-tpls.min',
 		'text-angular': './vendorjs/textAngular/textAngular',
 		'text-angular-setup': './vendorjs/textAngular/textAngularSetup',
-        'text-angular-sanitize':'./vendorjs/textAngular/textAngular-sanitize'
+        'text-angular-sanitize':'./vendorjs/textAngular/textAngular-sanitize',
+        'ng-audio':'../vendor/angular-audio/app/angular.audio'
     },
     // angular does not support AMD out of the box, put it in a shim
 	shim: {
@@ -40,7 +41,11 @@ require.config({
         },
         'text-angular': {
             deps:['angular']
+        },
+        'ng-audio':{
+        	deps:['angular']
         }
+        
     },
     // kick start application
     deps: ['./appStart']

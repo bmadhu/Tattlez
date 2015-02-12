@@ -3,15 +3,32 @@
 */
 define(['../modules/services'], function (services) {
     'use strict';
-    services.factory('chatSrvc', function ($http, $q, $rootScope, $timeout, joinSrvc, $filter) {
+    services.factory('chatSrvc', function ($http, $q, $rootScope, $timeout, joinSrvc, $filter,configSrvc) {
     	//An array to hold the communicationIds for each ContactId.
     	var contactCommunications = [];
     	//Adds Contact to database
-        function getCommunicationId(contactNumber) {
-            var future = $q.defer();
-            $http.get('/communications/getCommunicationId/' + joinSrvc.mobileAndOtp.mobileNumber + '/' + contactNumber).success(function (data) {
-            	future.resolve(data);
-            }, function (err) { future.reject(err); });
+        function getCommunicationId(contactNumber,isGrp,grpAdminNumber) {
+        	var future = $q.defer();
+        	if(!isGrp){
+	            
+	            var mobileNumber;
+	            if(joinSrvc.mobileAndOtp.mobileNumber){
+	            	$http.get('/communications/getCommunicationId/' + joinSrvc.mobileAndOtp.mobileNumber + '/' + contactNumber).success(function (data) {
+	            		future.resolve(data);
+	            	}, function (err) { future.reject(err); });
+	            }
+	            else{
+		            joinSrvc.getUserByUserId().then(function(userdata){
+						$http.get('/communications/getCommunicationId/' + userdata.mobileNumber + '/' + contactNumber).success(function (data) {
+		            		future.resolve(data);
+		            	}, function (err) { future.reject(err); });
+					});	
+	            }
+            }else{
+            	$http.get('/communications/getCommunicationId/' + grpAdminNumber + '/' + contactNumber).success(function (data) {
+		            		future.resolve(data);
+		            	}, function (err) { future.reject(err); });
+            }
             return future.promise;
         }
 
@@ -35,11 +52,16 @@ define(['../modules/services'], function (services) {
         	future.resolve($filter('filter')(communicationMappings, { contactId: contactIdToMap }));
         	return future.promise;
         }
+        //remove Selected Communication ID for chat
+        function removeSelectedCommunicationIdForChat(){
+        	localStorage.removeItem(configSrvc.cmidLocalStorage);
+        }
         return {
             getCommunicationId: getCommunicationId,
             addMessage: addMessage,
             updateContactCommunicationIdMappings: updateContactCommunicationIdMappings,
-            getContactCommunicationIdMappings: getContactCommunicationIdMappings
+            getContactCommunicationIdMappings: getContactCommunicationIdMappings,
+            removeSelectedCommunicationIdForChat: removeSelectedCommunicationIdForChat
         };
     });
 });

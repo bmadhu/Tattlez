@@ -3,13 +3,24 @@
  */
 define(['../modules/controller'], function (controllers) {
     'use strict';
-    controllers.controller('appCtrl', ['$scope', 'configSrvc', 'contactsSrvc', 'chatSrvc', '$q', '$timeout', function ($scope, configSrvc, contactsSrvc, chatSrvc, $q, $timeout) {
+    controllers.controller('appCtrl', ['$scope','$rootScope', 'configSrvc', 'contactsSrvc', 'chatSrvc', '$q', '$timeout', 'socketio','ngAudio','joinSrvc','$filter',
+    function ($scope,$rootScope, configSrvc, contactsSrvc, chatSrvc, $q, $timeout,socketio, ngAudio,joinSrvc,$filter) {
+    	
+    	$rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
+	  		if(fromState.name=="" && toState.name != "join"){
+	  			$rootScope.$broadcast("ESTABLISH_COMMUNICATION");
+	  		}
+	  	});
     	$scope.phoneTablet = configSrvc.phoneTablet;
-    	// Listen to USER_AUTHENTICATED event
-    	$scope.$on("USER_AUTHENTICATED", function (event) {
-    		connectToChat();
+    	$scope.timeFormat="h:mm a";
+    	$scope.audio = ngAudio.load('../sounds/2.mp3');
+    	$scope.isNotification=false;
+    	
+    	// Listen to ESTABLISH_COMMUNICATION event
+    	$scope.$on("ESTABLISH_COMMUNICATION", function (event) {
     		//Get all the contacts of user and save into localStorage
     		contactsSrvc.getallContacts().then(function (result) {
+    			if(result!== null){
     			var promises = [];
     			for (var idx in result) {
     				var contact = result[idx];
@@ -19,8 +30,14 @@ define(['../modules/controller'], function (controllers) {
 					 * If the user and the contact has a communicationId established, we'll get that.
 					 * If the user and the contact don't have communicationId established, then create new and get that.
 					 */
-    				chatSrvc.getCommunicationId(contact.contactNumber).then(function (result) {
-    					return result[0]._id;
+    				chatSrvc.getCommunicationId(contact.contactNumber,contact.group,contact.groupAdmin).then(function (result) {
+    					console.log(result);
+    					//if the call to Mongo DB uses find, then it returns array
+    					//if the call to mongo db inserts a new record to DB and returns an object.
+    					if(result.length){
+    						return result[0]._id;
+    					}
+    					return result._id;
     				}));
     			}
     			$q.all(promises).then(function (response) {
@@ -32,19 +49,66 @@ define(['../modules/controller'], function (controllers) {
     					/**
 						* Connect to chat with each contact to get the notifications.
 						*/
-    					chat.emit('connected to chat', response[idx]);
+    					socketio.emit('connected to chat', response[idx]);
     				}
     			});
-    			/**
-				* Receive messages from the other user
-				* Add the messages to array
-				*/
-    			chat.on('message', function (msg) {
-    				$timeout(function () {
-    					alert(msg);
-    				}, 0);
-    			});
+    		}
     		});
+    		$scope.notifyMsg=function(msg,userNumber,contacts){
+    			if(msg.to == userNumber){
+					var contact = $filter('filter')(contacts,{contactNumber:msg.from},true);
+					msg.from = contact[0].contactName;
+					$scope.audio.play();
+		    		$scope.isNotification=true;
+		    		$scope.notification=msg.from+' : '+msg.message;
+		    		//Clear notification
+			    	$timeout(function () {
+    					$scope.isNotification=false;
+    					$scope.notification='';
+    				}, 3000);
+				}
+				else{
+					var contact = $filter('filter')(contacts,{contactNumber:msg.to},true);
+					msg.from = contact[0].contactName;
+					$scope.audio.play();
+		    		$scope.isNotification=true;
+		    		$scope.notification=msg.from+' : '+msg.message;
+		    		//Clear notification
+			    	$timeout(function () {
+    					$scope.isNotification=false;
+    					$scope.notification='';
+    				}, 3000);
+				}
+    		};
+    		/**
+			* Receive messages from the other user
+			* Add the messages to array
+			*/
+			socketio.on('message', function (msg) {
+				//If the user is not chatting with user, who sent the message then, notify the user.
+				if(localStorage.getItem(configSrvc.cmidLocalStorage) !== msg.communicationId){
+					contactsSrvc.getallContacts().then(function(contacts){
+						var userNumber;
+						if(joinSrvc.mobileAndOtp.mobileNumber){
+							userNumber = joinSrvc.mobileAndOtp.mobileNumber;
+							$scope.notifyMsg(msg,userNumber,contacts);
+						}
+						else{
+							joinSrvc.getUserByUserId().then(function(userdata){
+								userNumber = userdata.mobileNumber;
+								$scope.notifyMsg(msg,userNumber,contacts);
+							});	
+						}
+						
+					});
+			    		
+				}else{
+    				$timeout(function () {
+    					//Broadcast the received message to chat window(chatController).
+    					$rootScope.$broadcast("MSG_RECEIVED",msg);
+    				}, 0);
+				}
+			});
     	});
     }]);
 });

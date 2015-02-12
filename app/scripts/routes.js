@@ -4,12 +4,6 @@
 define(['./app'], function (app) {
 	'use strict';
 	return app.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', '$httpProvider', function ($stateProvider, $locationProvider, $urlRouterProvider, $httpProvider) {
-		if (!$httpProvider.defaults.headers.get) {
-			$httpProvider.defaults.headers.get = {};
-		}
-		//disable IE ajax request caching
-		$httpProvider.defaults.headers.get['If-Modified-Since'] = '0';
-
 		$urlRouterProvider.otherwise('/');
 		$stateProvider
             .state('home', {
@@ -62,5 +56,6 @@ define(['./app'], function (app) {
             });
 		//$locationProvider.html5Mode(true);
 	}]);
+	
 
 });

@@ -7,7 +7,9 @@ define(['../modules/controller'], function (controllers) {
     controllers.controller('ContactsCtrl', function ($scope, $state, contactsSrvc, joinSrvc) {
     	$scope.showModal = 'display-none';
     	contactsSrvc.getallContacts().then(function (result) {
-    		$scope.contacts = result;
+    		if(result!==null){
+    			$scope.contacts = result;
+    		}
     	});
 
         /**
@@ -15,7 +17,7 @@ define(['../modules/controller'], function (controllers) {
          */
         $scope.gotoHistory = function () {
             $state.go('history');
-        }
+        };
         /**
          * Loads Adding new contact page from Contacts
          */
@@ -38,16 +40,17 @@ define(['../modules/controller'], function (controllers) {
         	contactsSrvc.deleteContact(contact).then(function (result) {
         		if (result == 'OK') {
         			$scope.contacts.splice(index, 1);
+        			contactsSrvc.refreshContacts().then(function(res){
+        			});
         		}
         		else {
-        			console.log('not ok');
         		}
         		deleteContactCloseModal();
         	});
         };
         $scope.cancelDeleteContact = function () {
         	deleteContactCloseModal();
-        }
+        };
         function deleteContactCloseModal() {
         	$scope.index = null;
         	$scope.showModal = 'display-none';

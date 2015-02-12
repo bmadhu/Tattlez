@@ -9,7 +9,8 @@ define(['../modules/services'], function (services) {
 			otpDelay: 30000, //timeout delay for otp validation
 			alertDelay: 5000, //timeout delay for otp alert
 			uidLocalStorage: "_id_tattlez",
-			cidLocalStorage: "_cid_tattlez"
+			cidLocalStorage: "_cid_tattlez",
+			cmidLocalStorage: "_cmid_tattlez"
 		};
 	});
 });

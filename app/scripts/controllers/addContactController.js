@@ -3,7 +3,7 @@
  */
 define(['../modules/controller'], function (controllers) {
 	'use strict';
-	controllers.controller('addContactCtrl', function ($scope, $state, addContactSrvc, joinSrvc) {
+	controllers.controller('addContactCtrl', function ($scope, $state, addContactSrvc, joinSrvc, contactsSrvc) {
 		$scope.contactName;
 		$scope.contactNumber;
 		$scope.showAlert = false;
@@ -32,8 +32,11 @@ define(['../modules/controller'], function (controllers) {
 			contact.contactNumber = $scope.contactNumber;
 			contact.userId = joinSrvc.getUserId();
 			addContactSrvc.addContact(contact).then(function (result) {
-				if (result == 'OK')
-					$state.go('contacts');
+				if (result == 'OK'){
+					contactsSrvc.refreshContacts().then(function(res){
+        				$state.go('contacts');
+        			});
+				}	
 				else {
 					$scope.showAlert = true;
 				}

@@ -3,7 +3,7 @@
  */
 define(['../modules/services'], function (services) {
     'use strict';
-    services.factory('contactsSrvc', function ($http, $q, joinSrvc, configSrvc) {
+    services.factory('contactsSrvc', function ($http, $q, joinSrvc, configSrvc,$rootScope) {
         //get all contacts
     	function getallContacts() {
     		var userId = joinSrvc.getUserId();
@@ -13,12 +13,33 @@ define(['../modules/services'], function (services) {
     		}
     		else {
     			$http.jsonp('/contacts/getallContacts/' + userId + '?callback=JSON_CALLBACK').success(function (data) {
-    				localStorage.setItem(userId + '_C', JSON.stringify(data));
-    				future.resolve(data);
+    				if(data!==null){
+						localStorage.setItem(userId + '_C', JSON.stringify(data));
+					}
+    					future.resolve(data);
+    				
     			}, function (err) { future.reject(err); });
     		}
 
             return future.promise;
+        }
+        function refreshContacts(){
+        	var userId = joinSrvc.getUserId();
+        	var future = $q.defer();
+        	$http.jsonp('/contacts/getallContacts/' + userId + '?callback=JSON_CALLBACK').success(function (data) {
+    				if(data!==null){
+						localStorage.setItem(userId + '_C', JSON.stringify(data));
+						$rootScope.$broadcast("ESTABLISH_COMMUNICATION");
+					}
+					else{
+						localStorage.removeItem(userId + '_C');
+						localStorage.removeItem(userId + '_CCM');
+					}
+    				future.resolve(data);
+    			}, function (err) { 
+    				future.reject(err); 
+    				});
+    		return future.promise;
         }
         //Delete Contact from database
         function deleteContact(contact) {
@@ -36,6 +57,10 @@ define(['../modules/services'], function (services) {
         function getSelectedContactForChat() {
             return localStorage.getItem(configSrvc.cidLocalStorage);
         }
+        //remove Selected Contact for chat
+        function removeSelectedContactForChat(){
+        	localStorage.removeItem(configSrvc.cidLocalStorage);
+        }
         //get details of chat contact
         function getChatContactDetails(contactId) {
             var future = $q.defer();
@@ -51,7 +76,9 @@ define(['../modules/services'], function (services) {
             deleteContact: deleteContact,
             setSelectedContactForChat: setSelectedContactForChat,
             getSelectedContactForChat: getSelectedContactForChat,
-            getChatContactDetails: getChatContactDetails
+            removeSelectedContactForChat: removeSelectedContactForChat,
+            getChatContactDetails: getChatContactDetails,
+            refreshContacts: refreshContacts
         };
     });
 });

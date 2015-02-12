@@ -20,16 +20,39 @@ return function(req,res) {
     });
 }
 };
-
+exports.getUserByUserID=function(db,mongojs){
+	return function(req,res){
+		db.users.find({_id:mongojs.ObjectId(req.params.userId)},function(err,doc){
+			res.send(doc[0]);
+			res.end();
+			if(err){
+				console.log(err);
+			}
+		})
+	}
+}
 exports.getUserIdByMobileNumber=function(db){
   return function(req,res){
       db.users.find({mobileNumber:req.params.mobileNumber},function(err,doc){
+          if(doc.length>0){
           res.send(doc[0]._id.toString());
           res.end();
+          }
+          else{
+          	var user={};
+          	user.mobileNumber = req.params.mobileNumber;
+          	db.users.insert(user, function (err, doc) {
+                 res.send(doc._id.toString());
+                 res.end();
+                 if(err){
+					console.log(err);
+                 }
+             });
+          }
           if(err)
           console.log(err);
-      })
-  }
+      });
+  };
 };
 
 exports.addUser = function(db){
