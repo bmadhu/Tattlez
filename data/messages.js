@@ -6,5 +6,5 @@
             res.send('OK');
             res.end();
         });
-    }
+    };
 };

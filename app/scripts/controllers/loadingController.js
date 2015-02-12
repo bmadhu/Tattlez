@@ -3,7 +3,7 @@ define(['../modules/controller'], function (controllers) {
     controllers.controller('LoadingCtrl', function ($scope, $interval, $state) {
     	$scope.appName = 'TATTLEZ';
     	$scope.progress = 0;
-    	var stopProgress = $interval(updateProgress, 100);
+    	var stopProgress = $interval(updateProgress, 10);
     	function updateProgress() {
     		if ($scope.progress != 100)
     			$scope.progress += 2;

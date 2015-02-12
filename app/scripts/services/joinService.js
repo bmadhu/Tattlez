@@ -49,6 +49,14 @@ define(['../modules/services'], function (services) {
 			}, function (err) { future.reject(err); });
 			return future.promise;
 		}
+		
+		function getUserIdByContactMobileNumber(mobileNumber) {
+			var future = $q.defer();
+			$http.get('/users/getUserIdByMobileNumber/' + mobileNumber).success(function (data) {
+				future.resolve(data);
+			}, function (err) { future.reject(err); });
+			return future.promise;
+		}
 
 		function addUser(user) {
 			var future = $q.defer();
@@ -69,7 +77,17 @@ define(['../modules/services'], function (services) {
 			});
 			return future.promise;
 		}
-
+		function getUserByUserId(){
+			var future=$q.defer();
+			$http.post('/users/getUserByUserId/'+localStorage.getItem(configSrvc.uidLocalStorage)).success(function(data){
+				if(data!=null){
+					future.resolve(data);
+				}
+			},function(err){
+				future.reject(err);
+			});
+			return future.promise;
+		}
 		return {
 			setMobileNumber: setMobileNumber,
 			setOtp: setOtp,
@@ -78,7 +96,9 @@ define(['../modules/services'], function (services) {
 			getallUsers: getallUsers,
 			addUser: addUser,
 			getUserIdByMobileNumber: getUserIdByMobileNumber,
-			getUserId: getUserId
+			getUserId: getUserId,
+			getUserByUserId:getUserByUserId,
+			getUserIdByContactMobileNumber: getUserIdByContactMobileNumber
 		};
 	});
 });

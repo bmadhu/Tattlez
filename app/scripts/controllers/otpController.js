@@ -19,7 +19,7 @@ alert(joinSrvc.mobileAndOtp.otp);
             user.mobileNumber=joinSrvc.mobileAndOtp.mobileNumber;
             joinSrvc.addUser(user).then(function (data) {
 				//Broadcast to appController
-            	$rootScope.$broadcast("USER_AUTHENTICATED");
+            	$rootScope.$broadcast("ESTABLISH_COMMUNICATION");
                 $state.go('history');
             });
 

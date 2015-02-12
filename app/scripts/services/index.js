@@ -6,7 +6,8 @@ define([
     './joinService',
     './addContactService',
     './contactsService',
-	'./chatService'
+	'./chatService',
+	'./socketio'
 ], function () {
 
 });

@@ -4,7 +4,8 @@
 define([
     './rpattern',
     './focus',
-    './ngEnter'
+    './ngEnter',
+    './myCurrentDateTime'
 ], function () {
 
 });

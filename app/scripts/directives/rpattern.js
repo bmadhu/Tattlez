@@ -13,7 +13,7 @@
 					if (pattern.match(/^\/(.*)\/$/)) {
 						pattern = new RegExp(pattern.substr(1, pattern.length - 2));
 						patternValidator = function (value) {
-							return validate(pattern, value)
+							return validate(pattern, value);
 						};
 					}
 					else {

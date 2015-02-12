@@ -46,7 +46,10 @@ exports.getContactsByUserId = function (db,mongojs) {
         db.contacts.find({ userId: req.params.userId }).forEach(function (err, doc) {
             if (err) console.log(err);
             if (!doc) {
-
+				if(totalCnt == 0){
+					res.jsonp(null);
+					res.end();
+				}
             }
             if (doc) {
                 totalCnt++;
@@ -57,6 +60,7 @@ exports.getContactsByUserId = function (db,mongojs) {
                 contact.ispoen = false; //to control drop-down menu in html page.
                 contact.group = doc.group;
                 // if (doc.contactNumber) {
+                
                 db.users.find({ mobileNumber: doc.contactNumber, _id: mongojs.ObjectId(doc.userId) }, function (uerr, udoc) {
                     if (uerr) console.log(uerr);
                     if (udoc.length > 0)
@@ -66,6 +70,7 @@ exports.getContactsByUserId = function (db,mongojs) {
                     docs.push(contact);
                     internalCnt++;
                     if (internalCnt == totalCnt) {
+                    	
                         res.jsonp(docs);
                         res.end();
                     }
@@ -80,14 +85,47 @@ exports.getContactsByUserId = function (db,mongojs) {
 exports.getChatContactDetails = function (db, mongojs) {
     return function (req, res) {
         var contactId = req.params.contactId;
-        db.contacts.find({ _id: mongojs.ObjectId(contactId) }, function (err, doc) {
+        var docs = [];
+        var internalCnt = 0;
+        var totalCnt = 0;
+        db.contacts.find({ _id: mongojs.ObjectId(contactId) }).forEach(function (err, doc) {
             if (err) {
                 res.jsonp(err);
                 res.end();
             }
             else {
-                res.jsonp(doc);
-                res.end();
+               if (!doc) {
+					if(totalCnt == 0){
+						res.jsonp(null);
+						res.end();
+					}
+            	}
+            if (doc) {
+            	
+                totalCnt++;
+                var contact = {};
+                contact.contactName = doc.contactName;
+                contact.contactNumber = doc.contactNumber;
+                contact.id = doc._id.toString();
+                contact.ispoen = false; //to control drop-down menu in html page.
+                contact.group = doc.group;
+                // if (doc.contactNumber) {
+                
+                db.users.find({ mobileNumber: doc.contactNumber, _id: mongojs.ObjectId(doc.userId) }, function (uerr, udoc) {
+                    if (uerr) console.log(uerr);
+                    if (udoc.length > 0)
+                        contact.photo = udoc.mobileNumber;
+                    else
+                        contact.photo = 'default_profile_M.jpg';
+                    docs.push(contact);
+                    internalCnt++;
+                    if (internalCnt == totalCnt) {
+                    	
+                        res.jsonp(docs);
+                        res.end();
+                    }
+                });
+            }
             }
         });
     }

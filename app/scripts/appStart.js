@@ -15,6 +15,7 @@ define([
 	'text-angular-setup',
     'text-angular',
 	'jquery',
+	'ng-audio'
 ], function (require, ng) {
     'use strict';
 
