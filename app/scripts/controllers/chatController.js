@@ -5,7 +5,26 @@ define(['../modules/controller'], function (controllers) {
 	'use strict';
 	controllers.controller('chatCtrl', function ($scope,$rootScope, $state, contactsSrvc, chatSrvc, textAngularManager,$timeout,joinSrvc,$filter,socketio,configSrvc) {
 		var joined = false;
+		$scope.isShowSmileys=false;
+		$scope.chatFormCls="chat-form";
+		$scope.smileySrc="../images/smiley.png";
+		
+		$scope.toggleSmileysDiv=function(){
+			if($scope.isShowSmileys){
+				$scope.isShowSmileys=false;
+				$scope.chatFormCls="chat-form";
+				$scope.smileySrc="../images/smiley.png";
+				setTimeout(function () {
+					placeCaretAtEnd($("text-angular div[contenteditable=true]").get(0));
+				}, 0);
+			}else{
+				$scope.isShowSmileys=true;
+				$scope.chatFormCls="chat-form-small";
+				$scope.smileySrc="../images/down-arrow.png";
+			}
+		};
 		//get the contactId of the user to which we are trying to start chat.
+		$scope.emoticons = configSrvc.emoticons;
 		$scope.contactId = contactsSrvc.getSelectedContactForChat();
 		var userNumber;
 		if(joinSrvc.mobileAndOtp.mobileNumber){
@@ -16,7 +35,20 @@ define(['../modules/controller'], function (controllers) {
 				userNumber = userdata.mobileNumber;
 			});	
 		}
-		
+		$scope.addEmoticon = function (obj,to,index) {
+			var textarea = $("#txtAreaChat");
+			
+			var text = textarea.val();
+			var emoticon = "<img class='emoji emoji_" + obj + "' title=':" + obj + ":' src='../images/blank.gif' />";
+			textarea.val(text + emoticon);
+			$timeout(function () {
+				$scope.newMsg = text + emoticon;
+				setTimeout(function () {
+					placeCaretAtEnd($("text-angular div[contenteditable=true]").get(0));
+				}, 10);
+			}, 0);
+			
+		};
 		$scope.newMsg;
 		$scope.msgs = [];
 
@@ -81,6 +113,7 @@ define(['../modules/controller'], function (controllers) {
 			*/
 			chatSrvc.addMessage(doc).then(function (result) {
 			});
+			$timeout(function () { $("."+$scope.chatFormCls).animate({ scrollTop: $("."+$scope.chatFormCls).prop("scrollHeight") - $("."+$scope.chatFormCls).height() }, 100); }, 10);
 			/**
 			* clear the chat message using textAngularManager service.
 			*/
@@ -114,3 +147,20 @@ define(['../modules/controller'], function (controllers) {
 		
 	});
 });
+function placeCaretAtEnd(el) {
+	el.focus();
+	if (typeof window.getSelection != "undefined"
+			&& typeof document.createRange != "undefined") {
+		var range = document.createRange();
+		range.selectNodeContents(el);
+		range.collapse(false);
+		var sel = window.getSelection();
+		sel.removeAllRanges();
+		sel.addRange(range);
+	} else if (typeof document.body.createTextRange != "undefined") {
+		var textRange = document.body.createTextRange();
+		textRange.moveToElementText(el);
+		textRange.collapse(false);
+		textRange.select();
+	}
+}
