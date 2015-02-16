@@ -6,24 +6,27 @@
         <span>Please provide group subject and optional group icon</span>
     </div>
 
-    <div style="padding-top: 20px;height: 220px">
+    <div style="padding-top: 5px;height: 240px">
         <form name="newGroupForm" ng-submit="createGroup()" style="height: 200px">
 
             <div class="form-group">
                 <span>Add Group Name</span>
                 <input type="text" placeholder="Enter group subject" ng-model="groupName" class="form-control" ng-required="true" focus="true"/>
             </div>
-            <div class="form-group">
+            <div class="form-group no-margin">
                 <span>Add Group Participants</span>
-                <div style="height: 82px;overflow-y: scroll;" class="form-group">
-                    <div ng-repeat="contact in contactsList | filter:{group:false}">
-                        <ul class="margin-bottom-small">
-                            <input type="checkbox" ng-model="contact.selected" ng-change="handleAddedGroupContacts(contact)">{{ contact.contactName }} - {{ contact.contactNumber }}</input>
-                        </ul>
+                <div style="height: 105px;overflow-y: scroll;margin-bottom: 5px !important;" class="form-group">
+                    <div ng-repeat="contact in contactsList | filter:{group:false}" class="row" style="background: #646262;color:#fff;margin:0 !important;border-bottom: 1px solid #fff;">
+                        <div class="col-md-1" style="padding: 6px 6px 6px 12px;">
+                        	 <input type="checkbox" ng-model="contact.selected" ng-change="handleAddedGroupContacts(contact)"></input>
+                        </div>
+                        <div class="col-md-11" style="padding:6px;border-left: 1px solid #fff;">
+                        	{{ contact.contactName }} - {{ contact.contactNumber }}
+                        </div>
                     </div>
                 </div>
                     <!--<input type="checkbox" placeholder="Type contact name..." ng-model="contactObject" class="form-control" ng-required="true"/>-->
-                <div style="text-align: center" class="form-group">
+                <div style="text-align: center" class="form-group no-margin">
                     <button class="btn btn-warning" type="submit" ng-disabled="!newGroupForm.$valid">Create</button>
                     <button class="btn btn-default" type="button" ng-click="gotoContacts()">Cancel</button>
                 </div>
