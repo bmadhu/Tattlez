@@ -3,9 +3,9 @@
 </div>
 <div ng-class="chatFormCls" class="content">
 	<div ng-repeat="msg in msgs track by $index">
-		<div ng-class="{'mymessage-div-style':msg.from == 'me','yourmessage-div-style':msg.from != 'me'}">
-			<span ng-class="{'mymessage-style':msg.from == 'me','yourmessage-style':msg.from != 'me'}">
-					<b>{{msg.from}}:</b> 
+		<div ng-class="{'mymessage-div-style':msg.fromLabel == 'me','yourmessage-div-style':msg.fromLabel != 'me'}">
+			<span ng-class="{'mymessage-style':msg.fromLabel == 'me','yourmessage-style':msg.fromLabel != 'me'}">
+					<b>{{msg.fromLabel}}:</b> 
 					<span ng-bind-html="msg.message"></span>
 					<br />
 					<span class="msg-date-time">{{msg.on|date:'medium'}}</span>

@@ -72,6 +72,32 @@ define(['../modules/controller'], function (controllers) {
         chatSrvc.getContactCommunicationIdMappings($scope.contactId).then(function (result) {
         	$scope.communicationId = result[0].communicationId;
         	localStorage.setItem(configSrvc.cmidLocalStorage,result[0].communicationId);
+        	chatSrvc.getMessagesByCommunicationId($scope.communicationId).then(function(result){
+        		console.log(result);
+        		var finalResult=[];
+        		contactsSrvc.getallContacts().then(function(contacts){
+        			angular.forEach(result,function(value,key){
+        			console.log(value);
+        			console.log(key);
+        			if(value.to == userNumber){
+        				var contact = $filter('filter')(contacts,{contactNumber:value.from},true);
+						value.fromLabel = contact.length>0?contact[0].contactName:value.from;
+        			}
+        			else if(value.from != userNumber){
+        				var contact = $filter('filter')(contacts,{contactNumber:value.from},true);
+						value.fromLabel = contact.length>0?contact[0].contactName:value.from;
+        			}
+        			else{
+        				value.fromLabel = "me";
+        			}
+        			finalResult.push(value);
+        		});
+        		});
+        		
+        		$scope.msgs=finalResult;
+        		$scope.scrollMsgDivUp();
+        		
+        	});
         	//get the contact details to display the name on screen
 			contactsSrvc.getChatContactDetails($scope.contactId).then(function(data){
 				$scope.contactDetails=data[0];
@@ -102,18 +128,20 @@ define(['../modules/controller'], function (controllers) {
 			* Emit the message to socket.
 			*/
 			socketio.emit('message', doc);
-			/**
-			* Add messages to array to show it on the window immediately.
-			*/
-			doc.from='me';
-			$scope.msgs.push(doc);
+			
 			
 			/**
 			* Call chatSrvc to add new message in database
 			*/
 			chatSrvc.addMessage(doc).then(function (result) {
 			});
-			$timeout(function () { $("."+$scope.chatFormCls).animate({ scrollTop: $("."+$scope.chatFormCls).prop("scrollHeight") - $("."+$scope.chatFormCls).height() }, 100); }, 10);
+			/**
+			* Add messages to array to show it on the window immediately.
+			*/
+			var docTemp = doc;
+			docTemp.fromLabel='me';
+			$scope.msgs.push(docTemp);
+			$scope.scrollMsgDivUp();
 			/**
 			* clear the chat message using textAngularManager service.
 			*/
@@ -124,6 +152,9 @@ define(['../modules/controller'], function (controllers) {
 			*/
 			$scope.newMsg = '';
 		};
+		$scope.scrollMsgDivUp=function(){
+			$timeout(function () { $("."+$scope.chatFormCls).animate({ scrollTop: $("."+$scope.chatFormCls).prop("scrollHeight") - $("."+$scope.chatFormCls).height() }, 100); }, 10);
+		};
 		/**
 		* Receive messages from the other user
 		* Add the messages to array
@@ -132,8 +163,9 @@ define(['../modules/controller'], function (controllers) {
 			$timeout(function () {
 				contactsSrvc.getallContacts().then(function(contacts){
 					var contact = $filter('filter')(contacts,{contactNumber:msg.from},true);
-					msg.from = contact[0].contactName;
+					msg.fromLabel = contact.length>0?contact[0].contactName:msg.from;
 					$scope.msgs.push(msg);
+					$scope.scrollMsgDivUp();
 				});
 			}, 0);
 		});
