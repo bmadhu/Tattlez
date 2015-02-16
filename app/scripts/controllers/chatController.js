@@ -5,7 +5,26 @@ define(['../modules/controller'], function (controllers) {
 	'use strict';
 	controllers.controller('chatCtrl', function ($scope,$rootScope, $state, contactsSrvc, chatSrvc, textAngularManager,$timeout,joinSrvc,$filter,socketio,configSrvc) {
 		var joined = false;
+		$scope.isShowSmileys=false;
+		$scope.chatFormCls="chat-form";
+		$scope.smileySrc="../images/smiley.png";
+		
+		$scope.toggleSmileysDiv=function(){
+			if($scope.isShowSmileys){
+				$scope.isShowSmileys=false;
+				$scope.chatFormCls="chat-form";
+				$scope.smileySrc="../images/smiley.png";
+				setTimeout(function () {
+					placeCaretAtEnd($("text-angular div[contenteditable=true]").get(0));
+				}, 0);
+			}else{
+				$scope.isShowSmileys=true;
+				$scope.chatFormCls="chat-form-small";
+				$scope.smileySrc="../images/down-arrow.png";
+			}
+		};
 		//get the contactId of the user to which we are trying to start chat.
+		$scope.emoticons = configSrvc.emoticons;
 		$scope.contactId = contactsSrvc.getSelectedContactForChat();
 		var userNumber;
 		if(joinSrvc.mobileAndOtp.mobileNumber){
@@ -16,7 +35,20 @@ define(['../modules/controller'], function (controllers) {
 				userNumber = userdata.mobileNumber;
 			});	
 		}
-		
+		$scope.addEmoticon = function (obj,to,index) {
+			var textarea = $("#txtAreaChat");
+			
+			var text = textarea.val();
+			var emoticon = "<img class='emoji emoji_" + obj + "' title=':" + obj + ":' src='../images/blank.gif' />";
+			textarea.val(text + emoticon);
+			$timeout(function () {
+				$scope.newMsg = text + emoticon;
+				setTimeout(function () {
+					placeCaretAtEnd($("text-angular div[contenteditable=true]").get(0));
+				}, 10);
+			}, 0);
+			
+		};
 		$scope.newMsg;
 		$scope.msgs = [];
 
@@ -40,6 +72,32 @@ define(['../modules/controller'], function (controllers) {
         chatSrvc.getContactCommunicationIdMappings($scope.contactId).then(function (result) {
         	$scope.communicationId = result[0].communicationId;
         	localStorage.setItem(configSrvc.cmidLocalStorage,result[0].communicationId);
+        	chatSrvc.getMessagesByCommunicationId($scope.communicationId).then(function(result){
+        		console.log(result);
+        		var finalResult=[];
+        		contactsSrvc.getallContacts().then(function(contacts){
+        			angular.forEach(result,function(value,key){
+        			console.log(value);
+        			console.log(key);
+        			if(value.to == userNumber){
+        				var contact = $filter('filter')(contacts,{contactNumber:value.from},true);
+						value.fromLabel = contact.length>0?contact[0].contactName:value.from;
+        			}
+        			else if(value.from != userNumber){
+        				var contact = $filter('filter')(contacts,{contactNumber:value.from},true);
+						value.fromLabel = contact.length>0?contact[0].contactName:value.from;
+        			}
+        			else{
+        				value.fromLabel = "me";
+        			}
+        			finalResult.push(value);
+        		});
+        		});
+        		
+        		$scope.msgs=finalResult;
+        		$scope.scrollMsgDivUp();
+        		
+        	});
         	//get the contact details to display the name on screen
 			contactsSrvc.getChatContactDetails($scope.contactId).then(function(data){
 				$scope.contactDetails=data[0];
@@ -70,17 +128,20 @@ define(['../modules/controller'], function (controllers) {
 			* Emit the message to socket.
 			*/
 			socketio.emit('message', doc);
-			/**
-			* Add messages to array to show it on the window immediately.
-			*/
-			doc.from='me';
-			$scope.msgs.push(doc);
+			
 			
 			/**
 			* Call chatSrvc to add new message in database
 			*/
 			chatSrvc.addMessage(doc).then(function (result) {
 			});
+			/**
+			* Add messages to array to show it on the window immediately.
+			*/
+			var docTemp = doc;
+			docTemp.fromLabel='me';
+			$scope.msgs.push(docTemp);
+			$scope.scrollMsgDivUp();
 			/**
 			* clear the chat message using textAngularManager service.
 			*/
@@ -91,6 +152,9 @@ define(['../modules/controller'], function (controllers) {
 			*/
 			$scope.newMsg = '';
 		};
+		$scope.scrollMsgDivUp=function(){
+			$timeout(function () { $("."+$scope.chatFormCls).animate({ scrollTop: $("."+$scope.chatFormCls).prop("scrollHeight") - $("."+$scope.chatFormCls).height() }, 100); }, 10);
+		};
 		/**
 		* Receive messages from the other user
 		* Add the messages to array
@@ -99,8 +163,9 @@ define(['../modules/controller'], function (controllers) {
 			$timeout(function () {
 				contactsSrvc.getallContacts().then(function(contacts){
 					var contact = $filter('filter')(contacts,{contactNumber:msg.from},true);
-					msg.from = contact[0].contactName;
+					msg.fromLabel = contact.length>0?contact[0].contactName:msg.from;
 					$scope.msgs.push(msg);
+					$scope.scrollMsgDivUp();
 				});
 			}, 0);
 		});
@@ -114,3 +179,20 @@ define(['../modules/controller'], function (controllers) {
 		
 	});
 });
+function placeCaretAtEnd(el) {
+	el.focus();
+	if (typeof window.getSelection != "undefined"
+			&& typeof document.createRange != "undefined") {
+		var range = document.createRange();
+		range.selectNodeContents(el);
+		range.collapse(false);
+		var sel = window.getSelection();
+		sel.removeAllRanges();
+		sel.addRange(range);
+	} else if (typeof document.body.createTextRange != "undefined") {
+		var textRange = document.body.createTextRange();
+		textRange.moveToElementText(el);
+		textRange.collapse(false);
+		textRange.select();
+	}
+}

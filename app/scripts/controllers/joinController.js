@@ -7,6 +7,7 @@ define(['../modules/controller'], function (controllers) {
          * generates random number
          * navigates to Authenticate page
          */
+        localStorage.clear();
     	$scope.join = function () {
             joinSrvc.setMobileNumber($scope.mobileNumber);
             joinSrvc.setOtp();

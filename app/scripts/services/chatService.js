@@ -42,8 +42,15 @@ define(['../modules/services'], function (services) {
 
         function updateContactCommunicationIdMappings(obj) {
         	var userId = joinSrvc.getUserId();
-        	contactCommunications.push(obj);
-        	localStorage.setItem(userId + "_CCM", JSON.stringify(contactCommunications));
+        	
+        	console.log(contactCommunications);
+        	if(userId){
+        		contactCommunications.push(obj);
+        		localStorage.setItem(userId + "_CCM", JSON.stringify(contactCommunications));
+        	}
+        }
+        function clearContactCommunicationsArray(){
+        	contactCommunications=[];
         }
         function getContactCommunicationIdMappings(contactIdToMap) {
         	var future = $q.defer();
@@ -56,12 +63,23 @@ define(['../modules/services'], function (services) {
         function removeSelectedCommunicationIdForChat(){
         	localStorage.removeItem(configSrvc.cmidLocalStorage);
         }
+        function getMessagesByCommunicationId(communicationId){
+        	var future = $q.defer();
+        	$http.get('/messages/getMessagesByCommunicationId/' + communicationId ).success(function (data) {
+        		future.resolve(data);
+        	}).error(function(errData){
+        		console.log(errData);
+        		future.reject(errData);
+        	});
+        	return future.promise;
+        }
         return {
             getCommunicationId: getCommunicationId,
             addMessage: addMessage,
             updateContactCommunicationIdMappings: updateContactCommunicationIdMappings,
             getContactCommunicationIdMappings: getContactCommunicationIdMappings,
-            removeSelectedCommunicationIdForChat: removeSelectedCommunicationIdForChat
+            removeSelectedCommunicationIdForChat: removeSelectedCommunicationIdForChat,
+            getMessagesByCommunicationId: getMessagesByCommunicationId
         };
     });
 });

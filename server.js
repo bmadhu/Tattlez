@@ -3,7 +3,7 @@
  */
 var express = require('express');
 var bodyParser = require('body-parser');
-var databaseUrl = "mongodb://srikanth:6036@proximus.modulusmongo.net:27017/ijan4eWu";
+var databaseUrl = "mongodb://srikanth:6036@proximus.modulusmongo.net:27017/nytoR8ux";
 var collections = ["users", "contacts", "communications", "messages"];
 var mongojs = require("mongojs");
 var db = mongojs.connect(databaseUrl, collections);
@@ -36,7 +36,7 @@ var Chat = io
   	var joinedRoom = {};
   	var addedUser=false;
       socket.on('connected to chat', function (data) {
-          socket.username=data;
+      	  socket.username=data;
           socket.join(data);
           joinedRoom[data] = data;
           addedUser=true;
@@ -48,6 +48,7 @@ var Chat = io
       		console.log('comm id');
               console.log(joinedRoom[data.communicationId]);
       		// Broadcasts the message to the other contact
+      		console.log(joinedRoom);
       		socket.broadcast.to(joinedRoom[data.communicationId]).send(data);
           } else {
               socket.send(
@@ -59,12 +60,14 @@ var Chat = io
       socket.on('disconnect', function () {
 		// remove the username from global usernames list
 		if (addedUser) {
+			console.log(joinedRoom);
 			socket.leave(socket.username);
 			delete joinedRoom[socket.username];
 			console.log('disconnect');
 			console.log(joinedRoom);
 		}
 	 });
+	 
   });
   /*End socket.io initialization*/
 
@@ -79,6 +82,7 @@ app.get('/communications/getCommunicationId/:loginNumber/:contactNumber', commun
 app.get('/contacts/getChatContactDetails/:contactId', contactsData.getChatContactDetails(db, mongojs));
 app.post('/messages/addMessage',messagesData.addMessage(db));
 app.post('/users/getUserByUserId/:userId',usersData.getUserByUserID(db,mongojs));
+app.get('/messages/getMessagesByCommunicationId/:communicationId',messagesData.getMessagesByCommunicationId(db));
 /*Start express server*/
 var port = process.env.PORT||3000;
 server.listen(port);

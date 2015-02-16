@@ -231,7 +231,7 @@ body {
 
 .chat-form {
 	overflow-y: scroll;
-	height: 66%;
+	height: 68%;
 }
 
 .dropdown-menu-custom {
@@ -288,7 +288,9 @@ body {
 .margin-bottom-small {
     margin-bottom: 5px;
 }
-
+.no-margin{
+	margin:0 !important;
+}
 .cursor-pointer {
 	cursor: pointer;
 }
@@ -353,4 +355,29 @@ body {
 }
 .no-padding{
 	padding:0 !important;
+}
+.smiley-div{
+	height: 100%;
+	text-align: center;
+	cursor: pointer;
+}
+.smiley-div img{
+	padding-top:23%;
+}
+.attachment-div{
+	height: 100%;
+	text-align: center;
+	cursor: pointer;
+}
+.attachment-div img{
+	padding-top:23%;
+}
+.smileys-div{
+	height: 40%;
+	overflow: auto;
+	background-color: rgba(255, 255, 255, 0.67);
+}
+.chat-form-small{
+	overflow-y: scroll;
+	height: 28%;
 }

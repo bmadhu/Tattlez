@@ -1,11 +1,11 @@
 ﻿<div class="heading">
 	<img ng-src="../images/{{contactDetails.photo}}" class="img-default" width="35px" height="33px" /><span class="text no-padding" ng-bind="contactDetails.contactName"></span>
 </div>
-<div class="content chat-form">
+<div ng-class="chatFormCls" class="content">
 	<div ng-repeat="msg in msgs track by $index">
-		<div ng-class="{'mymessage-div-style':msg.from == 'me','yourmessage-div-style':msg.from != 'me'}">
-			<span ng-class="{'mymessage-style':msg.from == 'me','yourmessage-style':msg.from != 'me'}">
-					<b>{{msg.from}}:</b> 
+		<div ng-class="{'mymessage-div-style':msg.fromLabel == 'me','yourmessage-div-style':msg.fromLabel != 'me'}">
+			<span ng-class="{'mymessage-style':msg.fromLabel == 'me','yourmessage-style':msg.fromLabel != 'me'}">
+					<b>{{msg.fromLabel}}:</b> 
 					<span ng-bind-html="msg.message"></span>
 					<br />
 					<span class="msg-date-time">{{msg.on|date:'medium'}}</span>
@@ -13,15 +13,22 @@
 		</div>
 	</div>
 </div>
-<div class="form-group div-chat-message">
-	<div class="col-md-1">s</div>
+<div class="form-group div-chat-message" style="margin-bottom:6px !important;">
+	<div class="col-md-1 smiley-div" ng-click="toggleSmileysDiv()">
+		<img ng-src="{{smileySrc}}" alt="smiley">
+	</div>
 	<div class="col-md-10">
 		<text-angular name="chatEditor" ng-model="newMsg" placeholder="Enter message" ng-enter="addMessage(contactId)" ta-toolbar="[]"></text-angular>
-		<textarea class="form-control input-lg" style="display: none;" ng-model="newMsg" placeholder="Enter message"></textarea>
+		<textarea class="form-control input-lg" style="display: none;" id="txtAreaChat" ng-model="newMsg" placeholder="Enter message"></textarea>
 	</div>
-	<div class="col-md-1">f</div>
-
+	<div class="col-md-1 attachment-div">
+		<img src="../images/attachment.png" alt="attach">
+	</div>
+	
 </div>
+	<div class="smileys-div" ng-show="isShowSmileys">
+		<span ng-repeat="emoticon in emoticons" class="emoji emoji_{{emoticon}}" ng-click="addEmoticon(emoticon,usermsg.Name)"></span>
+	</div>
 <!-- FOOTER SECTION -->
 <div class="footer" data-align="center">
     <div class="pull-right padding-top-small padding-right-mini">
