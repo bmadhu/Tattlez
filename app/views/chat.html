@@ -7,6 +7,15 @@
 			<span ng-class="{'mymessage-style':msg.fromLabel == 'me','yourmessage-style':msg.fromLabel != 'me'}">
 					<b>{{msg.fromLabel}}:</b> 
 					<span ng-bind-html="msg.message"></span>
+					<div ng-if="msg.isMedia" style="text-align: center;position: relative;">
+						<img style="border: 5px solid #FFFFFF;cursor: pointer;max-width: 200px;max-height: 150px;" ng-src="{{msg.path}}" >
+						<div class="upload-progress" ng-show="msg.progress">
+							<span ng-class="msg.uploadWidth"></span>
+						</div>
+						<!--<div class="upload-progress" ng-show="msg.progress==false">
+							<span ng-show="msg.progress==false">Srikanth</span>
+						</div>-->
+					</div>
 					<br />
 					<span class="msg-date-time">{{msg.on|date:'medium'}}</span>
 			</span>
@@ -18,11 +27,12 @@
 		<img ng-src="{{smileySrc}}" alt="smiley">
 	</div>
 	<div class="col-md-10">
-		<text-angular name="chatEditor" ng-model="newMsg" placeholder="Enter message" ng-enter="addMessage(contactId)" ta-toolbar="[]"></text-angular>
+		<text-angular name="chatEditor" ng-model="newMsg" placeholder="Enter message" ng-enter="addMessage(false)" ta-toolbar="[]"></text-angular>
 		<textarea class="form-control input-lg" style="display: none;" id="txtAreaChat" ng-model="newMsg" placeholder="Enter message"></textarea>
 	</div>
 	<div class="col-md-1 attachment-div">
 		<img src="../images/attachment.png" alt="attach">
+		<input type="file" ng-file-select ng-model="files" ng-file-change="upload($files)" ng-multiple="false" ng-accept="'image/*'" class="form-control">
 	</div>
 	
 </div>

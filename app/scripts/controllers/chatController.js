@@ -3,12 +3,78 @@
  */
 define(['../modules/controller'], function (controllers) {
 	'use strict';
-	controllers.controller('chatCtrl', function ($scope,$rootScope, $state, contactsSrvc, chatSrvc, textAngularManager,$timeout,joinSrvc,$filter,socketio,configSrvc) {
+	controllers.controller('chatCtrl', function ($scope,$rootScope, $state, contactsSrvc, chatSrvc, textAngularManager,$timeout,joinSrvc,$filter,socketio,configSrvc,$upload,socketiostream,guid) {
 		var joined = false;
 		$scope.isShowSmileys=false;
 		$scope.chatFormCls="chat-form";
 		$scope.smileySrc="../images/smiley.png";
-		
+    	$scope.upload = function (files) {
+	        if (files && files.length) {
+	            for (var i = 0; i < files.length; i++) {
+	                var file = files[i];
+	                var fileTypeSplit = (file.name).split('.');
+	                var fileType = fileTypeSplit[fileTypeSplit.length-1];
+	                var newGuid = guid.newguid();
+	                var fileName = newGuid+"."+fileType;
+	                var stream = ss.createStream();
+					// upload a file to the server.
+					var data = { name: fileName,communicationId:$scope.communicationId,from:userNumber };
+					var fileReader = new FileReader();
+    				fileReader.readAsDataURL(file);
+    				fileReader.onload = function (e) {
+						$timeout(function () {
+							$scope.dataUrl = e.target.result;
+							var doc = {};
+							doc.guid = newGuid;
+							doc.communicationId = $scope.communicationId;
+							doc.message = $scope.newMsg;
+							doc.from = userNumber;
+							doc.to=$scope.contactDetails.contactNumber;
+							doc.on = new Date();
+							doc.isMedia = true;
+							doc.fromLabel='me';
+							doc.path=e.target.result;
+							doc.uploadWidth="0";
+							doc.progress=true;
+							$scope.msgs.push(doc);
+							$scope.scrollMsgDivUp(0);
+							
+							
+							ss(socketiostream).emit('communication-files', stream, data);
+							var blobStream = ss.createBlobReadStream(file);
+							var size = 0;
+		    				var isStarted=false;
+							blobStream.on('data', function (chunk) {
+								if(!isStarted){
+									
+								}
+								size += chunk.length;
+								var percentage = Math.floor(size / file.size * 100);
+								if(percentage == "100"){
+									$scope.addMessage(true,data);
+									$timeout(function(){$scope.msgs[$scope.msgs.length-1].progress=false;},100);	
+								}
+								$scope.msgs[$scope.msgs.length-1].uploadWidth="width"+percentage;
+							});
+							blobStream.pipe(stream);
+						});
+    				};
+					
+					
+					
+	            }
+	        }
+	    };
+	    
+		$scope.$on("IMAGE_RECEIVED", function (event,data) {
+			$timeout(function () {
+				var fileTypeSplit = (data.filename).split('.');
+	            var guid = fileTypeSplit[0];
+	            var msg = $filter('filter')($scope.msgs,{guid:guid},true);
+	            msg[0].path = (data.path).replace('app','..');
+	            console.log(msg);
+			}, 0);
+		});
 		$scope.toggleSmileysDiv=function(){
 			if($scope.isShowSmileys){
 				$scope.isShowSmileys=false;
@@ -74,28 +140,21 @@ define(['../modules/controller'], function (controllers) {
         	localStorage.setItem(configSrvc.cmidLocalStorage,result[0].communicationId);
         	chatSrvc.getMessagesByCommunicationId($scope.communicationId).then(function(result){
         		console.log(result);
-        		var finalResult=[];
+        		
         		contactsSrvc.getallContacts().then(function(contacts){
-        			angular.forEach(result,function(value,key){
-        			console.log(value);
-        			console.log(key);
-        			if(value.to == userNumber){
-        				var contact = $filter('filter')(contacts,{contactNumber:value.from},true);
-						value.fromLabel = contact.length>0?contact[0].contactName:value.from;
-        			}
-        			else if(value.from != userNumber){
-        				var contact = $filter('filter')(contacts,{contactNumber:value.from},true);
-						value.fromLabel = contact.length>0?contact[0].contactName:value.from;
+        			if(userNumber){
+	        			$scope.getMessages(result,userNumber,contacts);
         			}
         			else{
-        				value.fromLabel = "me";
+        				joinSrvc.getUserByUserId().then(function(userdata){
+							userNumber = userdata.mobileNumber;
+							$scope.getMessages(result,userNumber,contacts);
+						});	
         			}
-        			finalResult.push(value);
-        		});
         		});
         		
-        		$scope.msgs=finalResult;
-        		$scope.scrollMsgDivUp();
+        		
+        		
         		
         	});
         	//get the contact details to display the name on screen
@@ -114,7 +173,40 @@ define(['../modules/controller'], function (controllers) {
         		editorScope.displayElements.text[0].focus();
         	}, 1000);
         });
-		$scope.addMessage = function (contactId) {
+        $scope.getMessages=function(result,userNumber,contacts){
+        	var finalResult=[];
+    		var cnt=0;
+        	angular.forEach(result,function(value,key){
+    			console.log(value);
+    			console.log(key);
+    			cnt++;
+    			if(value.to == userNumber){
+    				console.log('if');
+    				var contact = $filter('filter')(contacts,{contactNumber:value.from},true);
+					value.fromLabel = contact.length>0?contact[0].contactName:value.from;
+					finalResult.push(value);
+    			}
+    			else if(value.from != userNumber){
+    				console.log('else if');
+    				var contact = $filter('filter')(contacts,{contactNumber:value.from},true);
+					value.fromLabel = contact.length>0?contact[0].contactName:value.from;
+					finalResult.push(value);
+    			}
+    			else{
+    				console.log('else');
+    				value.fromLabel = "me";
+    				finalResult.push(value);
+    			}
+    			console.log('modified');
+    			console.log(value);
+    			console.log(key);
+    			if(cnt == result.length){
+    				$scope.msgs=finalResult;
+    				$scope.scrollMsgDivUp(0); 
+    			}
+			});
+        };
+		$scope.addMessage = function (isMedia,data) {
 			/**
 			* Prepare an object with CommunicationId and the message to save in database.
 			*/
@@ -124,6 +216,10 @@ define(['../modules/controller'], function (controllers) {
 			doc.from = userNumber;
 			doc.to=$scope.contactDetails.contactNumber;
 			doc.on = new Date();
+			doc.isMedia = isMedia;
+			if(isMedia){
+				doc.path=configSrvc.communicationFilesUplaodPath+data.communicationId+"/"+data.from+"/"+data.name;
+			}
 			/**
 			* Emit the message to socket.
 			*/
@@ -140,8 +236,10 @@ define(['../modules/controller'], function (controllers) {
 			*/
 			var docTemp = doc;
 			docTemp.fromLabel='me';
-			$scope.msgs.push(docTemp);
-			$scope.scrollMsgDivUp();
+			if(!isMedia){
+				$scope.msgs.push(docTemp);
+				$scope.scrollMsgDivUp(0);
+			}
 			/**
 			* clear the chat message using textAngularManager service.
 			*/
@@ -152,8 +250,8 @@ define(['../modules/controller'], function (controllers) {
 			*/
 			$scope.newMsg = '';
 		};
-		$scope.scrollMsgDivUp=function(){
-			$timeout(function () { $("."+$scope.chatFormCls).animate({ scrollTop: $("."+$scope.chatFormCls).prop("scrollHeight") - $("."+$scope.chatFormCls).height() }, 100); }, 10);
+		$scope.scrollMsgDivUp=function(time){
+			$timeout(function () { $("."+$scope.chatFormCls).animate({ scrollTop: $("."+$scope.chatFormCls).prop("scrollHeight") - $("."+$scope.chatFormCls).height() }, 100); }, time);
 		};
 		/**
 		* Receive messages from the other user
@@ -165,7 +263,7 @@ define(['../modules/controller'], function (controllers) {
 					var contact = $filter('filter')(contacts,{contactNumber:msg.from},true);
 					msg.fromLabel = contact.length>0?contact[0].contactName:msg.from;
 					$scope.msgs.push(msg);
-					$scope.scrollMsgDivUp();
+					$scope.scrollMsgDivUp(0);
 				});
 			}, 0);
 		});

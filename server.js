@@ -15,6 +15,10 @@ var app = express();
 /*Start socket.io configuration*/
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
+var ss = require('socket.io-stream');
+var path = require('path');
+var fs = require('fs');
+var mkdirp = require('mkdirp');
 /*End socket.io configuration*/
 
 // parse application/x-www-form-urlencoded
@@ -70,7 +74,48 @@ var Chat = io
 	 
   });
   /*End socket.io initialization*/
-
+/*Start socket.io-stream initialization*/
+var str = io.of('/user').on('connection', function (socket) {
+	ss(socket).on('profile-image', function (stream, data) {
+		var filename = path.basename(data.name);
+		console.log(data.name);
+		console.log(stream);
+		stream.pipe(fs.createWriteStream("files/profile-pics/"+data.profileId+"/"+filename));
+	});
+	ss(socket).on('communication-files', function (stream, data) {
+		var filename = path.basename(data.name);
+		
+		var directory = "app/files/communication-files/"+data.communicationId+"/"+data.from;
+		fs.exists(directory,function(exists){
+			if(exists){
+				stream.pipe(fs.createWriteStream(directory+"/"+filename));
+				fs.watchFile(directory+"/"+filename, function (curr, prev) {
+					fs.readFile(directory+"/"+filename, function (err, buffer) {
+						ss(socket).emit('image', { buffer: buffer,path:directory+"/"+filename,filename:filename });
+					});
+				});
+			}
+			else{
+				mkdirp(directory, function(err){
+					if( err ){
+						console.log(err);
+					}
+					else {
+						stream.pipe(fs.createWriteStream(directory+"/"+filename));
+						fs.watchFile(directory+"/"+filename, function (curr, prev) {
+							fs.readFile(directory+"/"+filename, function (err, buffer) {
+								ss(socket).emit('image', { buffer: buffer,path:directory+"/"+filename,filename:filename });
+							});
+						});
+					}
+				});
+			}
+			
+		});
+		
+	});
+});
+/*End socket.io-stream initialization*/
 /*REST API*/
 app.get('/users/getall',usersData.getallUsers(db));
 app.get('/users/getUserIdByMobileNumber/:mobileNumber',usersData.getUserIdByMobileNumber(db));
