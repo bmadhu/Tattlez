@@ -318,10 +318,36 @@ body {
 	text-align:left;
 }
 .mymessage-div-style {
-	margin: 10px 10px 12px 10px;
+	margin: 10px 10px 12px 50px;
 	text-align: right;
+	position:relative;
 }
-
+.mymessage-div-style:before{
+	content: "";
+	position: absolute;
+	top: 5px;
+	right: -15px;
+	border-style: solid;
+	border-width: 8px 0px 8px 16px;
+	border-color: transparent #8DC0DF;
+	display: block;
+	width: 0;
+	z-index: 1;
+	bottom: auto;
+	left: auto;
+}
+.mymessage-div-style:after{
+	content: "";
+	position: absolute;
+	top: 6px;
+	right: -12px;
+	border-style: solid;
+	border-width: 7px 0px 7px 13px;
+	border-color: transparent #DFF1FC;
+	display: block;
+	width: 0;
+	z-index: 1;
+}
 .yourmessage-style {
 	background-color: #EBFFE0;
 	padding: 4px;
@@ -331,8 +357,35 @@ body {
 	border: 1px solid #69B83C;
 }
 .yourmessage-div-style {
-	margin: 10px 10px 12px 10px;
+	margin: 10px 50px 12px 10px;
 	text-align: left;
+	position:relative;
+}
+.yourmessage-div-style:before{
+	content: "";
+	position: absolute;
+	top: 5px;
+	left: -15px;
+	border-style: solid;
+	border-width: 8px 16px 8px 0px;
+	border-color: transparent #69B83C;
+	display: block;
+	width: 0;
+	z-index: 1;
+	bottom: auto;
+	right:auto;
+}
+.yourmessage-div-style:after{
+	content: "";
+	position: absolute;
+	top: 6px;
+	left: -12px;
+	border-style: solid;
+	border-width: 7px 13px 7px 0px;
+	border-color: transparent #EBFFE0;
+	display: block;
+	width: 0;
+	z-index: 1;
 }
 .msg-date-time{
 	font-size: 10px;
@@ -372,6 +425,15 @@ body {
 .attachment-div img{
 	padding-top:23%;
 }
+.attachment-div input{
+	opacity: 0;
+	z-index: 99;
+	position: relative;
+	top: -30px;
+	width: 41px;
+	margin: 0 auto;
+	cursor: pointer;
+}
 .smileys-div{
 	height: 40%;
 	overflow: auto;
@@ -381,3 +443,32 @@ body {
 	overflow-y: scroll;
 	height: 28%;
 }
+.upload-progress{
+	z-index: 1000;
+	pointer-events: none;
+	position: absolute;
+	height: 16px;
+	left: 50%;
+	top: 50%;
+	margin-top: -8px;
+	width: 80px;
+	margin-left: -40px;
+	background: rgba(255, 255, 255, 0.9);
+	-webkit-transform: scale(1);
+	border-radius: 8px;
+	overflow: hidden;
+}
+.upload-progress span{
+	background: linear-gradient(to bottom, #666, #444);
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 0;
+	-webkit-transition: width 300ms ease-in-out;
+	-moz-transition: width 300ms ease-in-out;
+	-ms-transition: width 300ms ease-in-out;
+	-o-transition: width 300ms ease-in-out;
+	transition: width 300ms ease-in-out;
+}
+

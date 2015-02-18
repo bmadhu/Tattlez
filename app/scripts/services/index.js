@@ -7,7 +7,9 @@ define([
     './addContactService',
     './contactsService',
 	'./chatService',
-	'./socketio'
+	'./socketio',
+	'./socketio-stream',
+	'./guid'
 ], function () {
 
 });

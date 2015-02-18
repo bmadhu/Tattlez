@@ -11,7 +11,8 @@ define([
 	'angular-bootstrap',
     'text-angular-sanitize',
     'text-angular',
-    'ng-audio'
+    'ng-audio',
+    'ng-file-upload'
 ], function (angular) {
     'use strict';
 
@@ -22,6 +23,7 @@ define([
         'ui.router',
 		'ui.bootstrap',
         'textAngular',
-        'ngAudio'
+        'ngAudio',
+        'angularFileUpload'
     ]);
 });

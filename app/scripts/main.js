@@ -14,7 +14,9 @@ require.config({
 		'text-angular': './vendorjs/textAngular/textAngular',
 		'text-angular-setup': './vendorjs/textAngular/textAngularSetup',
         'text-angular-sanitize':'./vendorjs/textAngular/textAngular-sanitize',
-        'ng-audio':'../vendor/angular-audio/app/angular.audio'
+        'ng-audio':'../vendor/angular-audio/app/angular.audio',
+        'ng-file-upload':'../vendor/ng-file-upload/angular-file-upload',
+        'ng-file-upload-shim':'../vendor/ng-file-upload/angular-file-upload-shim'
     },
     // angular does not support AMD out of the box, put it in a shim
 	shim: {
@@ -43,6 +45,9 @@ require.config({
             deps:['angular']
         },
         'ng-audio':{
+        	deps:['angular']
+        },
+        'ng-file-upload':{
         	deps:['angular']
         }
         

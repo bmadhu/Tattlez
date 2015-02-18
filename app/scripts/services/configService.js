@@ -11,6 +11,7 @@ define(['../modules/services'], function (services) {
 			uidLocalStorage: "_id_tattlez",
 			cidLocalStorage: "_cid_tattlez",
 			cmidLocalStorage: "_cmid_tattlez",
+			communicationFilesUplaodPath:"files/communication-files/",
 			emoticons : [
             "bowtie", "smile", "laughing", "blush", "smiley", "relaxed",
             "smirk", "heart_eyes", "kissing_heart", "kissing_closed_eyes", "flushed",

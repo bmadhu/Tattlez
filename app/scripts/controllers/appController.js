@@ -3,8 +3,8 @@
  */
 define(['../modules/controller'], function (controllers) {
     'use strict';
-    controllers.controller('appCtrl', ['$scope','$rootScope', 'configSrvc', 'contactsSrvc', 'chatSrvc', '$q', '$timeout', 'socketio','ngAudio','joinSrvc','$filter',
-    function ($scope,$rootScope, configSrvc, contactsSrvc, chatSrvc, $q, $timeout,socketio, ngAudio,joinSrvc,$filter) {
+    controllers.controller('appCtrl', ['$scope','$rootScope', 'configSrvc', 'contactsSrvc', 'chatSrvc', '$q', '$timeout', 'socketio','ngAudio','joinSrvc','$filter','socketiostream',
+    function ($scope,$rootScope, configSrvc, contactsSrvc, chatSrvc, $q, $timeout,socketio, ngAudio,joinSrvc,$filter,socketiostream) {
     	
     	$rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
 	  		if(fromState.name=="" && toState.name != "join"){
@@ -43,6 +43,12 @@ define(['../modules/controller'], function (controllers) {
 					$rootScope.$broadcast("MSG_RECEIVED",msg);
 				}, 0);
 			}
+		});
+		ss(socketiostream).on('image', function (data) {
+			console.log('image');
+			console.log(data);
+			$rootScope.$broadcast("IMAGE_RECEIVED",data);
+			
 		});
 		$scope.notifyMsg=function(msg,userNumber,contacts){
 			if(msg.to == userNumber){

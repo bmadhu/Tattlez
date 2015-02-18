@@ -15,7 +15,8 @@ define([
 	'text-angular-setup',
     'text-angular',
 	'jquery',
-	'ng-audio'
+	'ng-audio',
+	'ng-file-upload'
 ], function (require, ng) {
     'use strict';
 
