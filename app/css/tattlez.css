@@ -264,6 +264,22 @@ body {
 	padding: 0px 6px !important;
 	border-radius: 12px;
 }
+.btn-attach-icon {
+    padding: 5px 6px !important;
+    border: none;
+    background: transparent;
+    outline: 0;
+}
+.btn-attach-icon:hover {
+    border: none;
+    background: transparent;
+    outline: 0;
+}
+.btn-attach-icon:active {
+    border: none;
+    background: transparent;
+    outline: 0;
+}
 
 .display-none {
 	display: none;
@@ -422,9 +438,9 @@ body {
 	text-align: center;
 	cursor: pointer;
 }
-.attachment-div img{
+/*.attachment-div img{
 	padding-top:23%;
-}
+}*/
 .attachment-div input{
 	opacity: 0;
 	z-index: 99;
