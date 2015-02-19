@@ -30,25 +30,10 @@
 		<text-angular name="chatEditor" ng-model="newMsg" placeholder="Enter message" ng-enter="addMessage(false)" ta-toolbar="[]"></text-angular>
 		<textarea class="form-control input-lg" style="display: none;" id="txtAreaChat" ng-model="newMsg" placeholder="Enter message"></textarea>
 	</div>
-    <div class="btn-group padding-top-small dropup attachment-div col-md-1" dropdown is-open="false">
-        <div class="padding-top-small dropdown-toggle">
-            <img src="../images/attachment.png" alt="attach">
-        </div>
-        <ul class="dropdown-menu dropdown-menu-custom" role="menu">
-            <li>
-                <div style="width: 80px;height: 20px">
-                    <span>&nbsp;&nbsp;&nbsp;Image File</span>
-                    <input type="file" ng-file-select ng-model="files" ng-file-change="upload($files)" ng-multiple="false" ng-accept="'image/*'" class="form-control">
-                </div>
-            </li>
-            <li class="divider"></li>
-            <li><a><span class="halflings halflings-facetime-video"></span>&nbsp;Video Files</a></li>
-        </ul>
-    </div>
-	<!--<div class="col-md-1 attachment-div">
+	<div class="col-md-1 attachment-div">
 		<img src="../images/attachment.png" alt="attach">
-		<input type="file" ng-file-select ng-model="files" ng-file-change="upload($files)" ng-multiple="false" ng-accept="'image/*'" class="form-control">
-	</div>-->
+		<input type="file" ng-file-select ng-model="files" ng-file-change="upload($files)" ng-multiple="false" ng-accept="'image/*,video/*'" class="form-control">
+	</div>
 	
 </div>
 	<div class="smileys-div" ng-show="isShowSmileys">

@@ -438,9 +438,9 @@ body {
 	text-align: center;
 	cursor: pointer;
 }
-/*.attachment-div img{
+.attachment-div img{
 	padding-top:23%;
-}*/
+}
 .attachment-div input{
 	opacity: 0;
 	z-index: 99;
