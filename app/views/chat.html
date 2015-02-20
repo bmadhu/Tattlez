@@ -7,14 +7,37 @@
 			<span ng-class="{'mymessage-style':msg.fromLabel == 'me','yourmessage-style':msg.fromLabel != 'me'}">
 					<b>{{msg.fromLabel}}:</b> 
 					<span ng-bind-html="msg.message"></span>
-					<div ng-if="msg.isMedia" style="text-align: center;position: relative;">
+					<div ng-if="!msg.isVideo" style="text-align: center;position: relative;">
 						<img style="border: 5px solid #FFFFFF;cursor: pointer;max-width: 200px;max-height: 150px;" ng-src="{{msg.path}}" >
 						<div class="upload-progress" ng-show="msg.progress">
 							<span ng-class="msg.uploadWidth"></span>
 						</div>
-						<!--<div class="upload-progress" ng-show="msg.progress==false">
-							<span ng-show="msg.progress==false">Srikanth</span>
-						</div>-->
+					</div>
+					<div ng-if="msg.isVideo" style="text-align: center;position: relative;">
+						<img ng-if="msg.progress" style="border: 5px solid #FFFFFF;cursor: pointer;max-width: 200px;max-height: 150px;" ng-src="{{msg.path}}" >
+						<div class="upload-progress" ng-show="msg.progress">
+							<span ng-class="msg.uploadWidth"></span>
+						</div>
+						<div ng-if="!msg.progress" style="height:150px;display: inline-block;">
+						<videogular >
+							<vg-media vg-src="msg.path">
+							</vg-media>
+							<vg-controls>
+				<vg-play-pause-button></vg-play-pause-button>
+				<vg-time-display>{{ currentTime | date:'mm:ss' }}</vg-time-display>
+				<vg-scrub-bar>
+					<vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+				</vg-scrub-bar>
+				<vg-time-display>{{ timeLeft | date:'mm:ss' }}</vg-time-display>
+				<vg-volume>
+					<vg-mute-button></vg-mute-button>
+					<vg-volume-bar></vg-volume-bar>
+				</vg-volume>
+				<vg-fullscreen-button></vg-fullscreen-button>
+			</vg-controls>
+							<vg-overlay-play></vg-overlay-play>
+						</videogular>
+						</div>
 					</div>
 					<br />
 					<span class="msg-date-time">{{msg.on|date:'medium'}}</span>
@@ -27,7 +50,7 @@
 		<img ng-src="{{smileySrc}}" alt="smiley">
 	</div>
 	<div class="col-md-10">
-		<text-angular name="chatEditor" ng-model="newMsg" placeholder="Enter message" ng-enter="addMessage(false)" ta-toolbar="[]"></text-angular>
+		<text-angular name="chatEditor" ng-model="newMsg" placeholder="Enter message" ng-enter="addMessage(false,false)" ta-toolbar="[]"></text-angular>
 		<textarea class="form-control input-lg" style="display: none;" id="txtAreaChat" ng-model="newMsg" placeholder="Enter message"></textarea>
 	</div>
 	<div class="col-md-1 attachment-div">

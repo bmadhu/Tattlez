@@ -2,7 +2,9 @@
  * Created by bindum on 24/7/14.
  */
 
-var otpCtrl = function ($rootScope, $scope, $state, $timeout, configSrvc, joinSrvc) {
+define(['../modules/controller'], function (controllers) {
+	'use strict';
+	controllers.controller('otpCtrl', function ($rootScope, $scope, $state, $timeout, configSrvc, joinSrvc) {
     $scope.enableResendOtp = false;
     $scope.showAlert = false;
     $scope.otpInput;
@@ -43,4 +45,5 @@ alert(joinSrvc.mobileAndOtp.otp);
     $scope.gotoJoinForm = function () {
         $state.go('join');
     };
-};
+});
+});

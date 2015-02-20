@@ -487,4 +487,24 @@ body {
 	-o-transition: width 300ms ease-in-out;
 	transition: width 300ms ease-in-out;
 }
+videogular vg-overlay-play .play:before {
+  content: "" !important;
+position: absolute;
+/* top: 5px; */
+left: 44%;
+border-style: solid;
+border-width: 20px 0px 20px 30px;
+border-color: transparent #FFFFFF;
+display: block;
+width: 0;
+z-index: 1;
+bottom: 40%;
+}
+/*videogular{
+	width:200px !important;
+	height:150px !important;
+}*/
+videogular vg-overlay-play{
+	width:0% !important;
+}
 
