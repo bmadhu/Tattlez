@@ -20,6 +20,13 @@
     "textAngular": "~1.2.2",
     "angular-audio":"latest",
     "ng-file-upload":"latest",
-    "ng-file-upload-shim":"latest"
+    "ng-file-upload-shim":"latest",
+    "videogular":"latest",
+    "videogular-themes-default":"latest",
+    "videogular-controls":"latest",
+    "videogular-buffering":"latest",
+    "videogular-overlay-play":"latest",
+    "videogular-poster":"latest"
+    
   }
 }

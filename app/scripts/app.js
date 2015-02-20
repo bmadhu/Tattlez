@@ -12,7 +12,12 @@ define([
     'text-angular-sanitize',
     'text-angular',
     'ng-audio',
-    'ng-file-upload'
+    'ng-file-upload',
+    'videogular',
+    'videogular-controls',
+    'videogular-overlay-play',
+    'videogular-poster',
+    'videogular-buffering'
 ], function (angular) {
     'use strict';
 
@@ -24,6 +29,10 @@ define([
 		'ui.bootstrap',
         'textAngular',
         'ngAudio',
-        'angularFileUpload'
+        'angularFileUpload',
+        "com.2fdevs.videogular",
+		"com.2fdevs.videogular.plugins.controls",
+		"com.2fdevs.videogular.plugins.overlayplay",
+		"com.2fdevs.videogular.plugins.poster"
     ]);
 });
