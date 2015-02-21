@@ -143,8 +143,41 @@ define(['../modules/controller'], function (controllers) {
 				$scope.smileySrc="../images/down-arrow.png";
 			}
 		};
+
+        $scope.smileyPanes = [
+            {
+                active: true,
+                emoticon: 'smile',
+                emoticonsArray: configSrvc.emoticons1
+            },
+            {
+                active: false,
+                emoticon: 'cat',
+                emoticonsArray: configSrvc.emoticons2
+            },
+            {
+                active: false,
+                emoticon: 'bamboo',
+                emoticonsArray: configSrvc.emoticons3
+            },
+            {
+                active: false,
+                emoticon: 'house',
+                emoticonsArray: configSrvc.emoticons4
+            },
+            {
+                active: false,
+                emoticon: 'one',
+                emoticonsArray: configSrvc.emoticons5
+            }
+        ];
+
+        $scope.toggleActive = function (tabIndex) {
+            for(var i = 1; i <= $scope.smileyPanes.length; i++) {
+                $scope.smileyPanes[i-1].active = (i == tabIndex);
+            }
+        }
 		//get the contactId of the user to which we are trying to start chat.
-		$scope.emoticons = configSrvc.emoticons;
 		$scope.contactId = contactsSrvc.getSelectedContactForChat();
 		var userNumber;
 		if(joinSrvc.mobileAndOtp.mobileNumber){

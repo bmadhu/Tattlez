@@ -452,8 +452,13 @@ body {
 }
 .smileys-div{
 	height: 40%;
-	overflow: auto;
+    overflow: hidden;
 	background-color: rgba(255, 255, 255, 0.67);
+}
+.smileys-tab-content {
+    height: 73%;
+    width: 99.15%;
+    overflow: auto;
 }
 .chat-form-small{
 	overflow-y: scroll;
