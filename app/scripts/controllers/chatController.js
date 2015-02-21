@@ -3,63 +3,107 @@
  */
 define(['../modules/controller'], function (controllers) {
 	'use strict';
-	controllers.controller('chatCtrl', function ($scope,$rootScope, $state, contactsSrvc, chatSrvc, textAngularManager,$timeout,joinSrvc,$filter,socketio,configSrvc,$upload,socketiostream,guid) {
+	controllers.controller('chatCtrl', function ($scope,$rootScope, $state, contactsSrvc, chatSrvc, textAngularManager,$timeout,joinSrvc,$filter,socketio,configSrvc,$upload,socketiostream,guid,$sce) {
 		var joined = false;
 		$scope.isShowSmileys=false;
 		$scope.chatFormCls="chat-form";
 		$scope.smileySrc="../images/smiley.png";
-
+		$scope.vidSrc=[
+					{src: $sce.trustAsResourceUrl("http://localhost:3000/IMG_2603.MOV"), type: "video/MP4"}
+				];
+		
     	$scope.upload = function (files) {
 	        if (files && files.length) {
 	            for (var i = 0; i < files.length; i++) {
 	                var file = files[i];
-	                var fileTypeSplit = (file.name).split('.');
-	                var fileType = fileTypeSplit[fileTypeSplit.length-1];
 	                var newGuid = guid.newguid();
-	                var fileName = newGuid+"."+fileType;
-	                var stream = ss.createStream();
-					// upload a file to the server.
-					var data = { name: fileName,communicationId:$scope.communicationId,from:userNumber };
-					var fileReader = new FileReader();
-    				fileReader.readAsDataURL(file);
-    				fileReader.onload = function (e) {
-						$timeout(function () {
-							$scope.dataUrl = e.target.result;
-							var doc = {};
-							doc.guid = newGuid;
-							doc.communicationId = $scope.communicationId;
-							doc.message = $scope.newMsg;
-							doc.from = userNumber;
-							doc.to=$scope.contactDetails.contactNumber;
-							doc.on = new Date();
-							doc.isMedia = true;
-							doc.fromLabel='me';
-							doc.path=e.target.result;
-							doc.uploadWidth="0";
-							doc.progress=true;
-							$scope.msgs.push(doc);
-							$scope.scrollMsgDivUp(0);
-							
-							
-							ss(socketiostream).emit('communication-files', stream, data);
-							var blobStream = ss.createBlobReadStream(file);
-							var size = 0;
-		    				var isStarted=false;
-							blobStream.on('data', function (chunk) {
-								if(!isStarted){
-									
-								}
-								size += chunk.length;
-								var percentage = Math.floor(size / file.size * 100);
-								if(percentage == "100"){
-									$scope.addMessage(true,data);
-									$timeout(function(){$scope.msgs[$scope.msgs.length-1].progress=false;},100);	
-								}
-								$scope.msgs[$scope.msgs.length-1].uploadWidth="width"+percentage;
+	                 var stream = ss.createStream();
+	                if(file.type.indexOf('video') > -1){
+		                var fileTypeSplit = (file.name).split('.');
+		                var fileType = fileTypeSplit[fileTypeSplit.length-1];
+		                var fileName = newGuid+"."+fileType;
+						// upload a file to the server.
+						var data = { name: fileName,communicationId:$scope.communicationId,from:userNumber,mediaType:file.type };
+						
+							$timeout(function () {
+								
+								var doc = {};
+								doc.guid = newGuid;
+								doc.communicationId = $scope.communicationId;
+								doc.message = $scope.newMsg;
+								doc.from = userNumber;
+								doc.to=$scope.contactDetails.contactNumber;
+								doc.on = new Date();
+								doc.isMedia = true;
+								doc.isVideo = true;
+								doc.mediaType=file.type;
+								doc.fromLabel='me';
+								doc.path='../images/video_thumbnail.png';
+								doc.uploadWidth="0";
+								doc.progress=true;
+								$scope.msgs.push(doc);
+								console.log(doc);
+								$scope.scrollMsgDivUp(0);
+								ss(socketiostream).emit('communication-files', stream, data);
+								var blobStream = ss.createBlobReadStream(file);
+								var size = 0;
+								blobStream.on('data', function (chunk) {
+									size += chunk.length;
+									var percentage = Math.floor(size / file.size * 100);
+									if(percentage == "100"){
+										//$scope.addMessage(true,true,data);
+										$timeout(function(){$scope.msgs[$scope.msgs.length-1].progress=false;},100);	
+									}
+									$scope.msgs[$scope.msgs.length-1].uploadWidth="width"+percentage;
+								});
+								blobStream.pipe(stream);
 							});
-							blobStream.pipe(stream);
-						});
-    				};
+	    				
+    				}
+	                if(file.type.indexOf('image') > -1){
+		                var fileTypeSplit = (file.name).split('.');
+		                var fileType = fileTypeSplit[fileTypeSplit.length-1];
+		                var fileName = newGuid+"."+fileType;
+		               
+						// upload a file to the server.
+						var data = { name: fileName,communicationId:$scope.communicationId,from:userNumber,mediaType:file.type };
+						var fileReader = new FileReader();
+	    				fileReader.readAsDataURL(file);
+	    				fileReader.onload = function (e) {
+							$timeout(function () {
+								$scope.dataUrl = e.target.result;
+								var doc = {};
+								doc.guid = newGuid;
+								doc.communicationId = $scope.communicationId;
+								doc.message = $scope.newMsg;
+								doc.from = userNumber;
+								doc.to=$scope.contactDetails.contactNumber;
+								doc.on = new Date();
+								doc.isMedia = true;
+								doc.isVideo=false;
+								doc.mediaType=file.type;
+								doc.fromLabel='me';
+								doc.path=e.target.result;
+								doc.uploadWidth="0";
+								doc.progress=true;
+								$scope.msgs.push(doc);
+								$scope.scrollMsgDivUp(0);
+								ss(socketiostream).emit('communication-files', stream, data);
+								var blobStream = ss.createBlobReadStream(file);
+								var size = 0;
+								blobStream.on('data', function (chunk) {
+									size += chunk.length;
+									var percentage = Math.floor(size / file.size * 100);
+									if(percentage == "100"){
+										$scope.addMessage(true,false,data);
+										$timeout(function(){$scope.msgs[$scope.msgs.length-1].progress=false;},100);	
+									}
+									$scope.msgs[$scope.msgs.length-1].uploadWidth="width"+percentage;
+								});
+								blobStream.pipe(stream);
+							});
+	    				};
+    				}
 					
 					
 					
@@ -72,10 +116,19 @@ define(['../modules/controller'], function (controllers) {
 				var fileTypeSplit = (data.filename).split('.');
 	            var guid = fileTypeSplit[0];
 	            var msg = $filter('filter')($scope.msgs,{guid:guid},true);
-	            msg[0].path = (data.path).replace('app','..');
+	            if(msg[0].mediaType.indexOf('video') > -1){
+	            	console.log(data);
+	            	var path = (data.path).replace('app','http://localhost:3000');
+	            	msg[0].path=[
+									{src: $sce.trustAsResourceUrl(path), type: "video/mp4"}
+								];
+	            }else{
+	            	msg[0].path = (data.path).replace('app','..');
+	            }
 	            console.log(msg);
 			}, 0);
 		});
+		
 		$scope.toggleSmileysDiv=function(){
 			if($scope.isShowSmileys){
 				$scope.isShowSmileys=false;
@@ -240,7 +293,7 @@ define(['../modules/controller'], function (controllers) {
     			}
 			});
         };
-		$scope.addMessage = function (isMedia,data) {
+		$scope.addMessage = function (isMedia,isVideo,data) {
 			/**
 			* Prepare an object with CommunicationId and the message to save in database.
 			*/
@@ -251,7 +304,9 @@ define(['../modules/controller'], function (controllers) {
 			doc.to=$scope.contactDetails.contactNumber;
 			doc.on = new Date();
 			doc.isMedia = isMedia;
+			doc.isVideo=isVideo;
 			if(isMedia){
+				doc.mediaType=data.mediaType;
 				doc.path=configSrvc.communicationFilesUplaodPath+data.communicationId+"/"+data.from+"/"+data.name;
 			}
 			/**

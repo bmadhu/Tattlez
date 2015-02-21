@@ -16,7 +16,12 @@ require.config({
         'text-angular-sanitize':'./vendorjs/textAngular/textAngular-sanitize',
         'ng-audio':'../vendor/angular-audio/app/angular.audio',
         'ng-file-upload':'../vendor/ng-file-upload/angular-file-upload',
-        'ng-file-upload-shim':'../vendor/ng-file-upload/angular-file-upload-shim'
+        'ng-file-upload-shim':'../vendor/ng-file-upload/angular-file-upload-shim',
+        'videogular':'../vendor/videogular/videogular',
+        'videogular-controls':'../vendor/videogular-controls/vg-controls',
+        'videogular-overlay-play':'../vendor/videogular-overlay-play/vg-overlay-play',
+        'videogular-poster':'../vendor/videogular-poster/vg-poster',
+        'videogular-buffering':'../vendor/videogular-buffering/vg-buffering'
     },
     // angular does not support AMD out of the box, put it in a shim
 	shim: {
@@ -48,6 +53,21 @@ require.config({
         	deps:['angular']
         },
         'ng-file-upload':{
+        	deps:['angular']
+        },
+        'videogular':{
+        	deps:['angular']
+        },
+        'videogular-controls':{
+        	deps:['angular']
+        },
+        'videogular-overlay-play':{
+        	deps:['angular']
+        },
+        'videogular-poster':{
+        	deps:['angular']
+        },
+        'videogular-buffering':{
         	deps:['angular']
         }
         

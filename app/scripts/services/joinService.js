@@ -61,7 +61,7 @@ define(['../modules/services'], function (services) {
 		function addUser(user) {
 			var future = $q.defer();
 			$http.post('/users/addUser', user).success(function (data) {
-				if (data != 'null') {
+				if (data != null) {
 					localStorage.setItem(configSrvc.uidLocalStorage, data._id);
 					future.resolve(data);
 				}
