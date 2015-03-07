@@ -4,7 +4,8 @@
 define(['../modules/services'], function (services) {
 	'use strict';
 	services.factory('joinSrvc', function ($http, $q, $rootScope, $timeout, configSrvc) {
-		var mobileAndOtp = {}; //object to save mobile number and OTP
+		var mobileAndOtp = {}, //object to save mobile number and OTP
+            userProfile = {};
 
 		// Sets mobile number from join form
 		function setMobileNumber(mobileNumber) {
@@ -23,10 +24,20 @@ define(['../modules/services'], function (services) {
 			}, configSrvc.otpDelay);
 		}
 
+        function setProfile(profileObj) {
+            userProfile.profilePic = profileObj.profilePic;
+            userProfile.profileName = profileObj.profileName;
+            userProfile.profileStatus = profileObj.profileStatus;
+        }
+
 		// Gets mobile and OTP object
 		function getMobileAndOtp() {
 			return mobileAndOtp;
 		}
+
+        function getUserProfile() {
+            return userProfile;
+        }
 
 		function getUserId() {
 			return localStorage.getItem(configSrvc.uidLocalStorage);
@@ -88,10 +99,23 @@ define(['../modules/services'], function (services) {
 			});
 			return future.promise;
 		}
+
+        function updateUser(userProfile) {
+            var future = $q.defer();
+            $http.post('/users/updateUser',userProfile).success(function (data) {
+                future.resolve(data);
+            }, function (err) { future.reject(err); });
+            return future.promise;
+
+        }
 		return {
 			setMobileNumber: setMobileNumber,
 			setOtp: setOtp,
+            setProfile: setProfile,
+            userProfile: userProfile,
+            updateUser: updateUser,
 			getMobileAndOtp: getMobileAndOtp,
+            getUserProfile: getUserProfile,
 			mobileAndOtp: mobileAndOtp,
 			getallUsers: getallUsers,
 			addUser: addUser,
