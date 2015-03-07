@@ -40,7 +40,7 @@ define(['../modules/controller'], function (controllers) {
          *  Help, profile, Account, Chat settings, notifications, contacts
          */
         $scope.goToSettingsPage = function () {
-            // $state.go('settings');
+             $state.go('settings');
         }
         /**
          *  Navigate to Status page.

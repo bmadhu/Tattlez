@@ -86,3 +86,15 @@ exports.addUser = function(db){
 
     }
 };
+
+exports.updateUser = function(db, mongojs){
+    return function (req, res) {
+        var doc = req.body;
+
+        db.users.update({_id: mongojs.ObjectId(doc.userId)},{$set: {profilePic: doc.profilePic, profileName: doc.profileName, profileStatus: doc.profileStatus}}, function (err, docs) {
+            if (err) console.log(err);
+            res.send('OK');
+            res.end();
+        });
+    }
+};
