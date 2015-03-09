@@ -21,7 +21,7 @@ alert(joinSrvc.mobileAndOtp.otp);
             user.mobileNumber=joinSrvc.mobileAndOtp.mobileNumber;
             user.profilePic = "../images/default_profile_M.jpg";
             user.profileName = "Guest";
-            user.profileStatus = "Hey!I'm using Tattlez.";
+            user.profileStatus = "Hey there! I'm using Tattlez.";
             joinSrvc.addUser(user).then(function (data) {
 				//Broadcast to appController
             	$rootScope.$broadcast("ESTABLISH_COMMUNICATION");
