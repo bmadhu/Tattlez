@@ -2,8 +2,8 @@
     <span class="text">Profile</span>
 </div>
 <div class="div-join content padding-top-small">
-    <div id="profileImageDisplayArea" style="background-color: lightblue;top: 5px;width: 150px;height: 150px;float: left;">
-        <img src={{userProfile.profileImgUrl}} class="img-default" width="150px" height="150px"/>
+    <div id="profileImageDisplayArea" style="background-color: lightblue;top: 5px;width: 160px;height: 160px;float: left;">
+        <img src={{userProfile.profileImgUrl}} class="img-default" width="160px" height="160px"/>
     </div>
 
     <div style="position: relative">
@@ -13,33 +13,21 @@
         </div>
     </div>
     <div style="display: block;margin-left: 200px;padding-top: 10px">
-        <div>
-            <div ng-hide="editorEnabled">
-                <input type="text" ng-model="userProfile.profileName" placeholder="Name" disabled="disabled">
-                <a href=""
-                   ng-click="editProfileName()">
-                    <i class="fa fa-pencil"></i>
-                </a>
+        <form name="newContactForm">
+            <div class="form-group">
+                <span>Name</span>
+                <input type="text"
+                       placeholder="Enter Name" ng-model="userProfile.profileName" name="profilename" class="form-control"/>
             </div>
-            <div ng-show="editorEnabled">
-                <input type="text" ng-model="editableTitle" ng-show="editorEnabled">
-                <a href="" ng-click="saveIt()">
-                    <i class="fa fa-check"></i>
-                </a>
-                <a href="" ng-click="disableProfileName()">
-                    <i class="fa fa-times"></i>
-                </a>
+            <div class="form-group">
+                <span>Status</span>
+                <textarea type="text"
+                       placeholder="Hey!I'm using Tattlez" ng-model="userProfile.profileStatus" name="profileStatus" class="form-control"/>
             </div>
-        </div>
-        <div style="padding-top: 10px">
-            <textarea style="width: 250px;height: 100px;" placeholder="Hey! I am using Tattlez." ng-model="userProfile.profileStatus"></textarea>
-        </div>
-    </div>
-    <div style="height: 100px;padding-top: 10px" ng-hide="true">
-
+        </form>
     </div>
     <div style="padding-top: 20px;">
-        <button class="btn btn-primary" style="width: 100%;">Save</button>
+        <button class="btn btn-primary" style="width: 100%;" ng-click="saveUserProfile()">Save</button>
     </div>
 
 </div>

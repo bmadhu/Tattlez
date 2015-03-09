@@ -28,5 +28,8 @@ define(['../modules/controller'], function (controllers) {
                 }
             }
         };
+        $scope.gotoHistory = function() {
+            $state.go('history');
+        }
     });
 });

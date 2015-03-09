@@ -17,22 +17,6 @@ define(['../modules/controller'], function (controllers) {
             $scope.userProfile.profileStatus = userdata.profileStatus;
         });
 
-        $scope.editProfileName = function() {
-            $scope.editorEnabled = true;
-            $scope.editableTitle = $scope.userProfile.profileName;
-        };
-
-        $scope.disableProfileName = function() {
-            $scope.editorEnabled = false;
-        };
-
-        $scope.saveIt = function() {
-            $scope.userProfile.profileName = $scope.editableTitle;
-            $scope.disableProfileName();
-        };
-
-
-
         $scope.uploadProfilePic = function(files) {
             if (files && files.length) {
                 for (var i = 0; i < files.length; i++) {
@@ -67,22 +51,29 @@ define(['../modules/controller'], function (controllers) {
                 var fileTypeSplit = (data.filename).split('.');
                 var guid = fileTypeSplit[0];
                 $scope.userProfile.profileImgUrl = (data.path).replace('app','..');
-                    var userdata = {};
-                    userdata.userId = joinSrvc.getUserId();
-                    userdata.profilePic = $scope.userProfile.profileImgUrl;
-                    userdata.profileName = $scope.userProfile.profileName;
-                    userdata.profileStatus = $scope.userProfile.profileStatus;
-                    joinSrvc.updateUser(userdata).then(function(result){
-                        if (result == 'OK') {
-                            console.log("userProfile updated successfully");
-                        }
-                    });
             }, 0);
 
         });
 
+        $scope.saveUserProfile = function() {
+            var userdata = {};
+            userdata.userId = joinSrvc.getUserId();
+            userdata.profilePic = $scope.userProfile.profileImgUrl;
+            userdata.profileName = $scope.userProfile.profileName;
+            userdata.profileStatus = $scope.userProfile.profileStatus;
+            joinSrvc.updateUser(userdata).then(function(result){
+                if (result == 'OK') {
+                    console.log("userProfile updated successfully");
+                }
+            });
+        }
+
         $scope.gotoSettings = function() {
             $state.go('settings');
         }
+        $scope.gotoHistory = function() {
+            $state.go('history');
+        }
+
     });
 });
