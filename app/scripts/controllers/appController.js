@@ -14,7 +14,22 @@ define(['../modules/controller'], function (controllers) {
     	$scope.phoneTablet = configSrvc.phoneTablet;
     	$scope.timeFormat="h:mm a";
     	$scope.audio = ngAudio.load('../sounds/2.mp3');
+    	
+    	$scope.outCallAudio = ngAudio.load('../sounds/Ringing_Phone.mp3');
+    	$scope.outCallAudio.loop=true;
+    	$scope.inCallAudio = ngAudio.load('../sounds/Phone_Ringing.mp3');
+    	$scope.inCallAudio.loop=true;
+    	$scope.busyCallAudio = ngAudio.load('../sounds/Busy_Signal.mp3');
+    	$scope.busyCallAudio.loop=true;
+    	
     	$scope.isNotification=false;
+    	$scope.showInCallModal='display-none';
+    	$scope.showOutCallModal='display-none';
+    	$scope.$on("OUT_GOING_CALL", function (event,data) {
+    		  $scope.showOutCallModal='display-block';
+    		  $scope.callTo=data.name;
+			  $scope.outCallAudio.play();
+		});
     	/**
 		* Receive messages from the other user
 		* Add the messages to array
@@ -44,6 +59,28 @@ define(['../modules/controller'], function (controllers) {
 				}, 0);
 			}
 		});
+		/**
+		* Receive messages from the other user
+		* Add the messages to array
+		*/
+		socketio.on('call', function (msg) {
+				contactsSrvc.getallContacts().then(function(contacts){
+					var userNumber;
+					if(joinSrvc.mobileAndOtp.mobileNumber){
+						userNumber = joinSrvc.mobileAndOtp.mobileNumber;
+						$scope.notifyCall(msg,userNumber,contacts);
+					}
+					else{
+						joinSrvc.getUserByUserId().then(function(userdata){
+							userNumber = userdata.mobileNumber;
+							$scope.notifyCall(msg,userNumber,contacts);
+						});	
+					}
+					
+				});
+		    		
+			
+		});
 		ss(socketiostream).on('image', function (data) {
 			console.log('image');
 			console.log(data);
@@ -55,7 +92,7 @@ define(['../modules/controller'], function (controllers) {
 				var contact = $filter('filter')(contacts,{contactNumber:msg.from},true);
 				msg.from = contact[0].contactName;
 				$scope.audio.play();
-	    		$scope.isNotification=true;
+	    		
 	    		$scope.notification=msg.from+' : '+msg.message;
 	    		//Clear notification
 		    	$timeout(function () {
@@ -67,7 +104,7 @@ define(['../modules/controller'], function (controllers) {
 				var contact = $filter('filter')(contacts,{contactNumber:msg.to},true);
 				msg.from = contact[0].contactName;
 				$scope.audio.play();
-	    		$scope.isNotification=true;
+	    		
 	    		$scope.notification=msg.from+' : '+msg.message;
 	    		//Clear notification
 		    	$timeout(function () {
@@ -75,6 +112,20 @@ define(['../modules/controller'], function (controllers) {
 					$scope.notification='';
 				}, 3000);
 			}
+		};
+		$scope.notifyCall=function(msg,userNumber,contacts){
+			if(msg.to == userNumber){
+				var contact = $filter('filter')(contacts,{contactNumber:msg.from},true);
+				msg.from = contact[0].contactName;
+	    		
+			}
+			else{
+				var contact = $filter('filter')(contacts,{contactNumber:msg.to},true);
+				msg.from = contact[0].contactName;
+			}
+			$scope.inCallAudio.play();
+    		$scope.callFrom=msg.from;
+    		$scope.showInCallModal='display-block';
 		};
     	// Listen to ESTABLISH_COMMUNICATION event
     	$scope.$on("ESTABLISH_COMMUNICATION", function (event) {

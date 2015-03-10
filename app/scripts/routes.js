@@ -53,6 +53,18 @@ define(['./app'], function (app) {
                 templateUrl: '../views/newGroup.html',
                 controller: 'newGroupCtrl',
                 module: 'private'
+            })
+            .state('settings', {
+                url: '/settings',
+                templateUrl: '../views/settings.html',
+                controller: 'settingsCtrl',
+                module: 'private'
+            })
+            .state('profile', {
+                url: '/profile',
+                templateUrl: '../views/profile.html',
+                controller: 'profileCtrl',
+                module: 'private'
             });
 		//$locationProvider.html5Mode(true);
 	}]);

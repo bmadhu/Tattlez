@@ -433,6 +433,13 @@ body {
 .smiley-div img{
 	padding-top:23%;
 }
+.profileSection {
+    color: darkgrey;
+    border-radius: 1px;
+    padding: 10px 10px 10px 10px;
+    position: absolute;
+    left: 30%;
+}
 .attachment-div{
 	height: 100%;
 	text-align: center;
@@ -452,8 +459,13 @@ body {
 }
 .smileys-div{
 	height: 40%;
-	overflow: auto;
+    overflow: hidden;
 	background-color: rgba(255, 255, 255, 0.67);
+}
+.smileys-tab-content {
+    height: 73%;
+    width: 99.15%;
+    overflow: auto;
 }
 .chat-form-small{
 	overflow-y: scroll;

@@ -3,7 +3,7 @@ define(['../modules/services'], function (services) {
 
     services.provider('socketio', function() {
         var socketio = io.connect("/chat");
-
+		
         
 
         socketio.on('create', function(data) {

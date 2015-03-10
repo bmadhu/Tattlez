@@ -1,12 +1,17 @@
 ﻿<div class="heading">
-	<img ng-src="../images/{{contactDetails.photo}}" class="img-default" width="35px" height="33px" /><span class="text no-padding" ng-bind="contactDetails.contactName"></span>
+	<img ng-src="{{contactDetails.photo}}" class="img-default" width="35px" height="33px" /><span class="text no-padding" ng-bind="contactDetails.contactName"></span>
+</div>
+<div>
+	<button type="button" class="btn btn-default" ng-click="Call()">Call</button>
 </div>
 <div ng-class="chatFormCls" class="content">
+	
 	<div ng-repeat="msg in msgs track by $index">
 		<div ng-class="{'mymessage-div-style':msg.fromLabel == 'me','yourmessage-div-style':msg.fromLabel != 'me'}">
 			<span ng-class="{'mymessage-style':msg.fromLabel == 'me','yourmessage-style':msg.fromLabel != 'me'}">
 					<b>{{msg.fromLabel}}:</b> 
 					<span ng-bind-html="msg.message"></span>
+					<div ng-if="msg.isMedia">
 					<div ng-if="!msg.isVideo" style="text-align: center;position: relative;">
 						<img style="border: 5px solid #FFFFFF;cursor: pointer;max-width: 200px;max-height: 150px;" ng-src="{{msg.path}}" >
 						<div class="upload-progress" ng-show="msg.progress">
@@ -39,6 +44,7 @@
 						</videogular>
 						</div>
 					</div>
+					</div>
 					<br />
 					<span class="msg-date-time">{{msg.on|date:'medium'}}</span>
 			</span>
@@ -46,9 +52,11 @@
 	</div>
 </div>
 <div class="form-group div-chat-message" style="margin-bottom:6px !important;">
-	<div class="col-md-1 smiley-div" ng-click="toggleSmileysDiv()">
-		<img ng-src="{{smileySrc}}" alt="smiley">
-	</div>
+    <div class="col-md-1 smiley-div" ng-click="toggleSmileysDiv()">
+        <img ng-src="{{smileySrc}}" alt="smiley">
+    </div>
+
+
 	<div class="col-md-10">
 		<text-angular name="chatEditor" ng-model="newMsg" placeholder="Enter message" ng-enter="addMessage(false,false)" ta-toolbar="[]"></text-angular>
 		<textarea class="form-control input-lg" style="display: none;" id="txtAreaChat" ng-model="newMsg" placeholder="Enter message"></textarea>
@@ -59,9 +67,20 @@
 	</div>
 	
 </div>
-	<div class="smileys-div" ng-show="isShowSmileys">
-		<span ng-repeat="emoticon in emoticons" class="emoji emoji_{{emoticon}}" ng-click="addEmoticon(emoticon,usermsg.Name)"></span>
-	</div>
+<!-- SMILEYS SECTION -->
+<div class="smileys-div" ng-show="isShowSmileys">
+    <ul class="nav nav-tabs">
+        <li  ng-repeat="pane in smileyPanes" ng-class="{active: pane.active}">
+            <a href ng-click="toggleActive($index+1)">
+                <img class='emoji emoji_{{pane.emoticon}}' src='../images/blank.gif' />
+            </a>
+        </li>
+    </ul>
+    <div class="smileys-tab-content" ng-show="tab.active" ng-repeat="tab in smileyPanes">
+        <span ng-repeat="emoticon in tab.emoticonsArray" class="emoji emoji_{{emoticon}}" ng-click="addEmoticon(emoticon,usermsg.Name)"></span>
+    </div>
+</div>
+
 <!-- FOOTER SECTION -->
 <div class="footer" data-align="center">
     <div class="pull-right padding-top-small padding-right-mini">

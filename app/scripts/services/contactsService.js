@@ -13,10 +13,11 @@ define(['../modules/services'], function (services) {
     		}
     		else {
     			$http.jsonp('/contacts/getallContacts/' + userId + '?callback=JSON_CALLBACK').success(function (data) {
+                    console.log(data);
     				if(data!==null){
 						localStorage.setItem(userId + '_C', JSON.stringify(data));
 					}
-    					future.resolve(data);
+                    future.resolve(data);
     				
     			}, function (err) { future.reject(err); });
     		}

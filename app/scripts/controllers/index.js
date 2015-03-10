@@ -10,7 +10,9 @@ define([
     './contactsController',
     './addContactController',
 	'./chatController',
-    './newGroupController'
+    './newGroupController',
+    './settingsController',
+    './profileController'
 ], function () {
 
 });
