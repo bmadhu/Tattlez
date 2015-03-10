@@ -26,7 +26,7 @@ define(['../modules/controller'], function (controllers) {
 	        .then(function (roomId) {
 	        	$timeout(function () {
 					//Broadcast the received message to chat window(chatController).
-					$rootScope.$broadcast("OUT_GOING_CALL",{name:$scope.contactDetails.contactName});
+					$rootScope.$broadcast("OUT_GOING_CALL",{ContactData:$scope.contactDetails});
 				}, 0);
 	          socketio.emit('call', {communicationId:$scope.communicationId,from:userNumber,to:$scope.contactDetails.contactNumber});
 	        });
@@ -299,6 +299,8 @@ define(['../modules/controller'], function (controllers) {
         	//get the contact details to display the name on screen
 			contactsSrvc.getChatContactDetails($scope.contactId).then(function(data){
 				$scope.contactDetails=data[0];
+				console.log('details')
+				console.log(data[0]);
 			});
         	//joinSrvc.getUserByUserId().then(function(userdata){
 				//$scope.userdata = userdata;

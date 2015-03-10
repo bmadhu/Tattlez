@@ -27,7 +27,8 @@ define(['../modules/controller'], function (controllers) {
     	$scope.showOutCallModal='display-none';
     	$scope.$on("OUT_GOING_CALL", function (event,data) {
     		  $scope.showOutCallModal='display-block';
-    		  $scope.callTo=data.name;
+    		  console.log(data);
+    		  $scope.callTo=data.ContactData;
 			  $scope.outCallAudio.play();
 		});
     	/**
@@ -117,14 +118,17 @@ define(['../modules/controller'], function (controllers) {
 			if(msg.to == userNumber){
 				var contact = $filter('filter')(contacts,{contactNumber:msg.from},true);
 				msg.from = contact[0].contactName;
+				msg.fromPhoto = contact[0].photo;
 	    		
 			}
 			else{
 				var contact = $filter('filter')(contacts,{contactNumber:msg.to},true);
 				msg.from = contact[0].contactName;
+				msg.fromPhoto = contact[0].photo;
 			}
 			$scope.inCallAudio.play();
     		$scope.callFrom=msg.from;
+    		$scope.callFromPhoto = msg.fromPhoto;
     		$scope.showInCallModal='display-block';
 		};
     	// Listen to ESTABLISH_COMMUNICATION event
