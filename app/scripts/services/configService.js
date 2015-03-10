@@ -13,6 +13,7 @@ define(['../modules/services'], function (services) {
 			cmidLocalStorage: "_cmid_tattlez",
 			serverURL:"http://localhost:3000",
 			communicationFilesUplaodPath:"files/communication-files/",
+            userProfilePicsUploadPath: "files/profile-pics/",
 			emoticons1 : [
             "smile", "bowtie", "laughing", "blush", "smiley", "relaxed",
             "smirk", "heart_eyes", "kissing_heart", "kissing_closed_eyes", "flushed",

@@ -433,6 +433,13 @@ body {
 .smiley-div img{
 	padding-top:23%;
 }
+.profileSection {
+    color: darkgrey;
+    border-radius: 1px;
+    padding: 10px 10px 10px 10px;
+    position: absolute;
+    left: 30%;
+}
 .attachment-div{
 	height: 100%;
 	text-align: center;

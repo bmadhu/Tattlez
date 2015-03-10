@@ -1,0 +1,40 @@
+<div class="heading">
+    <span class="text">Settings</span>
+</div>
+
+<div class="div-join content padding-top-small">
+    <div class="list" ng-repeat="item in settingsList" style="padding-left: 10px;padding-right: 10px">
+        <div style="border-bottom: solid 1px gray; padding-top: 15px;">
+            <ul style="list-style-type: none;">
+                <li style="cursor: pointer;"><a class="cursor-pointer" ng-click="handleSettings($index, item.name)"><i class="fa fa-{{item.icon}}"></i>&nbsp;{{ item.name }}</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- FOOTER SECTION -->
+<div class="footer" data-align="center">
+    <div class="pull-right padding-top-small padding-right-mini">
+        <button type="button" class="btn btn-default dropdown-toggle btn-custom" ng-disabled="true">
+            <i class="fa fa-mail-reply"></i>
+        </button>
+        <!--<a class="fa fa-undo"></a>-->
+    </div>
+    <div class="btn-group dropup pull-left padding-top-small padding-left-mini" dropdown is-open="status.isopen">
+        <button type="button" class="btn btn-default dropdown-toggle btn-custom"  ng-disabled="true">
+            <i class="fa fa-align-justify"></i>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+            <li><a ng-click="tellFriend()"><i class="fa fa-share-alt"></i>&nbsp;Tell a friend</a></li>
+            <li><a ng-click="goToPhoneContactsPage()"><i class="fa fa-th-list"></i>&nbsp;Contacts</a></li>
+            <li><a ng-click="refreshContacts()"><i class="fa fa-refresh"></i>&nbsp;Refresh</a></li>
+            <li><a ng-click="goToHelpPage()"><i class="fa fa-question-circle"></i>&nbsp;Help</a></li>
+        </ul>
+    </div>
+    <div class="padding-top-small" style="text-align: center;padding-left: 2px;">
+        <button type="button" class="btn btn-default dropdown-toggle btn-custom" ng-click="gotoHistory()">
+            <i class="fa fa-home"></i>
+        </button>
+    </div>
+</div>
+

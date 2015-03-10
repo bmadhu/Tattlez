@@ -61,12 +61,13 @@ exports.getContactsByUserId = function (db,mongojs) {
                 contact.group = doc.group;
                 // if (doc.contactNumber) {
                 
-                db.users.find({ mobileNumber: doc.contactNumber, _id: mongojs.ObjectId(doc.userId) }, function (uerr, udoc) {
+                db.users.find({ mobileNumber: doc.contactNumber }, function (uerr, udoc) {
                     if (uerr) console.log(uerr);
+
                     if (udoc.length > 0)
-                        contact.photo = udoc.mobileNumber;
+                     contact.photo = udoc[0].profilePic;
                     else
-                        contact.photo = 'default_profile_M.jpg';
+                        contact.photo = '../images/default_profile_M.jpg';
                     docs.push(contact);
                     internalCnt++;
                     if (internalCnt == totalCnt) {

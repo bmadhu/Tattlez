@@ -19,6 +19,9 @@ alert(joinSrvc.mobileAndOtp.otp);
         if (joinSrvc.mobileAndOtp.otp && joinSrvc.mobileAndOtp.otp ==  $scope.otpInput) {
             var user = {};
             user.mobileNumber=joinSrvc.mobileAndOtp.mobileNumber;
+            user.profilePic = "../images/default_profile_M.jpg";
+            user.profileName = "Guest";
+            user.profileStatus = "Hey there! I'm using Tattlez.";
             joinSrvc.addUser(user).then(function (data) {
 				//Broadcast to appController
             	$rootScope.$broadcast("ESTABLISH_COMMUNICATION");
