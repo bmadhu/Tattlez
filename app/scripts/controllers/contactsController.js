@@ -9,6 +9,7 @@ define(['../modules/controller'], function (controllers) {
     	contactsSrvc.getallContacts().then(function (result) {
     		if(result!==null){
     			$scope.contacts = result;
+    			console.log(result);
     		}
     	});
 

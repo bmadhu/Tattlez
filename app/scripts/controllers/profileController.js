@@ -8,7 +8,8 @@ define(['../modules/controller'], function (controllers) {
         var userNumber;
         $scope.userProfile = {};
         $scope.editorEnabled = false;
-
+		$scope.btnDisabled=false;
+		$scope.msg='';
         joinSrvc.getUserByUserId().then(function(userdata){
             console.log(userdata);
             userNumber = userdata.mobileNumber;
@@ -19,6 +20,8 @@ define(['../modules/controller'], function (controllers) {
 
         $scope.uploadProfilePic = function(files) {
             if (files && files.length) {
+            	$scope.btnDisabled=true;
+            	$scope.msg='Uploading Photo...';
                 for (var i = 0; i < files.length; i++) {
                     var file = files[i];
                     var newGuid = guid.newguid();
@@ -48,14 +51,21 @@ define(['../modules/controller'], function (controllers) {
 
         ss(socketiostream).on('profileImage', function (data) {
             $timeout(function () {
-                var fileTypeSplit = (data.filename).split('.');
-                var guid = fileTypeSplit[0];
-                $scope.userProfile.profileImgUrl = (data.path).replace('app','..');
+            	$scope.userProfile.profileImgUrl = (data.path).replace('app','..');
+                $scope.saveUserProfile();
+                $scope.btnDisabled=false;
+                
             }, 0);
 
         });
-
+		$scope.profileUpdatedMsg=function(){
+			$scope.msg='Profile updated';
+                $timeout(function(){
+                	$scope.msg='';
+                },3000);
+		};
         $scope.saveUserProfile = function() {
+        	$scope.msg='Updating profile...';
             var userdata = {};
             userdata.userId = joinSrvc.getUserId();
             userdata.profilePic = $scope.userProfile.profileImgUrl;
@@ -63,7 +73,7 @@ define(['../modules/controller'], function (controllers) {
             userdata.profileStatus = $scope.userProfile.profileStatus;
             joinSrvc.updateUser(userdata).then(function(result){
                 if (result == 'OK') {
-                    console.log("userProfile updated successfully");
+                    $scope.profileUpdatedMsg();
                 }
             });
         }
