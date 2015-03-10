@@ -11,11 +11,13 @@ define(['../modules/controller'], function (controllers) {
                 icon: 'pencil'
             },
             {
-                name: 'Profile'
+                name: 'Profile',
+                icon:'user'
 
             },
             {
-                name: 'Account'
+                name: 'Account',
+                icon:'gear'
             }
         ];
 
