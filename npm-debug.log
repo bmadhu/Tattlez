@@ -1,0 +1,521 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', '-g', 'geoexif' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.35
+4 verbose cache add [ 'geoexif', null ]
+5 verbose cache add name=undefined spec="geoexif" args=["geoexif",null]
+6 verbose parsed url { protocol: null,
+6 verbose parsed url   slashes: null,
+6 verbose parsed url   auth: null,
+6 verbose parsed url   host: null,
+6 verbose parsed url   port: null,
+6 verbose parsed url   hostname: null,
+6 verbose parsed url   hash: null,
+6 verbose parsed url   search: null,
+6 verbose parsed url   query: null,
+6 verbose parsed url   pathname: 'geoexif',
+6 verbose parsed url   path: 'geoexif',
+6 verbose parsed url   href: 'geoexif' }
+7 silly lockFile 5feac859-geoexif geoexif
+8 verbose lock geoexif /Users/srikanthk/.npm/5feac859-geoexif.lock
+9 silly lockFile 5feac859-geoexif geoexif
+10 silly lockFile 5feac859-geoexif geoexif
+11 verbose addNamed [ 'geoexif', '' ]
+12 verbose addNamed [ null, '*' ]
+13 silly lockFile 18c78538-geoexif geoexif@
+14 verbose lock geoexif@ /Users/srikanthk/.npm/18c78538-geoexif.lock
+15 silly addNameRange { name: 'geoexif', range: '*', hasData: false }
+16 verbose request where is /geoexif
+17 verbose request registry https://registry.npmjs.org/
+18 verbose request id a858ea8443351f5b
+19 verbose url raw /geoexif
+20 verbose url resolving [ 'https://registry.npmjs.org/', './geoexif' ]
+21 verbose url resolved https://registry.npmjs.org/geoexif
+22 verbose request where is https://registry.npmjs.org/geoexif
+23 info trying registry request attempt 1 at 16:55:46
+24 verbose etag "2G3YN9G40DJ0AXDBAM0VMFE1G"
+25 http GET https://registry.npmjs.org/geoexif
+26 http 304 https://registry.npmjs.org/geoexif
+27 silly registry.get cb [ 304,
+27 silly registry.get   { date: 'Wed, 04 Mar 2015 11:25:47 GMT',
+27 silly registry.get     server: 'Apache',
+27 silly registry.get     via: '1.1 varnish',
+27 silly registry.get     'last-modified': 'Wed, 04 Mar 2015 11:25:34 GMT',
+27 silly registry.get     'cache-control': 'max-age=60',
+27 silly registry.get     etag: '"2G3YN9G40DJ0AXDBAM0VMFE1G"',
+27 silly registry.get     age: '13',
+27 silly registry.get     'x-served-by': 'cache-sn86-SIN',
+27 silly registry.get     'x-cache': 'HIT',
+27 silly registry.get     'x-cache-hits': '1',
+27 silly registry.get     'x-timer': 'S1425468347.194096,VS0,VE0',
+27 silly registry.get     vary: 'Accept',
+27 silly registry.get     'content-length': '0',
+27 silly registry.get     'keep-alive': 'timeout=10, max=50',
+27 silly registry.get     connection: 'Keep-Alive' } ]
+28 verbose etag https://registry.npmjs.org/geoexif from cache
+29 silly addNameRange number 2 { name: 'geoexif', range: '*', hasData: true }
+30 silly addNameRange versions [ 'geoexif', [ '0.0.0', '0.0.1', '0.0.3' ] ]
+31 verbose addNamed [ 'geoexif', '0.0.3' ]
+32 verbose addNamed [ '0.0.3', '0.0.3' ]
+33 silly lockFile 4e94156d-geoexif-0-0-3 geoexif@0.0.3
+34 verbose lock geoexif@0.0.3 /Users/srikanthk/.npm/4e94156d-geoexif-0-0-3.lock
+35 silly lockFile 4e94156d-geoexif-0-0-3 geoexif@0.0.3
+36 silly lockFile 4e94156d-geoexif-0-0-3 geoexif@0.0.3
+37 silly lockFile 18c78538-geoexif geoexif@
+38 silly lockFile 18c78538-geoexif geoexif@
+39 silly resolved [ { name: 'geoexif',
+39 silly resolved     version: '0.0.3',
+39 silly resolved     description: 'A command line tool for extracting and using geo locatiom data from images',
+39 silly resolved     keywords: [ 'exif', 'geolocation', 'image', 'photo', 'location' ],
+39 silly resolved     homepage: 'https://github.com/danyshaanan/geoexif',
+39 silly resolved     author:
+39 silly resolved      { name: 'Dany Shaanan',
+39 silly resolved        email: 'danyshaanan@gmail.com',
+39 silly resolved        url: 'http://danyshaanan.com/' },
+39 silly resolved     contributors: [],
+39 silly resolved     license: 'MIT',
+39 silly resolved     licenses: [ [Object] ],
+39 silly resolved     repository: { type: 'git', url: 'git://github.com/danyshaanan/geoexif.git' },
+39 silly resolved     bugs:
+39 silly resolved      { url: 'https://github.com/danyshaanan/geoexif',
+39 silly resolved        email: 'danyshaanan@gmail.com' },
+39 silly resolved     preferGlobal: true,
+39 silly resolved     main: './src/geoexif.js',
+39 silly resolved     scripts: { test: 'grunt' },
+39 silly resolved     bin: { geoexif: './src/geoexif' },
+39 silly resolved     dependencies: { commander: '2.1.0', exif: '0.3.3', open: '0.0.4' },
+39 silly resolved     devDependencies:
+39 silly resolved      { grunt: '0.4.5',
+39 silly resolved        'grunt-bump': '0.0.16',
+39 silly resolved        'grunt-eslint': '4.0.0' },
+39 silly resolved     gitHead: 'aff91c44bde359a1c82430f3bf2b4b1b4b9e5916',
+39 silly resolved     _id: 'geoexif@0.0.3',
+39 silly resolved     _shasum: '3526cceaff9649a8d7fb4e295972486358448052',
+39 silly resolved     _from: 'geoexif@',
+39 silly resolved     _npmVersion: '1.4.28',
+39 silly resolved     _npmUser: { name: 'danyshaanan', email: 'danyshaanan@gmail.com' },
+39 silly resolved     maintainers: [ [Object] ],
+39 silly resolved     dist:
+39 silly resolved      { shasum: '3526cceaff9649a8d7fb4e295972486358448052',
+39 silly resolved        tarball: 'http://registry.npmjs.org/geoexif/-/geoexif-0.0.3.tgz' },
+39 silly resolved     directories: {},
+39 silly resolved     _resolved: 'https://registry.npmjs.org/geoexif/-/geoexif-0.0.3.tgz',
+39 silly resolved     readme: 'ERROR: No README data found!' } ]
+40 info install geoexif@0.0.3 into /usr/local/lib
+41 info installOne geoexif@0.0.3
+42 verbose lib/node_modules/geoexif unbuild
+43 verbose tar unpack /Users/srikanthk/.npm/geoexif/0.0.3/package.tgz
+44 silly lockFile 8f26e2bf-r-local-lib-node-modules-geoexif tar:///usr/local/lib/node_modules/geoexif
+45 verbose lock tar:///usr/local/lib/node_modules/geoexif /Users/srikanthk/.npm/8f26e2bf-r-local-lib-node-modules-geoexif.lock
+46 silly lockFile 752bd356-hk-npm-geoexif-0-0-3-package-tgz tar:///Users/srikanthk/.npm/geoexif/0.0.3/package.tgz
+47 verbose lock tar:///Users/srikanthk/.npm/geoexif/0.0.3/package.tgz /Users/srikanthk/.npm/752bd356-hk-npm-geoexif-0-0-3-package-tgz.lock
+48 silly gunzTarPerm modes [ '755', '644' ]
+49 silly gunzTarPerm extractEntry package.json
+50 silly gunzTarPerm extractEntry .npmignore
+51 silly gunzTarPerm extractEntry README.md
+52 silly gunzTarPerm extractEntry LICENSE
+53 silly gunzTarPerm extractEntry Gruntfile.js
+54 silly gunzTarPerm extractEntry .travis.yml
+55 silly gunzTarPerm extractEntry .eslintrc
+56 silly gunzTarPerm extractEntry npm-shrinkwrap.json
+57 silly gunzTarPerm extractEntry src/.npmignore
+58 silly gunzTarPerm extractEntry src/geoexif.js
+59 silly gunzTarPerm extractEntry src/geoexif
+60 silly lockFile 8f26e2bf-r-local-lib-node-modules-geoexif tar:///usr/local/lib/node_modules/geoexif
+61 silly lockFile 8f26e2bf-r-local-lib-node-modules-geoexif tar:///usr/local/lib/node_modules/geoexif
+62 silly lockFile 752bd356-hk-npm-geoexif-0-0-3-package-tgz tar:///Users/srikanthk/.npm/geoexif/0.0.3/package.tgz
+63 silly lockFile 752bd356-hk-npm-geoexif-0-0-3-package-tgz tar:///Users/srikanthk/.npm/geoexif/0.0.3/package.tgz
+64 info preinstall geoexif@0.0.3
+65 info shrinkwrap file "/usr/local/lib/node_modules/geoexif/npm-shrinkwrap.json"
+66 verbose readDependencies returned deps { commander: 'https://registry.npmjs.org/commander/-/commander-2.1.0.tgz',
+66 verbose readDependencies returned deps   exif: 'https://registry.npmjs.org/exif/-/exif-0.3.3.tgz',
+66 verbose readDependencies returned deps   open: 'https://registry.npmjs.org/open/-/open-0.0.4.tgz' }
+67 verbose readDependencies: using existing wrap [ '/usr/local/lib/node_modules/geoexif',
+67 verbose readDependencies: using existing wrap   { commander:
+67 verbose readDependencies: using existing wrap      { version: '2.1.0',
+67 verbose readDependencies: using existing wrap        from: 'https://registry.npmjs.org/commander/-/commander-2.1.0.tgz',
+67 verbose readDependencies: using existing wrap        resolved: 'https://registry.npmjs.org/commander/-/commander-2.1.0.tgz' },
+67 verbose readDependencies: using existing wrap     exif:
+67 verbose readDependencies: using existing wrap      { version: '0.3.3',
+67 verbose readDependencies: using existing wrap        from: 'https://registry.npmjs.org/exif/-/exif-0.3.3.tgz',
+67 verbose readDependencies: using existing wrap        resolved: 'https://registry.npmjs.org/exif/-/exif-0.3.3.tgz' },
+67 verbose readDependencies: using existing wrap     open:
+67 verbose readDependencies: using existing wrap      { version: '0.0.4',
+67 verbose readDependencies: using existing wrap        from: 'https://registry.npmjs.org/open/-/open-0.0.4.tgz',
+67 verbose readDependencies: using existing wrap        resolved: 'https://registry.npmjs.org/open/-/open-0.0.4.tgz' } } ]
+68 verbose from wrap [ 'commander',
+68 verbose from wrap   { version: '2.1.0',
+68 verbose from wrap     from: 'https://registry.npmjs.org/commander/-/commander-2.1.0.tgz',
+68 verbose from wrap     resolved: 'https://registry.npmjs.org/commander/-/commander-2.1.0.tgz' } ]
+69 verbose from wrap [ 'exif',
+69 verbose from wrap   { version: '0.3.3',
+69 verbose from wrap     from: 'https://registry.npmjs.org/exif/-/exif-0.3.3.tgz',
+69 verbose from wrap     resolved: 'https://registry.npmjs.org/exif/-/exif-0.3.3.tgz' } ]
+70 verbose from wrap [ 'open',
+70 verbose from wrap   { version: '0.0.4',
+70 verbose from wrap     from: 'https://registry.npmjs.org/open/-/open-0.0.4.tgz',
+70 verbose from wrap     resolved: 'https://registry.npmjs.org/open/-/open-0.0.4.tgz' } ]
+71 verbose readDependencies returned deps { commander: 'https://registry.npmjs.org/commander/-/commander-2.1.0.tgz',
+71 verbose readDependencies returned deps   exif: 'https://registry.npmjs.org/exif/-/exif-0.3.3.tgz',
+71 verbose readDependencies returned deps   open: 'https://registry.npmjs.org/open/-/open-0.0.4.tgz' }
+72 verbose cache add [ 'commander@https://registry.npmjs.org/commander/-/commander-2.1.0.tgz',
+72 verbose cache add   null ]
+73 verbose cache add name=undefined spec="commander@https://registry.npmjs.org/commander/-/commander-2.1.0.tgz" args=["commander@https://registry.npmjs.org/commander/-/commander-2.1.0.tgz",null]
+74 verbose parsed url { protocol: null,
+74 verbose parsed url   slashes: null,
+74 verbose parsed url   auth: null,
+74 verbose parsed url   host: null,
+74 verbose parsed url   port: null,
+74 verbose parsed url   hostname: null,
+74 verbose parsed url   hash: null,
+74 verbose parsed url   search: null,
+74 verbose parsed url   query: null,
+74 verbose parsed url   pathname: 'commander@https://registry.npmjs.org/commander/-/commander-2.1.0.tgz',
+74 verbose parsed url   path: 'commander@https://registry.npmjs.org/commander/-/commander-2.1.0.tgz',
+74 verbose parsed url   href: 'commander@https://registry.npmjs.org/commander/-/commander-2.1.0.tgz' }
+75 verbose cache add [ 'exif@https://registry.npmjs.org/exif/-/exif-0.3.3.tgz',
+75 verbose cache add   null ]
+76 verbose cache add name=undefined spec="exif@https://registry.npmjs.org/exif/-/exif-0.3.3.tgz" args=["exif@https://registry.npmjs.org/exif/-/exif-0.3.3.tgz",null]
+77 verbose parsed url { protocol: null,
+77 verbose parsed url   slashes: null,
+77 verbose parsed url   auth: null,
+77 verbose parsed url   host: null,
+77 verbose parsed url   port: null,
+77 verbose parsed url   hostname: null,
+77 verbose parsed url   hash: null,
+77 verbose parsed url   search: null,
+77 verbose parsed url   query: null,
+77 verbose parsed url   pathname: 'exif@https://registry.npmjs.org/exif/-/exif-0.3.3.tgz',
+77 verbose parsed url   path: 'exif@https://registry.npmjs.org/exif/-/exif-0.3.3.tgz',
+77 verbose parsed url   href: 'exif@https://registry.npmjs.org/exif/-/exif-0.3.3.tgz' }
+78 verbose cache add [ 'open@https://registry.npmjs.org/open/-/open-0.0.4.tgz',
+78 verbose cache add   null ]
+79 verbose cache add name=undefined spec="open@https://registry.npmjs.org/open/-/open-0.0.4.tgz" args=["open@https://registry.npmjs.org/open/-/open-0.0.4.tgz",null]
+80 verbose parsed url { protocol: null,
+80 verbose parsed url   slashes: null,
+80 verbose parsed url   auth: null,
+80 verbose parsed url   host: null,
+80 verbose parsed url   port: null,
+80 verbose parsed url   hostname: null,
+80 verbose parsed url   hash: null,
+80 verbose parsed url   search: null,
+80 verbose parsed url   query: null,
+80 verbose parsed url   pathname: 'open@https://registry.npmjs.org/open/-/open-0.0.4.tgz',
+80 verbose parsed url   path: 'open@https://registry.npmjs.org/open/-/open-0.0.4.tgz',
+80 verbose parsed url   href: 'open@https://registry.npmjs.org/open/-/open-0.0.4.tgz' }
+81 verbose cache add name="commander" spec="https://registry.npmjs.org/commander/-/commander-2.1.0.tgz" args=["commander","https://registry.npmjs.org/commander/-/commander-2.1.0.tgz"]
+82 verbose parsed url { protocol: 'https:',
+82 verbose parsed url   slashes: true,
+82 verbose parsed url   auth: null,
+82 verbose parsed url   host: 'registry.npmjs.org',
+82 verbose parsed url   port: null,
+82 verbose parsed url   hostname: 'registry.npmjs.org',
+82 verbose parsed url   hash: null,
+82 verbose parsed url   search: null,
+82 verbose parsed url   query: null,
+82 verbose parsed url   pathname: '/commander/-/commander-2.1.0.tgz',
+82 verbose parsed url   path: '/commander/-/commander-2.1.0.tgz',
+82 verbose parsed url   href: 'https://registry.npmjs.org/commander/-/commander-2.1.0.tgz' }
+83 silly lockFile b1b1c0ef-rg-commander-commander-2-1-0-tgz https://registry.npmjs.org/commander/-/commander-2.1.0.tgz
+84 verbose lock https://registry.npmjs.org/commander/-/commander-2.1.0.tgz /Users/srikanthk/.npm/b1b1c0ef-rg-commander-commander-2-1-0-tgz.lock
+85 verbose cache add name="exif" spec="https://registry.npmjs.org/exif/-/exif-0.3.3.tgz" args=["exif","https://registry.npmjs.org/exif/-/exif-0.3.3.tgz"]
+86 verbose parsed url { protocol: 'https:',
+86 verbose parsed url   slashes: true,
+86 verbose parsed url   auth: null,
+86 verbose parsed url   host: 'registry.npmjs.org',
+86 verbose parsed url   port: null,
+86 verbose parsed url   hostname: 'registry.npmjs.org',
+86 verbose parsed url   hash: null,
+86 verbose parsed url   search: null,
+86 verbose parsed url   query: null,
+86 verbose parsed url   pathname: '/exif/-/exif-0.3.3.tgz',
+86 verbose parsed url   path: '/exif/-/exif-0.3.3.tgz',
+86 verbose parsed url   href: 'https://registry.npmjs.org/exif/-/exif-0.3.3.tgz' }
+87 silly lockFile 90952946-ry-npmjs-org-exif-exif-0-3-3-tgz https://registry.npmjs.org/exif/-/exif-0.3.3.tgz
+88 verbose lock https://registry.npmjs.org/exif/-/exif-0.3.3.tgz /Users/srikanthk/.npm/90952946-ry-npmjs-org-exif-exif-0-3-3-tgz.lock
+89 verbose cache add name="open" spec="https://registry.npmjs.org/open/-/open-0.0.4.tgz" args=["open","https://registry.npmjs.org/open/-/open-0.0.4.tgz"]
+90 verbose parsed url { protocol: 'https:',
+90 verbose parsed url   slashes: true,
+90 verbose parsed url   auth: null,
+90 verbose parsed url   host: 'registry.npmjs.org',
+90 verbose parsed url   port: null,
+90 verbose parsed url   hostname: 'registry.npmjs.org',
+90 verbose parsed url   hash: null,
+90 verbose parsed url   search: null,
+90 verbose parsed url   query: null,
+90 verbose parsed url   pathname: '/open/-/open-0.0.4.tgz',
+90 verbose parsed url   path: '/open/-/open-0.0.4.tgz',
+90 verbose parsed url   href: 'https://registry.npmjs.org/open/-/open-0.0.4.tgz' }
+91 silly lockFile d7948e36-ry-npmjs-org-open-open-0-0-4-tgz https://registry.npmjs.org/open/-/open-0.0.4.tgz
+92 verbose lock https://registry.npmjs.org/open/-/open-0.0.4.tgz /Users/srikanthk/.npm/d7948e36-ry-npmjs-org-open-open-0-0-4-tgz.lock
+93 verbose addRemoteTarball [ 'https://registry.npmjs.org/commander/-/commander-2.1.0.tgz',
+93 verbose addRemoteTarball   null ]
+94 verbose addRemoteTarball [ 'https://registry.npmjs.org/exif/-/exif-0.3.3.tgz', null ]
+95 verbose addRemoteTarball [ 'https://registry.npmjs.org/open/-/open-0.0.4.tgz', null ]
+96 info retry fetch attempt 1 at 16:56:36
+97 verbose fetch to= /tmp/npm-24861-_M6Kvyeh/registry.npmjs.org/commander/-/commander-2.1.0.tgz
+98 info retry fetch attempt 1 at 16:56:36
+99 verbose fetch to= /tmp/npm-24861-_M6Kvyeh/registry.npmjs.org/exif/-/exif-0.3.3.tgz
+100 info retry fetch attempt 1 at 16:56:36
+101 verbose fetch to= /tmp/npm-24861-_M6Kvyeh/registry.npmjs.org/open/-/open-0.0.4.tgz
+102 http GET https://registry.npmjs.org/commander/-/commander-2.1.0.tgz
+103 http GET https://registry.npmjs.org/exif/-/exif-0.3.3.tgz
+104 http GET https://registry.npmjs.org/open/-/open-0.0.4.tgz
+105 http 200 https://registry.npmjs.org/commander/-/commander-2.1.0.tgz
+106 http 200 https://registry.npmjs.org/open/-/open-0.0.4.tgz
+107 verbose tar unpack /tmp/npm-24861-_M6Kvyeh/registry.npmjs.org/open/-/open-0.0.4.tgz
+108 silly lockFile 2e8b8e30-s-org-open-open-0-0-4-tgz-unpack tar:///tmp/npm-24861-_M6Kvyeh/registry.npmjs.org/open/-/open-0.0.4.tgz-unpack
+109 verbose lock tar:///tmp/npm-24861-_M6Kvyeh/registry.npmjs.org/open/-/open-0.0.4.tgz-unpack /Users/srikanthk/.npm/2e8b8e30-s-org-open-open-0-0-4-tgz-unpack.lock
+110 silly lockFile 4beff030-ry-npmjs-org-open-open-0-0-4-tgz tar:///tmp/npm-24861-_M6Kvyeh/registry.npmjs.org/open/-/open-0.0.4.tgz
+111 verbose lock tar:///tmp/npm-24861-_M6Kvyeh/registry.npmjs.org/open/-/open-0.0.4.tgz /Users/srikanthk/.npm/4beff030-ry-npmjs-org-open-open-0-0-4-tgz.lock
+112 verbose tar unpack /tmp/npm-24861-_M6Kvyeh/registry.npmjs.org/commander/-/commander-2.1.0.tgz
+113 silly lockFile ba41a649-ander-commander-2-1-0-tgz-unpack tar:///tmp/npm-24861-_M6Kvyeh/registry.npmjs.org/commander/-/commander-2.1.0.tgz-unpack
+114 verbose lock tar:///tmp/npm-24861-_M6Kvyeh/registry.npmjs.org/commander/-/commander-2.1.0.tgz-unpack /Users/srikanthk/.npm/ba41a649-ander-commander-2-1-0-tgz-unpack.lock
+115 silly lockFile 9c7abb91-rg-commander-commander-2-1-0-tgz tar:///tmp/npm-24861-_M6Kvyeh/registry.npmjs.org/commander/-/commander-2.1.0.tgz
+116 verbose lock tar:///tmp/npm-24861-_M6Kvyeh/registry.npmjs.org/commander/-/commander-2.1.0.tgz /Users/srikanthk/.npm/9c7abb91-rg-commander-commander-2-1-0-tgz.lock
+117 silly gunzTarPerm modes [ '755', '644' ]
+118 silly gunzTarPerm modes [ '755', '644' ]
+119 silly gunzTarPerm extractEntry package.json
+120 silly gunzTarPerm extractEntry package.json
+121 silly gunzTarPerm extractEntry .npmignore
+122 silly gunzTarPerm extractEntry README.md
+123 silly gunzTarPerm extractEntry index.js
+124 silly gunzTarPerm extractEntry Readme.md
+125 silly gunzTarPerm extractEntry LICENSE
+126 silly gunzTarPerm extractEntry .jshintignore
+127 silly gunzTarPerm extractEntry .jshintrc
+128 silly gunzTarPerm extractEntry lib/open.js
+129 silly gunzTarPerm extractEntry vendor/xdg-open
+130 silly lockFile ba41a649-ander-commander-2-1-0-tgz-unpack tar:///tmp/npm-24861-_M6Kvyeh/registry.npmjs.org/commander/-/commander-2.1.0.tgz-unpack
+131 silly lockFile ba41a649-ander-commander-2-1-0-tgz-unpack tar:///tmp/npm-24861-_M6Kvyeh/registry.npmjs.org/commander/-/commander-2.1.0.tgz-unpack
+132 silly lockFile 9c7abb91-rg-commander-commander-2-1-0-tgz tar:///tmp/npm-24861-_M6Kvyeh/registry.npmjs.org/commander/-/commander-2.1.0.tgz
+133 silly lockFile 9c7abb91-rg-commander-commander-2-1-0-tgz tar:///tmp/npm-24861-_M6Kvyeh/registry.npmjs.org/commander/-/commander-2.1.0.tgz
+134 silly lockFile b1b1c0ef-rg-commander-commander-2-1-0-tgz https://registry.npmjs.org/commander/-/commander-2.1.0.tgz
+135 silly lockFile b1b1c0ef-rg-commander-commander-2-1-0-tgz https://registry.npmjs.org/commander/-/commander-2.1.0.tgz
+136 silly lockFile 2e8b8e30-s-org-open-open-0-0-4-tgz-unpack tar:///tmp/npm-24861-_M6Kvyeh/registry.npmjs.org/open/-/open-0.0.4.tgz-unpack
+137 silly lockFile 2e8b8e30-s-org-open-open-0-0-4-tgz-unpack tar:///tmp/npm-24861-_M6Kvyeh/registry.npmjs.org/open/-/open-0.0.4.tgz-unpack
+138 silly lockFile 4beff030-ry-npmjs-org-open-open-0-0-4-tgz tar:///tmp/npm-24861-_M6Kvyeh/registry.npmjs.org/open/-/open-0.0.4.tgz
+139 silly lockFile 4beff030-ry-npmjs-org-open-open-0-0-4-tgz tar:///tmp/npm-24861-_M6Kvyeh/registry.npmjs.org/open/-/open-0.0.4.tgz
+140 silly lockFile d7948e36-ry-npmjs-org-open-open-0-0-4-tgz https://registry.npmjs.org/open/-/open-0.0.4.tgz
+141 silly lockFile d7948e36-ry-npmjs-org-open-open-0-0-4-tgz https://registry.npmjs.org/open/-/open-0.0.4.tgz
+142 http 200 https://registry.npmjs.org/exif/-/exif-0.3.3.tgz
+143 verbose tar unpack /tmp/npm-24861-_M6Kvyeh/registry.npmjs.org/exif/-/exif-0.3.3.tgz
+144 silly lockFile d212d5cd-s-org-exif-exif-0-3-3-tgz-unpack tar:///tmp/npm-24861-_M6Kvyeh/registry.npmjs.org/exif/-/exif-0.3.3.tgz-unpack
+145 verbose lock tar:///tmp/npm-24861-_M6Kvyeh/registry.npmjs.org/exif/-/exif-0.3.3.tgz-unpack /Users/srikanthk/.npm/d212d5cd-s-org-exif-exif-0-3-3-tgz-unpack.lock
+146 silly lockFile 190db5e0-ry-npmjs-org-exif-exif-0-3-3-tgz tar:///tmp/npm-24861-_M6Kvyeh/registry.npmjs.org/exif/-/exif-0.3.3.tgz
+147 verbose lock tar:///tmp/npm-24861-_M6Kvyeh/registry.npmjs.org/exif/-/exif-0.3.3.tgz /Users/srikanthk/.npm/190db5e0-ry-npmjs-org-exif-exif-0-3-3-tgz.lock
+148 silly gunzTarPerm modes [ '755', '644' ]
+149 silly gunzTarPerm extractEntry package.json
+150 silly gunzTarPerm extractEntry .npmignore
+151 silly gunzTarPerm extractEntry README.md
+152 silly gunzTarPerm extractEntry index.js
+153 silly gunzTarPerm extractEntry lib/exif/Buffer.js
+154 silly gunzTarPerm extractEntry lib/exif/ExifImage.js
+155 silly gunzTarPerm extractEntry lib/exif/index.js
+156 silly gunzTarPerm extractEntry lib/exif/makernotes/agfa.js
+157 silly gunzTarPerm extractEntry lib/exif/makernotes/epson.js
+158 silly gunzTarPerm extractEntry lib/exif/makernotes/fujifilm.js
+159 silly gunzTarPerm extractEntry lib/exif/makernotes/olympus.js
+160 silly gunzTarPerm extractEntry lib/exif/makernotes/sony.js
+161 silly gunzTarPerm extractEntry LICENSE.md
+162 silly lockFile d212d5cd-s-org-exif-exif-0-3-3-tgz-unpack tar:///tmp/npm-24861-_M6Kvyeh/registry.npmjs.org/exif/-/exif-0.3.3.tgz-unpack
+163 silly lockFile d212d5cd-s-org-exif-exif-0-3-3-tgz-unpack tar:///tmp/npm-24861-_M6Kvyeh/registry.npmjs.org/exif/-/exif-0.3.3.tgz-unpack
+164 silly lockFile 190db5e0-ry-npmjs-org-exif-exif-0-3-3-tgz tar:///tmp/npm-24861-_M6Kvyeh/registry.npmjs.org/exif/-/exif-0.3.3.tgz
+165 silly lockFile 190db5e0-ry-npmjs-org-exif-exif-0-3-3-tgz tar:///tmp/npm-24861-_M6Kvyeh/registry.npmjs.org/exif/-/exif-0.3.3.tgz
+166 silly lockFile 90952946-ry-npmjs-org-exif-exif-0-3-3-tgz https://registry.npmjs.org/exif/-/exif-0.3.3.tgz
+167 silly lockFile 90952946-ry-npmjs-org-exif-exif-0-3-3-tgz https://registry.npmjs.org/exif/-/exif-0.3.3.tgz
+168 silly resolved [ { name: 'commander',
+168 silly resolved     version: '2.1.0',
+168 silly resolved     description: 'the complete solution for node.js command-line programs',
+168 silly resolved     keywords: [ 'command', 'option', 'parser', 'prompt', 'stdin' ],
+168 silly resolved     author: { name: 'TJ Holowaychuk', email: 'tj@vision-media.ca' },
+168 silly resolved     repository:
+168 silly resolved      { type: 'git',
+168 silly resolved        url: 'https://github.com/visionmedia/commander.js.git' },
+168 silly resolved     devDependencies: { should: '>= 0.0.1' },
+168 silly resolved     scripts: { test: 'make test' },
+168 silly resolved     main: 'index',
+168 silly resolved     engines: { node: '>= 0.6.x' },
+168 silly resolved     files: [ 'index.js' ],
+168 silly resolved     readme: '# Commander.js\n\n  The complete solution for [node.js](http://nodejs.org) command-line interfaces, inspired by Ruby\'s [commander](https://github.com/visionmedia/commander).\n\n [![Build Status](https://secure.travis-ci.org/visionmedia/commander.js.png)](http://travis-ci.org/visionmedia/commander.js)\n\n## Installation\n\n    $ npm install commander\n\n## Option parsing\n\n Options with commander are defined with the `.option()` method, also serving as documentation for the options. The example below parses args and options from `process.argv`, leaving remaining args as the `program.args` array which were not consumed by options.\n\n```js\n#!/usr/bin/env node\n\n/**\n * Module dependencies.\n */\n\nvar program = require(\'commander\');\n\nprogram\n  .version(\'0.0.1\')\n  .option(\'-p, --peppers\', \'Add peppers\')\n  .option(\'-P, --pineapple\', \'Add pineapple\')\n  .option(\'-b, --bbq\', \'Add bbq sauce\')\n  .option(\'-c, --cheese [type]\', \'Add the specified type of cheese [marble]\', \'marble\')\n  .parse(process.argv);\n\nconsole.log(\'you ordered a pizza with:\');\nif (program.peppers) console.log(\'  - peppers\');\nif (program.pineapple) console.log(\'  - pineapple\');\nif (program.bbq) console.log(\'  - bbq\');\nconsole.log(\'  - %s cheese\', program.cheese);\n```\n\n Short flags may be passed as a single arg, for example `-abc` is equivalent to `-a -b -c`. Multi-word options such as "--template-engine" are camel-cased, becoming `program.templateEngine` etc.\n\n## Automated --help\n\n The help information is auto-generated based on the information commander already knows about your program, so the following `--help` info is for free:\n\n```  \n $ ./examples/pizza --help\n\n   Usage: pizza [options]\n\n   Options:\n\n     -V, --version        output the version number\n     -p, --peppers        Add peppers\n     -P, --pineapple      Add pineapple\n     -b, --bbq            Add bbq sauce\n     -c, --cheese <type>  Add the specified type of cheese [marble]\n     -h, --help           output usage information\n\n```\n\n## Coercion\n\n```js\nfunction range(val) {\n  return val.split(\'..\').map(Number);\n}\n\nfunction list(val) {\n  return val.split(\',\');\n}\n\nprogram\n  .version(\'0.0.1\')\n  .usage(\'[options] <file ...>\')\n  .option(\'-i, --integer <n>\', \'An integer argument\', parseInt)\n  .option(\'-f, --float <n>\', \'A float argument\', parseFloat)\n  .option(\'-r, --range <a>..<b>\', \'A range\', range)\n  .option(\'-l, --list <items>\', \'A list\', list)\n  .option(\'-o, --optional [value]\', \'An optional value\')\n  .parse(process.argv);\n\nconsole.log(\' int: %j\', program.integer);\nconsole.log(\' float: %j\', program.float);\nconsole.log(\' optional: %j\', program.optional);\nprogram.range = program.range || [];\nconsole.log(\' range: %j..%j\', program.range[0], program.range[1]);\nconsole.log(\' list: %j\', program.list);\nconsole.log(\' args: %j\', program.args);\n```\n\n## Custom help\n\n You can display arbitrary `-h, --help` information\n by listening for "--help". Commander will automatically\n exit once you are done so that the remainder of your program\n does not execute causing undesired behaviours, for example\n in the following executable "stuff" will not output when\n `--help` is used.\n\n```js\n#!/usr/bin/env node\n\n/**\n * Module dependencies.\n */\n\nvar program = require(\'../\');\n\nfunction list(val) {\n  return val.split(\',\').map(Number);\n}\n\nprogram\n  .version(\'0.0.1\')\n  .option(\'-f, --foo\', \'enable some foo\')\n  .option(\'-b, --bar\', \'enable some bar\')\n  .option(\'-B, --baz\', \'enable some baz\');\n\n// must be before .parse() since\n// node\'s emit() is immediate\n\nprogram.on(\'--help\', function(){\n  console.log(\'  Examples:\');\n  console.log(\'\');\n  console.log(\'    $ custom-help --help\');\n  console.log(\'    $ custom-help -h\');\n  console.log(\'\');\n});\n\nprogram.parse(process.argv);\n\nconsole.log(\'stuff\');\n```\n\nyielding the following help output:\n\n```\n\nUsage: custom-help [options]\n\nOptions:\n\n  -h, --help     output usage information\n  -V, --version  output the version number\n  -f, --foo      enable some foo\n  -b, --bar      enable some bar\n  -B, --baz      enable some baz\n\nExamples:\n\n  $ custom-help --help\n  $ custom-help -h\n\n```\n\n## .outputHelp()\n\n  Output help information without exiting.\n\n## .help()\n\n  Output help information and exit immediately.\n\n## Links\n\n - [API documentation](http://visionmedia.github.com/commander.js/)\n - [ascii tables](https://github.com/LearnBoost/cli-table)\n - [progress bars](https://github.com/visionmedia/node-progress)\n - [more progress bars](https://github.com/substack/node-multimeter)\n - [examples](https://github.com/visionmedia/commander.js/tree/master/examples)\n\n## License \n\n(The MIT License)\n\nCopyright (c) 2011 TJ Holowaychuk &lt;tj@vision-media.ca&gt;\n\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\'Software\'), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\npermit persons to whom the Software is furnished to do so, subject to\nthe following conditions:\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \'AS IS\', WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.\nIN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY\nCLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,\nTORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE\nSOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n',
+168 silly resolved     readmeFilename: 'Readme.md',
+168 silly resolved     bugs: { url: 'https://github.com/visionmedia/commander.js/issues' },
+168 silly resolved     homepage: 'https://github.com/visionmedia/commander.js',
+168 silly resolved     _id: 'commander@2.1.0',
+168 silly resolved     _shasum: 'd121bbae860d9992a3d517ba96f56588e47c6781',
+168 silly resolved     _from: 'https://registry.npmjs.org/commander/-/commander-2.1.0.tgz',
+168 silly resolved     _resolved: 'https://registry.npmjs.org/commander/-/commander-2.1.0.tgz' },
+168 silly resolved   { name: 'open',
+168 silly resolved     version: '0.0.4',
+168 silly resolved     description: 'open a file or url in the user\'s preferred application',
+168 silly resolved     keywords: [ 'start', 'open', 'browser', 'editor', 'default' ],
+168 silly resolved     homepage: 'https://github.com/jjrdn/node-open',
+168 silly resolved     author: { name: 'J Jordan', email: 'jjrdn@styosis.com' },
+168 silly resolved     license: 'MIT',
+168 silly resolved     contributors: [ [Object] ],
+168 silly resolved     repository: { type: 'git', url: 'https://github.com/pwnall/node-open.git' },
+168 silly resolved     bugs: { url: 'https://github.com/pwnall/node-open/issues' },
+168 silly resolved     engines: { node: '>= 0.6.0' },
+168 silly resolved     dependencies: {},
+168 silly resolved     devDependencies: { mocha: '*' },
+168 silly resolved     optionalDependencies: {},
+168 silly resolved     main: 'lib/open.js',
+168 silly resolved     scripts: { test: 'node_modules/mocha/bin/mocha' },
+168 silly resolved     readme: '# open\n\nOpen a file or url in the user\'s preferred application.\n\n# Usage\n\n```javascript\nvar open = require("open");\nopen("http://www.google.com");\n```\n\n`open` taks an optional argument specifying the program to be used to open the\nfile or URL.\n\n```javascript\nopen("http://www.google.com", "firefox");\n```\n\n# Installation\n\n    npm install open\n\n# How it works\n\n- on `win32` uses `start`\n- on `darwin` uses `open`\n- otherwise uses the `xdg-open` script from [freedesktop.org](http://portland.freedesktop.org/xdg-utils-1.0/xdg-open.html)\n\n# Warning\n\nThe same care should be taken when calling open as if you were calling\n[child_process.exec](http://nodejs.org/api/child_process.html#child_process_child_process_exec_command_options_callback)\ndirectly. If it is an executable it will run in a new shell.\n',
+168 silly resolved     readmeFilename: 'README.md',
+168 silly resolved     _id: 'open@0.0.4',
+168 silly resolved     _shasum: '5de46a0858b9f49f9f211aa8f26628550657f262',
+168 silly resolved     _from: 'https://registry.npmjs.org/open/-/open-0.0.4.tgz',
+168 silly resolved     _resolved: 'https://registry.npmjs.org/open/-/open-0.0.4.tgz' },
+168 silly resolved   { name: 'exif',
+168 silly resolved     version: '0.3.3',
+168 silly resolved     description: 'A node.js library to extract Exif metadata from images.',
+168 silly resolved     author: { name: 'Daniel Leinich', email: 'leinich@gmx.net' },
+168 silly resolved     keywords: [ 'exif', 'image', 'jpeg', 'jpg', 'tiff', 'makernotes', 'gps' ],
+168 silly resolved     main: './lib/exif',
+168 silly resolved     repository:
+168 silly resolved      { type: 'git',
+168 silly resolved        url: 'http://github.com/gomfunkel/node-exif.git' },
+168 silly resolved     readme: 'node-exif\n=========\n\nWith _node-exif_ you can extract Exif metadata from images (JPEG). Exif is a format used, for example, by digital cameras and scanners to save additional information about an image in the image file. This information can be the camera model, resolution, where the image was taken (GPS) or when it was taken.\n\nInstallation\n------------\n\nInstalling using npm (node package manager):\n\n    npm install exif\n    \nIf you don\'t have npm installed or don\'t want to use it:\n\n    cd ~/.node_libraries\n    git clone git://github.com/gomfunkel/node-exif.git exif\n\nUsage\n-----\n\nEasy. Just require _node-exif_ and throw an image at it. If _node-exif_ is able to extract data from the image it does so and returns an object with all the information found, if an error occurs you will receive an error message. To prove that it really is easy please see the following example.\n\n```javascript\nvar ExifImage = require(\'exif\').ExifImage;\n    \ntry {\n    new ExifImage({ image : \'myImage.jpg\' }, function (error, exifData) {\n        if (error)\n            console.log(\'Error: \'+error.message);\n        else\n            console.log(exifData); // Do something with your data!\n    });\n} catch (error) {\n    console.log(\'Error: \' + error.message);\n}\n```\n\nInstead of providing a filename of an image in your filesystem you can also pass a Buffer to ExifImage.\n\nThe data returned (`exifData` in the example above) is an object containing objects for each type of available Exif metadata:\n\n * `image` for image information data (IFD0)\n * `thumbnail` for information regarding a possibly embedded thumbnail (IFD1)\n * `exif` for Exif-specific attribute information (Exif IFD)\n * `gps` for GPS information (GPS IFD)\n * `interoperability` for interoperability information (Interoperability IFD)\n * `makernote` for vendor specific Exif information (Makernotes)\n\nThe ouput for an [example image](http://www.exif.org/samples/fujifilm-finepix40i.jpg) might thus look like this:\n\n```\n{ \n  image: { \n    Make: \'FUJIFILM\',\n    Model: \'FinePix40i\',\n    Orientation: 1,\n    XResolution: 72,\n    YResolution: 72,\n    ResolutionUnit: 2,\n    Software: \'Digital Camera FinePix40i Ver1.39\',\n    ModifyDate: \'2000:08:04 18:22:57\',\n    YCbCrPositioning: 2,\n    Copyright: \'          \',\n    ExifOffset: 250 \n  },\n  thumbnail: { \n    Compression: 6,\n    Orientation: 1,\n    XResolution: 72,\n    YResolution: 72,\n    ResolutionUnit: 2,\n    ThumbnailOffset: 1074,\n    ThumbnailLength: 8691,\n    YCbCrPositioning: 2 \n  },\n  exif: { \n    FNumber: 2.8,\n    ExposureProgram: 2,\n    ISO: 200,\n    ExifVersion: <Buffer 30 32 31 30>,\n    DateTimeOriginal: \'2000:08:04 18:22:57\',\n    CreateDate: \'2000:08:04 18:22:57\',\n    ComponentsConfiguration: <Buffer 01 02 03 00>,\n    CompressedBitsPerPixel: 1.5,\n    ShutterSpeedValue: 5.5,\n    ApertureValue: 3,\n    BrightnessValue: 0.26,\n    ExposureCompensation: 0,\n    MaxApertureValue: 3,\n    MeteringMode: 5,\n    Flash: 1,\n    FocalLength: 8.7,\n    MakerNote: <Buffer 46 55 4a 49 46 49 4c 4d 0c 00 00 00 0f 00 00 00 07 00 04 00 00 00 30 31 33 30 00 10 02 00 08 00 00 00 c6 00 00 00 01 10 03 00 01 00 00 00 03 00 00 00 02 ...>,\n    FlashpixVersion: <Buffer 30 31 30 30>,\n    ColorSpace: 1,\n    ExifImageWidth: 2400,\n    ExifImageHeight: 1800,\n    InteropOffset: 926,\n    FocalPlaneXResolution: 2381,\n    FocalPlaneYResolution: 2381,\n    FocalPlaneResolutionUnit: 3,\n    SensingMethod: 2,\n    FileSource: <Buffer 03>,\n    SceneType: <Buffer 01> \n  },\n  gps: {},\n  interoperability: {\n    InteropIndex: \'R98\', \n    InteropVersion: <Buffer 30 31 30 30>\n  },\n  makernote: { \n    Version: <Buffer 30 31 33 30>,\n    Quality: \'NORMAL \',\n    Sharpness: 3,\n    WhiteBalance: 0,\n    FujiFlashMode: 1,\n    FlashExposureComp: 0,\n    Macro: 0,\n    FocusMode: 0,\n    SlowSync: 0,\n    AutoBracketing: 0,\n    BlurWarning: 0,\n    FocusWarning: 0,\n    ExposureWarning: 0 \n  } \n}\n```\n\nFor more information about the Exif standard please refer to the specification found on [http://www.exif.org](http://www.exif.org). A comprehensive list of available Exif attributes and their meaning can be found on [http://www.sno.phy.queensu.ca/~phil/exiftool/TagNames/](http://www.sno.phy.queensu.ca/~phil/exiftool/TagNames/).\n\nToDo / Ideas\n------------\n\nThere are a lot of things still to be done and to be made better. If you have any special requests please open an issue with a feature request.\n   \nLicense\n-------\n\n_node-exif_ is licensed under the MIT License. (See LICENSE) ',
+168 silly resolved     readmeFilename: 'README.md',
+168 silly resolved     bugs: { url: 'https://github.com/gomfunkel/node-exif/issues' },
+168 silly resolved     homepage: 'https://github.com/gomfunkel/node-exif',
+168 silly resolved     _id: 'exif@0.3.3',
+168 silly resolved     _shasum: '0e8f8b20cfafde8c66902732bc89dc3c71244401',
+168 silly resolved     _from: 'https://registry.npmjs.org/exif/-/exif-0.3.3.tgz',
+168 silly resolved     _resolved: 'https://registry.npmjs.org/exif/-/exif-0.3.3.tgz' } ]
+169 info install commander@2.1.0 into /usr/local/lib/node_modules/geoexif
+170 info install open@0.0.4 into /usr/local/lib/node_modules/geoexif
+171 info install exif@0.3.3 into /usr/local/lib/node_modules/geoexif
+172 info installOne commander@2.1.0
+173 info installOne open@0.0.4
+174 info installOne exif@0.3.3
+175 verbose lib/node_modules/geoexif/node_modules/commander unbuild
+176 verbose lib/node_modules/geoexif/node_modules/open unbuild
+177 verbose lib/node_modules/geoexif/node_modules/exif unbuild
+178 verbose tar unpack /Users/srikanthk/.npm/commander/2.1.0/package.tgz
+179 silly lockFile ce54ceb5-s-geoexif-node-modules-commander tar:///usr/local/lib/node_modules/geoexif/node_modules/commander
+180 verbose lock tar:///usr/local/lib/node_modules/geoexif/node_modules/commander /Users/srikanthk/.npm/ce54ceb5-s-geoexif-node-modules-commander.lock
+181 silly lockFile df54b145--npm-commander-2-1-0-package-tgz tar:///Users/srikanthk/.npm/commander/2.1.0/package.tgz
+182 verbose lock tar:///Users/srikanthk/.npm/commander/2.1.0/package.tgz /Users/srikanthk/.npm/df54b145--npm-commander-2-1-0-package-tgz.lock
+183 verbose tar unpack /Users/srikanthk/.npm/open/0.0.4/package.tgz
+184 silly lockFile 6f6a19fa-odules-geoexif-node-modules-open tar:///usr/local/lib/node_modules/geoexif/node_modules/open
+185 verbose lock tar:///usr/local/lib/node_modules/geoexif/node_modules/open /Users/srikanthk/.npm/6f6a19fa-odules-geoexif-node-modules-open.lock
+186 silly lockFile 14e1d476-anthk-npm-open-0-0-4-package-tgz tar:///Users/srikanthk/.npm/open/0.0.4/package.tgz
+187 verbose lock tar:///Users/srikanthk/.npm/open/0.0.4/package.tgz /Users/srikanthk/.npm/14e1d476-anthk-npm-open-0-0-4-package-tgz.lock
+188 verbose tar unpack /Users/srikanthk/.npm/exif/0.3.3/package.tgz
+189 silly lockFile 8a39fea8-odules-geoexif-node-modules-exif tar:///usr/local/lib/node_modules/geoexif/node_modules/exif
+190 verbose lock tar:///usr/local/lib/node_modules/geoexif/node_modules/exif /Users/srikanthk/.npm/8a39fea8-odules-geoexif-node-modules-exif.lock
+191 silly lockFile ccb18b91-anthk-npm-exif-0-3-3-package-tgz tar:///Users/srikanthk/.npm/exif/0.3.3/package.tgz
+192 verbose lock tar:///Users/srikanthk/.npm/exif/0.3.3/package.tgz /Users/srikanthk/.npm/ccb18b91-anthk-npm-exif-0-3-3-package-tgz.lock
+193 silly gunzTarPerm modes [ '755', '644' ]
+194 silly gunzTarPerm modes [ '755', '644' ]
+195 silly gunzTarPerm modes [ '755', '644' ]
+196 silly gunzTarPerm extractEntry package.json
+197 silly gunzTarPerm extractEntry package.json
+198 silly gunzTarPerm extractEntry package.json
+199 silly gunzTarPerm extractEntry index.js
+200 silly gunzTarPerm extractEntry Readme.md
+201 silly gunzTarPerm extractEntry .npmignore
+202 silly gunzTarPerm extractEntry README.md
+203 silly gunzTarPerm extractEntry .npmignore
+204 silly gunzTarPerm extractEntry README.md
+205 silly gunzTarPerm extractEntry LICENSE
+206 silly gunzTarPerm extractEntry .jshintignore
+207 silly gunzTarPerm extractEntry .jshintrc
+208 silly gunzTarPerm extractEntry lib/open.js
+209 silly gunzTarPerm extractEntry vendor/xdg-open
+210 silly gunzTarPerm extractEntry index.js
+211 silly gunzTarPerm extractEntry lib/exif/Buffer.js
+212 silly gunzTarPerm extractEntry lib/exif/ExifImage.js
+213 silly gunzTarPerm extractEntry lib/exif/index.js
+214 silly gunzTarPerm extractEntry lib/exif/makernotes/agfa.js
+215 silly gunzTarPerm extractEntry lib/exif/makernotes/epson.js
+216 silly gunzTarPerm extractEntry lib/exif/makernotes/fujifilm.js
+217 silly gunzTarPerm extractEntry lib/exif/makernotes/olympus.js
+218 silly gunzTarPerm extractEntry lib/exif/makernotes/sony.js
+219 silly gunzTarPerm extractEntry LICENSE.md
+220 silly lockFile ce54ceb5-s-geoexif-node-modules-commander tar:///usr/local/lib/node_modules/geoexif/node_modules/commander
+221 silly lockFile ce54ceb5-s-geoexif-node-modules-commander tar:///usr/local/lib/node_modules/geoexif/node_modules/commander
+222 silly lockFile df54b145--npm-commander-2-1-0-package-tgz tar:///Users/srikanthk/.npm/commander/2.1.0/package.tgz
+223 silly lockFile df54b145--npm-commander-2-1-0-package-tgz tar:///Users/srikanthk/.npm/commander/2.1.0/package.tgz
+224 info preinstall commander@2.1.0
+225 verbose readDependencies using package.json deps
+226 verbose readDependencies using package.json deps
+227 silly resolved []
+228 verbose about to build /usr/local/lib/node_modules/geoexif/node_modules/commander
+229 info build /usr/local/lib/node_modules/geoexif/node_modules/commander
+230 verbose linkStuff [ true,
+230 verbose linkStuff   '/usr/local/lib/node_modules',
+230 verbose linkStuff   false,
+230 verbose linkStuff   '/usr/local/lib/node_modules/geoexif/node_modules' ]
+231 info linkStuff commander@2.1.0
+232 silly lockFile 6f6a19fa-odules-geoexif-node-modules-open tar:///usr/local/lib/node_modules/geoexif/node_modules/open
+233 silly lockFile 6f6a19fa-odules-geoexif-node-modules-open tar:///usr/local/lib/node_modules/geoexif/node_modules/open
+234 silly lockFile 14e1d476-anthk-npm-open-0-0-4-package-tgz tar:///Users/srikanthk/.npm/open/0.0.4/package.tgz
+235 silly lockFile 14e1d476-anthk-npm-open-0-0-4-package-tgz tar:///Users/srikanthk/.npm/open/0.0.4/package.tgz
+236 info preinstall open@0.0.4
+237 verbose readDependencies using package.json deps
+238 verbose readDependencies using package.json deps
+239 silly resolved []
+240 verbose about to build /usr/local/lib/node_modules/geoexif/node_modules/open
+241 info build /usr/local/lib/node_modules/geoexif/node_modules/open
+242 verbose linkStuff [ true,
+242 verbose linkStuff   '/usr/local/lib/node_modules',
+242 verbose linkStuff   false,
+242 verbose linkStuff   '/usr/local/lib/node_modules/geoexif/node_modules' ]
+243 info linkStuff open@0.0.4
+244 verbose linkBins commander@2.1.0
+245 verbose linkMans commander@2.1.0
+246 verbose rebuildBundles commander@2.1.0
+247 verbose linkBins open@0.0.4
+248 verbose linkMans open@0.0.4
+249 verbose rebuildBundles open@0.0.4
+250 info install commander@2.1.0
+251 info install open@0.0.4
+252 info postinstall commander@2.1.0
+253 info postinstall open@0.0.4
+254 silly lockFile 8a39fea8-odules-geoexif-node-modules-exif tar:///usr/local/lib/node_modules/geoexif/node_modules/exif
+255 silly lockFile 8a39fea8-odules-geoexif-node-modules-exif tar:///usr/local/lib/node_modules/geoexif/node_modules/exif
+256 silly lockFile ccb18b91-anthk-npm-exif-0-3-3-package-tgz tar:///Users/srikanthk/.npm/exif/0.3.3/package.tgz
+257 silly lockFile ccb18b91-anthk-npm-exif-0-3-3-package-tgz tar:///Users/srikanthk/.npm/exif/0.3.3/package.tgz
+258 info preinstall exif@0.3.3
+259 verbose readDependencies using package.json deps
+260 verbose readDependencies using package.json deps
+261 silly resolved []
+262 verbose about to build /usr/local/lib/node_modules/geoexif/node_modules/exif
+263 info build /usr/local/lib/node_modules/geoexif/node_modules/exif
+264 verbose linkStuff [ true,
+264 verbose linkStuff   '/usr/local/lib/node_modules',
+264 verbose linkStuff   false,
+264 verbose linkStuff   '/usr/local/lib/node_modules/geoexif/node_modules' ]
+265 info linkStuff exif@0.3.3
+266 verbose linkBins exif@0.3.3
+267 verbose linkMans exif@0.3.3
+268 verbose rebuildBundles exif@0.3.3
+269 info install exif@0.3.3
+270 info postinstall exif@0.3.3
+271 verbose about to build /usr/local/lib/node_modules/geoexif
+272 info build /usr/local/lib/node_modules/geoexif
+273 verbose linkStuff [ true,
+273 verbose linkStuff   '/usr/local/lib/node_modules',
+273 verbose linkStuff   true,
+273 verbose linkStuff   '/usr/local/lib/node_modules' ]
+274 info linkStuff geoexif@0.0.3
+275 verbose linkBins geoexif@0.0.3
+276 verbose link bins [ { geoexif: './src/geoexif' }, '/usr/local/bin', true ]
+277 verbose linkMans geoexif@0.0.3
+278 verbose rebuildBundles geoexif@0.0.3
+279 verbose rebuildBundles [ 'commander', 'exif', 'open' ]
+280 info install geoexif@0.0.3
+281 info postinstall geoexif@0.0.3
+282 error peerinvalid The package generator-karma does not satisfy its siblings' peerDependencies requirements!
+282 error peerinvalid Peer generator-angular@0.9.2 wants generator-karma@>=0.8.2
+282 error peerinvalid Peer generator-express-angular@0.2.8 wants generator-karma@~0.5.0
+283 error System Darwin 14.0.0
+284 error command "node" "/usr/local/bin/npm" "install" "-g" "geoexif"
+285 error cwd /Users/srikanthk/Documents/Tattlez
+286 error node -v v0.10.35
+287 error npm -v 1.4.28
+288 error code EPEERINVALID
+289 verbose exit [ 1, true ]

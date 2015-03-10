@@ -31,6 +31,32 @@
         </div>
         <div class="col-md-6 {{phoneTablet}}">
             <div class="{{phoneTablet}}-inner">
+            	<div id="overlay" class="{{showInCallModal}}">
+					<div class="modal-header">
+						<h3 class="modal-title">Incoming Call</h3>
+					</div>
+					<div class="modal-body">
+						<h5>{{callFrom}}</h5>
+					</div>
+					<div class="modal-footer">
+						<button class="btn btn-primary" ng-click="confirmDeleteContact()">Accept</button>
+						<button class="btn btn-warning" ng-click="cancelCall()">Reject</button>
+					</div>
+				</div>
+				<div id="fade" class="{{showInCallModal}}"></div>
+				<div id="overlay" class="{{showOutCallModal}}">
+					<div class="modal-header">
+						<h3 class="modal-title">Calling</h3>
+					</div>
+					<div class="modal-body">
+						<h5>{{callTo}}</h5>
+					</div>
+					<div class="modal-footer">
+						
+						<button class="btn btn-warning" ng-click="cancelCall()">Disconnect</button>
+					</div>
+				</div>
+				<div id="fade" class="{{showOutCallModal}}"></div>
             	<div class="notify-bar">
             		<div ng-show="isNotification"><span class="fa fa-comment"></span> <span ng-bind="notification"></span></div>
             		<div class="notify-time" my-current-time="timeFormat" ng-hide="isNotification"></div>

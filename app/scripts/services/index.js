@@ -9,7 +9,10 @@ define([
 	'./chatService',
 	'./socketio',
 	'./socketio-stream',
-	'./guid'
+	'./guid',
+	'./VideoStream',
+	'./Room',
+	'./socketRoom'
 ], function () {
 
 });

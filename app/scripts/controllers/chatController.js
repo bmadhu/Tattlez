@@ -3,7 +3,59 @@
  */
 define(['../modules/controller'], function (controllers) {
 	'use strict';
-	controllers.controller('chatCtrl', function ($scope,$rootScope, $state, contactsSrvc, chatSrvc, textAngularManager,$timeout,joinSrvc,$filter,socketio,configSrvc,$upload,socketiostream,guid,$sce) {
+	controllers.controller('chatCtrl', function ($scope,$rootScope, $state, contactsSrvc, chatSrvc, textAngularManager,$timeout,joinSrvc,$filter,socketio,configSrvc,$upload,socketiostream,guid,$sce,VideoStream,Room) {
+		var userNumber;
+		navigator.getUserMedia = navigator.getUserMedia || navigator.mozGetUserMedia ||
+               navigator.webkitGetUserMedia || navigator.msGetUserMedia;
+		if (!navigator.getUserMedia) {
+	      $scope.AVerror = 'WebRTC is not supported by your browser. You can try the app with Chrome and Firefox.';
+	      return;
+	    }
+	    /* 
+	     * Start Audio/Video
+	     */
+	    var stream;
+	    
+	    $scope.Call=function(){
+	    	VideoStream.get()
+	    .then(function (s) {
+	      stream = s;
+	      Room.init(stream);
+	      stream = URL.createObjectURL(stream);
+	      Room.createRoom($scope.communicationId,userNumber)
+	        .then(function (roomId) {
+	        	$timeout(function () {
+					//Broadcast the received message to chat window(chatController).
+					$rootScope.$broadcast("OUT_GOING_CALL",{name:$scope.contactDetails.contactName});
+				}, 0);
+	          socketio.emit('call', {communicationId:$scope.communicationId,from:userNumber,to:$scope.contactDetails.contactNumber});
+	        });
+	    }, function () {
+	      $scope.AVerror = 'No audio/video permissions. Please refresh your browser and allow the audio/video capturing.';
+	      alert($scope.AVerror);
+	    });
+	    };
+	    
+	    $scope.peers = [];
+	    $scope.$on("STREAM_RECEIVED", function (event,data) {
+			  console.log('Client connected, adding new stream');
+		      $scope.peers.push({
+		        id: peer.id,
+		        stream: URL.createObjectURL(peer.stream)
+		      });
+		});
+		$scope.$on("STREAM_ENDED", function (event,data) {
+			  console.log('Client disconnected, removing stream');
+		      $scope.peers = $scope.peers.filter(function (p) {
+		        return p.id !== peer.id;
+		      });
+		});
+	    $scope.getLocalVideo = function () {
+	      return $sce.trustAsResourceUrl(stream);
+	    };
+	    /*
+	     * End Audio/Video
+	     */
 		var joined = false;
 		$scope.isShowSmileys=false;
 		$scope.chatFormCls="chat-form";
@@ -118,7 +170,7 @@ define(['../modules/controller'], function (controllers) {
 	            var msg = $filter('filter')($scope.msgs,{guid:guid},true);
 	            if(msg[0].mediaType.indexOf('video') > -1){
 	            	console.log(data);
-	            	var path = (data.path).replace('app','http://localhost:3000');
+	            	var path = (data.path).replace('app',configSrvc.serverURL);
 	            	msg[0].path=[
 									{src: $sce.trustAsResourceUrl(path), type: "video/mp4"}
 								];
@@ -176,10 +228,10 @@ define(['../modules/controller'], function (controllers) {
             for(var i = 1; i <= $scope.smileyPanes.length; i++) {
                 $scope.smileyPanes[i-1].active = (i == tabIndex);
             }
-        }
+        };
 		//get the contactId of the user to which we are trying to start chat.
 		$scope.contactId = contactsSrvc.getSelectedContactForChat();
-		var userNumber;
+		
 		if(joinSrvc.mobileAndOtp.mobileNumber){
 			userNumber = joinSrvc.mobileAndOtp.mobileNumber;
 		}
