@@ -14,26 +14,12 @@ define(['../modules/controller'], function (controllers) {
 	    /* 
 	     * Start Audio/Video
 	     */
-	    var stream;
 	    
 	    $scope.Call=function(){
-	    	VideoStream.get()
-	    .then(function (s) {
-	      stream = s;
-	      Room.init(stream);
-	      stream = URL.createObjectURL(stream);
-	      Room.createRoom($scope.communicationId,userNumber)
-	        .then(function (roomId) {
-	        	$timeout(function () {
-					//Broadcast the received message to chat window(chatController).
-					$rootScope.$broadcast("OUT_GOING_CALL",{ContactData:$scope.contactDetails});
+	    	$timeout(function () {
+					//Broadcast Out going call to global window(appController).
+					$rootScope.$broadcast("OUT_GOING_CALL",{ContactData:$scope.contactDetails,communicationId:$scope.communicationId,userNumber:userNumber});
 				}, 0);
-	          socketio.emit('call', {communicationId:$scope.communicationId,from:userNumber,to:$scope.contactDetails.contactNumber});
-	        });
-	    }, function () {
-	      $scope.AVerror = 'No audio/video permissions. Please refresh your browser and allow the audio/video capturing.';
-	      alert($scope.AVerror);
-	    });
 	    };
 	    
 	    $scope.peers = [];

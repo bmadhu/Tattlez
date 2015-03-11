@@ -31,31 +31,32 @@
         </div>
         <div class="col-md-6 {{phoneTablet}}">
             <div class="{{phoneTablet}}-inner">
-            	<div id="overlay" class="{{showInCallModal}}">
+            	<div id="call-overlay" class="{{showInCallModal}}">
 					<div class="modal-header">
 						<h3 class="modal-title">Incoming Call</h3>
 					</div>
-					<div class="modal-body">
+					<div class="modal-body" style="display:inline-block;">
 						<img ng-src="{{callFromPhoto}}" class="img-default" width="95px" height="93px" />
 						<span class="text no-padding" ng-bind="callFrom"></span>
 					</div>
 					<div class="modal-footer">
-						<button class="btn btn-primary" ng-click="confirmDeleteContact()">Accept</button>
-						<button class="btn btn-warning" ng-click="cancelCall()">Reject</button>
+						<button class="btn btn-primary" ng-click="answerCall()">Accept</button>
+						<button class="btn btn-warning" ng-click="rejectCall()">Reject</button>
 					</div>
 				</div>
 				<div id="fade" class="{{showInCallModal}}"></div>
-				<div id="overlay" class="{{showOutCallModal}}">
+				<div id="call-overlay" class="{{showOutCallModal}}">
 					<div class="modal-header">
 						<h3 class="modal-title">Calling</h3>
 					</div>
-					<div class="modal-body">
+					<div class="modal-body" style="display:inline-block;">
+						<video id="localVideo" class="camera-local" autoplay></video>
 						<img ng-src="{{callTo.photo}}" class="img-default" width="95px" height="93px" />
 						<span class="text no-padding" ng-bind="callTo.contactName"></span>
 					</div>
 					<div class="modal-footer">
 						
-						<button class="btn btn-warning" ng-click="cancelCall()">Disconnect</button>
+						<button class="btn btn-warning" ng-click="endCall()">End Call</button>
 					</div>
 				</div>
 				<div id="fade" class="{{showOutCallModal}}"></div>
@@ -70,6 +71,7 @@
         <div class="col-md-3">
         </div>
     </div>
+    <script src="scripts/vendorjs/RTCPeerConnection.js" type="text/javascript"></script>
     <script src="scripts/socket.io.client.js" type="text/javascript"></script>
     <script src="scripts/vendorjs/socket.io-stream.js" type="text/javascript"></script>
     <script src="vendor/requirejs/require.js" data-main="scripts/main.js"></script>

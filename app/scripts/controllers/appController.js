@@ -3,8 +3,8 @@
  */
 define(['../modules/controller'], function (controllers) {
     'use strict';
-    controllers.controller('appCtrl', ['$scope','$rootScope', 'configSrvc', 'contactsSrvc', 'chatSrvc', '$q', '$timeout', 'socketio','ngAudio','joinSrvc','$filter','socketiostream',
-    function ($scope,$rootScope, configSrvc, contactsSrvc, chatSrvc, $q, $timeout,socketio, ngAudio,joinSrvc,$filter,socketiostream) {
+    controllers.controller('appCtrl', ['$scope','$rootScope', 'configSrvc', 'contactsSrvc', 'chatSrvc', '$q', '$timeout', 'socketio','ngAudio','joinSrvc','$filter','socketiostream','Room','VideoStream',
+    function ($scope,$rootScope, configSrvc, contactsSrvc, chatSrvc, $q, $timeout,socketio, ngAudio,joinSrvc,$filter,socketiostream,Room,VideoStream) {
     	
     	$rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
 	  		if(fromState.name=="" && toState.name != "join"){
@@ -14,23 +14,59 @@ define(['../modules/controller'], function (controllers) {
     	$scope.phoneTablet = configSrvc.phoneTablet;
     	$scope.timeFormat="h:mm a";
     	$scope.audio = ngAudio.load('../sounds/2.mp3');
-    	
+    	var userNumber;
     	$scope.outCallAudio = ngAudio.load('../sounds/Ringing_Phone.mp3');
     	$scope.outCallAudio.loop=true;
     	$scope.inCallAudio = ngAudio.load('../sounds/Phone_Ringing.mp3');
     	$scope.inCallAudio.loop=true;
     	$scope.busyCallAudio = ngAudio.load('../sounds/Busy_Signal.mp3');
     	$scope.busyCallAudio.loop=true;
-    	
+    	var localvid = document.getElementById('localVideo');
     	$scope.isNotification=false;
     	$scope.showInCallModal='display-none';
     	$scope.showOutCallModal='display-none';
+    	var stream;
     	$scope.$on("OUT_GOING_CALL", function (event,data) {
+    		$scope.communicationId = data.communicationId;
+    		$scope.userNumber = data.userNumber;
     		  $scope.showOutCallModal='display-block';
-    		  console.log(data);
     		  $scope.callTo=data.ContactData;
 			  $scope.outCallAudio.play();
+    		VideoStream.get()
+	    .then(function (s) {
+	      stream = s;
+	      Room.init(stream);
+	      localvid.src = URL.createObjectURL(s);
+		  localvid.autoplay=true;
+	      Room.createRoom($scope.communicationId,$scope.userNumber)
+	        .then(function (roomId) {
+				//Emit calling to other user using socket.io
+	          socketio.emit('call', {communicationId:$scope.communicationId,from:$scope.userNumber,to:$scope.callTo.contactNumber});
+	        });
+	    }, function () {
+	      $scope.AVerror = 'No audio/video permissions. Please refresh your browser and allow the audio/video capturing.';
+	      alert($scope.AVerror);
+	    });
+			  
+			  
 		});
+		$scope.endCall=function(){
+			$scope.showOutCallModal='display-none';
+			$scope.outCallAudio.stop();
+			stream.stop();
+			localvid.pause();
+			localvid.src="";
+			socketio.emit('endcall', {communicationId:$scope.communicationId,from:$scope.userNumber});
+		};
+		$scope.answerCall=function(){
+			Room.joinRoom($scope.communicationId,userNumber)
+	        .then(function (roomId) {
+				
+			});
+		};
+		$scope.rejectCall=function(){
+			
+		};
     	/**
 		* Receive messages from the other user
 		* Add the messages to array
@@ -65,8 +101,10 @@ define(['../modules/controller'], function (controllers) {
 		* Add the messages to array
 		*/
 		socketio.on('call', function (msg) {
+			$scope.communicationId = msg.communicationId;
+			
 				contactsSrvc.getallContacts().then(function(contacts){
-					var userNumber;
+					
 					if(joinSrvc.mobileAndOtp.mobileNumber){
 						userNumber = joinSrvc.mobileAndOtp.mobileNumber;
 						$scope.notifyCall(msg,userNumber,contacts);
@@ -82,6 +120,10 @@ define(['../modules/controller'], function (controllers) {
 		    		
 			
 		});
+		socketio.on('endcall', function (msg) {
+			$scope.inCallAudio.stop();
+    		$scope.showInCallModal='display-none';
+		});
 		ss(socketiostream).on('image', function (data) {
 			console.log('image');
 			console.log(data);
@@ -93,7 +135,7 @@ define(['../modules/controller'], function (controllers) {
 				var contact = $filter('filter')(contacts,{contactNumber:msg.from},true);
 				msg.from = contact[0].contactName;
 				$scope.audio.play();
-	    		
+	    		$scope.isNotification=true;
 	    		$scope.notification=msg.from+' : '+msg.message;
 	    		//Clear notification
 		    	$timeout(function () {
@@ -114,6 +156,7 @@ define(['../modules/controller'], function (controllers) {
 				}, 3000);
 			}
 		};
+		
 		$scope.notifyCall=function(msg,userNumber,contacts){
 			if(msg.to == userNumber){
 				var contact = $filter('filter')(contacts,{contactNumber:msg.from},true);
