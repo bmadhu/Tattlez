@@ -4,6 +4,8 @@
 define(['../modules/services'], function (services) {
     'use strict';
     services.factory('Room', function ($q,socketroom) {
+    	var servers= {iceServers: [{"url": "stun:stun.l.google.com:19302"}]};
+		var constraints = {optional: [{"DtlsSrtpKeyAgreement": true}]};
     	var iceConfig = { 'iceServers': [{ 'url': 'stun:stun.l.google.com:19302' }]},
         peerConnections = {},
         currentId, roomId,
@@ -13,13 +15,18 @@ define(['../modules/services'], function (services) {
       if (peerConnections[id]) {
         return peerConnections[id];
       }
-      var pc = new RTCPeerConnection(iceConfig);
+      var pc = new PeerConnection(servers,constraints);
       peerConnections[id] = pc;
       pc.addStream(stream);
-      pc.onicecandidate = function (evnt) {
-        socketroom.emit('msg', { by: currentId, to: id, ice: evnt.candidate, type: 'ice' });
-      };
-      pc.onaddstream = function (evnt) {
+      pc.on('ice',function (candidate) {
+      	if(candidate){
+        socketroom.emit('msg', { by: currentId, to: id, ice: candidate, type: 'ice' });
+       }
+       else{
+       	console.log("End of candidates.");
+       }
+      });
+      pc.on('addStream',function (evnt) {
         console.log('Received new stream');
         $timeout(function () {
 			//Broadcast the received message to chat window(chatController).
@@ -32,20 +39,24 @@ define(['../modules/services'], function (services) {
         if (!$rootScope.$$digest) {
           $rootScope.$apply();
         }
-      };
+      });
       return pc;
     }
 
     function makeOffer(id) {
+    	console.log('making offer'+id);
       var pc = getPeerConnection(id);
-      pc.createOffer(function (sdp) {
-        pc.setLocalDescription(sdp);
-        console.log('Creating an offer for', id);
-        socketroom.emit('msg', { by: currentId, to: id, sdp: sdp, type: 'sdp-offer' });
-      }, function (e) {
-        console.log(e);
-      },
-      { mandatory: { OfferToReceiveVideo: true, OfferToReceiveAudio: true }});
+      pc.offer({ mandatory: { OfferToReceiveAudio:true, OfferToReceiveVideo: true} },
+      function( err, offer){
+        if(!err){
+          console.log("Creating an offer...");
+          console.log(offer);
+          console.log(currentId);
+          socketroom.emit('msg', { by: currentId, to: id, sdp: offer, type: 'sdp-offer' });
+        }
+      }
+      );
+      
     }
 
     function handleMessage(data) {
@@ -80,6 +91,7 @@ define(['../modules/services'], function (services) {
 
     
       socketroom.on('peer.connected', function (params) {
+      	console.log('peer.connected');
         makeOffer(params.id);
       });
       socketroom.on('peer.disconnected', function (data) {
@@ -96,16 +108,21 @@ define(['../modules/services'], function (services) {
         handleMessage(data);
       });
   
-
+var connected;
     var api = {
+    	
       joinRoom: function (r,userId) {
+      	var d = $q.defer();
         if (!connected) {
+        	
           socketroom.emit('init', { room: r,joiner:true,userId:userId }, function (roomid, id) {
             currentId = id;
             roomId = roomid;
           });
           connected = true;
         }
+        d.resolve(r);
+        return d.promise;
       },
       createRoom: function (r,userId) {
         var d = $q.defer();
@@ -114,6 +131,16 @@ define(['../modules/services'], function (services) {
           roomId = roomid;
           currentId = id;
           connected = true;
+        });
+        return d.promise;
+      },
+      leaveRoom:function(){
+      	 var d = $q.defer();
+        socketroom.emit('disconnectRoom', function (roomid, id) {
+          d.resolve(roomid);
+          roomId = roomid;
+          currentId = id;
+          connected = false;
         });
         return d.promise;
       },

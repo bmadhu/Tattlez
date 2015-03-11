@@ -32,6 +32,20 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 
 //Create a static file server
 app.use(express.static(__dirname + '/app'));
+Array.prototype.contains = function(k, callback) {
+    var self = this;
+    return (function check(i) {
+        if (i >= self.length) {
+            return callback(false);
+        }
+
+        if (self[i] === k) {
+            return callback(true);
+        }
+
+        return process.nextTick(check.bind(null, i+1));
+    }(0));
+};
 /* Start socket.io for Audio/Video chat */
 var rooms = {},
     userIds = {};
@@ -43,42 +57,50 @@ var Chat = io
     socket.on('init', function (data, fn) {
       currentRoom = data.room;
       console.log(data.room);
+      id=data.userId;
       var room = rooms[currentRoom];
       if (!data.joiner) {
         rooms[currentRoom] = [socket];
-        id = userIds[currentRoom] = data.userId;
+        userIds[currentRoom] = [data.userId];
+        
         fn(currentRoom, id);
         console.log('Room created, with #', currentRoom);
       } else {
         if (!room) {
           return;
         }
-        userIds[currentRoom] = data.userId;
-        id = userIds[currentRoom];
+        userIds[currentRoom].push(data.userId);
+        
         fn(currentRoom, id);
         room.forEach(function (s) {
           s.emit('peer.connected', { id: id });
         });
         room.push(socket);
+        console.log(userIds);
         console.log('Peer connected to room', currentRoom, 'with #', id);
       }
     });
 
     socket.on('msg', function (data) {
-      var to = parseInt(data.to, 10);
-      if (rooms[currentRoom] && rooms[currentRoom][to]) {
+      var to = data.to;
+      
+      if (rooms[currentRoom] && userIds[currentRoom].indexOf(to) > -1) {
         console.log('Redirecting message to', to, 'by', data.by);
-        rooms[currentRoom][to].emit('msg', data);
+        var socketIndex = userIds[currentRoom].indexOf(to);
+        console.log(socketIndex);
+        rooms[currentRoom][socketIndex].emit('msg', data);
       } else {
         console.warn('Invalid user');
       }
     });
 
-    socket.on('disconnect', function () {
+    socket.on('disconnectRoom', function (fn) {
+    	console.log(currentRoom);
       if (!currentRoom || !rooms[currentRoom]) {
         return;
       }
       delete rooms[currentRoom][rooms[currentRoom].indexOf(socket)];
+      fn(currentRoom,id);
       rooms[currentRoom].forEach(function (socket) {
         if (socket) {
           socket.emit('peer.disconnected', { id: id });
@@ -122,6 +144,20 @@ var Chat = io
       		// Broadcasts the message to the other contact
       		console.log(joinedRoom);
       		socket.broadcast.to(joinedRoom[data.communicationId]).emit('call',data);
+          } else {
+              socket.send(
+			   "you're not connected to chat." +
+			   "select a contact and then start chat."
+			);
+          }
+      });
+      socket.on('endcall', function (data) {
+      	if (joinedRoom[data.communicationId]) {
+      		console.log('comm id');
+              console.log(joinedRoom[data.communicationId]);
+      		// Broadcasts the message to the other contact
+      		console.log(joinedRoom);
+      		socket.broadcast.to(joinedRoom[data.communicationId]).emit('endcall',data);
           } else {
               socket.send(
 			   "you're not connected to chat." +

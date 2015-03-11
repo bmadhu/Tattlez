@@ -121,6 +121,15 @@ body {
 		width: 50%;
 		z-index: 100; /* makes the div the top layer, so it’ll lay on top of the other content */
 	}
+	.tablet-inner #call-overlay {
+		  position: absolute;
+		  /* left: 25%; */
+		  /* top: 25%; */
+		  background-color: #ffffff;
+		  width: 81%;
+		  height: 70%;
+		  z-index: 100;
+	}
 
 	.tablet-inner #fade {
 		position: absolute; /* makes the div go into a position that’s absolute to the browser viewing area */
@@ -518,5 +527,13 @@ bottom: 40%;
 }*/
 videogular vg-overlay-play{
 	width:0% !important;
+}
+.camera-local {
+    width: 266px;
+    min-height: 200px;
+    height:200px;
+    float: left;
+    margin: 0 20px 25px 0;
+    border: 1px solid #aaa;
 }
 
