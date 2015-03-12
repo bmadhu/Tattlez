@@ -31,35 +31,23 @@
         </div>
         <div class="col-md-6 {{phoneTablet}}">
             <div class="{{phoneTablet}}-inner">
-            	<div id="call-overlay" class="{{showInCallModal}}">
+            	<div id="call-overlay" class="{{showCallModal}}">
 					<div class="modal-header">
-						<h3 class="modal-title">Incoming Call</h3>
-					</div>
-					<div class="modal-body" style="display:inline-block;">
-						<img ng-src="{{callFromPhoto}}" class="img-default" width="95px" height="93px" />
-						<span class="text no-padding" ng-bind="callFrom"></span>
-					</div>
-					<div class="modal-footer">
-						<button class="btn btn-primary" ng-click="answerCall()">Accept</button>
-						<button class="btn btn-warning" ng-click="rejectCall()">Reject</button>
-					</div>
-				</div>
-				<div id="fade" class="{{showInCallModal}}"></div>
-				<div id="call-overlay" class="{{showOutCallModal}}">
-					<div class="modal-header">
-						<h3 class="modal-title">Calling</h3>
+						<h3 class="modal-title">{{callTitle}}</h3>
 					</div>
 					<div class="modal-body" style="display:inline-block;">
 						<video id="localVideo" class="camera-local" autoplay></video>
-						<img ng-src="{{callTo.photo}}" class="img-default" width="95px" height="93px" />
-						<span class="text no-padding" ng-bind="callTo.contactName"></span>
+						<img ng-src="{{callPhoto}}" class="img-default" width="95px" height="93px" />
+						<span class="text no-padding" ng-bind="callName"></span>
 					</div>
 					<div class="modal-footer">
-						
-						<button class="btn btn-warning" ng-click="endCall()">End Call</button>
+						<button ng-if="!isOutGoingCall" class="btn btn-primary" ng-click="answerCall()">Accept</button>
+						<button ng-if="!isOutGoingCall" class="btn btn-warning" ng-click="rejectCall()">Reject</button>
+						<button ng-if="isOutGoingCall" class="btn btn-warning" ng-click="endCall()">End Call</button>
 					</div>
 				</div>
-				<div id="fade" class="{{showOutCallModal}}"></div>
+				<div id="fade" class="{{showCallModal}}"></div>
+				
             	<div class="notify-bar">
             		<div ng-show="isNotification"><span class="fa fa-comment"></span> <span ng-bind="notification"></span></div>
             		<div class="notify-time" my-current-time="timeFormat" ng-hide="isNotification"></div>

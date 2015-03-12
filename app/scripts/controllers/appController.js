@@ -23,14 +23,35 @@ define(['../modules/controller'], function (controllers) {
     	$scope.busyCallAudio.loop=true;
     	var localvid = document.getElementById('localVideo');
     	$scope.isNotification=false;
-    	$scope.showInCallModal='display-none';
-    	$scope.showOutCallModal='display-none';
+    	$scope.showCallModal='display-none';
     	var stream;
+    	$scope.peers = [];
+	    $scope.$on("STREAM_RECEIVED", function (event,data) {
+	    	$scope.outCallAudio.stop();
+			  console.log('Client connected, adding new stream');
+		      $scope.peers.push({
+		        id: data[0].id,
+		        stream: URL.createObjectURL(data[0].stream)
+		      });
+		      
+		});
+		$scope.$on("STREAM_ENDED", function (event,data) {
+			  console.log('Client disconnected, removing stream');
+		      $scope.peers = $scope.peers.filter(function (p) {
+		        return p.id !== peer.id;
+		      });
+		});
+	    $scope.getLocalVideo = function () {
+	      return $sce.trustAsResourceUrl(stream);
+	    };
     	$scope.$on("OUT_GOING_CALL", function (event,data) {
+    		$scope.isOutGoingCall=true;
+    		$scope.callTitle = "Calling";
     		$scope.communicationId = data.communicationId;
     		$scope.userNumber = data.userNumber;
-    		  $scope.showOutCallModal='display-block';
-    		  $scope.callTo=data.ContactData;
+    		  $scope.showCallModal='display-block';
+    		  $scope.callName=data.ContactData.contactName;
+    		  $scope.callPhoto = data.ContactData.photo;
 			  $scope.outCallAudio.play();
     		VideoStream.get()
 	    .then(function (s) {
@@ -41,7 +62,7 @@ define(['../modules/controller'], function (controllers) {
 	      Room.createRoom($scope.communicationId,$scope.userNumber)
 	        .then(function (roomId) {
 				//Emit calling to other user using socket.io
-	          socketio.emit('call', {communicationId:$scope.communicationId,from:$scope.userNumber,to:$scope.callTo.contactNumber});
+	          socketio.emit('call', {communicationId:$scope.communicationId,from:$scope.userNumber,to:data.ContactData.contactNumber});
 	        });
 	    }, function () {
 	      $scope.AVerror = 'No audio/video permissions. Please refresh your browser and allow the audio/video capturing.';
@@ -51,7 +72,7 @@ define(['../modules/controller'], function (controllers) {
 			  
 		});
 		$scope.endCall=function(){
-			$scope.showOutCallModal='display-none';
+			$scope.showCallModal='display-none';
 			$scope.outCallAudio.stop();
 			stream.stop();
 			localvid.pause();
@@ -59,10 +80,22 @@ define(['../modules/controller'], function (controllers) {
 			socketio.emit('endcall', {communicationId:$scope.communicationId,from:$scope.userNumber});
 		};
 		$scope.answerCall=function(){
-			Room.joinRoom($scope.communicationId,userNumber)
+			$scope.inCallAudio.stop();
+			VideoStream.get()
+	    .then(function (s) {
+	      stream = s;
+	      Room.init(stream);
+	      localvid.src = URL.createObjectURL(s);
+		  localvid.autoplay=true;
+	      Room.joinRoom($scope.communicationId,userNumber)
 	        .then(function (roomId) {
 				
 			});
+	    }, function () {
+	      $scope.AVerror = 'No audio/video permissions. Please refresh your browser and allow the audio/video capturing.';
+	      alert($scope.AVerror);
+	    });
+			
 		};
 		$scope.rejectCall=function(){
 			
@@ -102,9 +135,8 @@ define(['../modules/controller'], function (controllers) {
 		*/
 		socketio.on('call', function (msg) {
 			$scope.communicationId = msg.communicationId;
-			
+			$scope.callTitle = "Incoming Call";
 				contactsSrvc.getallContacts().then(function(contacts){
-					
 					if(joinSrvc.mobileAndOtp.mobileNumber){
 						userNumber = joinSrvc.mobileAndOtp.mobileNumber;
 						$scope.notifyCall(msg,userNumber,contacts);
@@ -122,7 +154,10 @@ define(['../modules/controller'], function (controllers) {
 		});
 		socketio.on('endcall', function (msg) {
 			$scope.inCallAudio.stop();
-    		$scope.showInCallModal='display-none';
+			stream.stop();
+			localvid.pause();
+			localvid.src="";
+    		$scope.showCallModal='display-none';
 		});
 		ss(socketiostream).on('image', function (data) {
 			console.log('image');
@@ -170,9 +205,9 @@ define(['../modules/controller'], function (controllers) {
 				msg.fromPhoto = contact[0].photo;
 			}
 			$scope.inCallAudio.play();
-    		$scope.callFrom=msg.from;
-    		$scope.callFromPhoto = msg.fromPhoto;
-    		$scope.showInCallModal='display-block';
+			$scope.callName=msg.from;
+    		$scope.callPhoto = msg.fromPhoto;
+    		$scope.showCallModal='display-block';
 		};
     	// Listen to ESTABLISH_COMMUNICATION event
     	$scope.$on("ESTABLISH_COMMUNICATION", function (event) {
