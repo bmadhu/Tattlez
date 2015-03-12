@@ -5,50 +5,10 @@ define(['../modules/controller'], function (controllers) {
 	'use strict';
 	controllers.controller('chatCtrl', function ($scope,$rootScope, $state, contactsSrvc, chatSrvc, textAngularManager,$timeout,joinSrvc,$filter,socketio,configSrvc,$upload,socketiostream,guid,$sce,VideoStream,Room) {
 		var userNumber;
-		navigator.getUserMedia = navigator.getUserMedia || navigator.mozGetUserMedia ||
-               navigator.webkitGetUserMedia || navigator.msGetUserMedia;
-		if (!navigator.getUserMedia) {
-	      $scope.AVerror = 'WebRTC is not supported by your browser. You can try the app with Chrome and Firefox.';
-	      return;
-	    }
-	    /* 
-	     * Start Audio/Video
-	     */
-	    
-	    $scope.Call=function(){
-	    	$timeout(function () {
-					//Broadcast Out going call to global window(appController).
-					$rootScope.$broadcast("OUT_GOING_CALL",{ContactData:$scope.contactDetails,communicationId:$scope.communicationId,userNumber:userNumber});
-				}, 0);
-	    };
-	    
-	    $scope.peers = [];
-	    $scope.$on("STREAM_RECEIVED", function (event,data) {
-			  console.log('Client connected, adding new stream');
-		      $scope.peers.push({
-		        id: peer.id,
-		        stream: URL.createObjectURL(peer.stream)
-		      });
-		});
-		$scope.$on("STREAM_ENDED", function (event,data) {
-			  console.log('Client disconnected, removing stream');
-		      $scope.peers = $scope.peers.filter(function (p) {
-		        return p.id !== peer.id;
-		      });
-		});
-	    $scope.getLocalVideo = function () {
-	      return $sce.trustAsResourceUrl(stream);
-	    };
-	    /*
-	     * End Audio/Video
-	     */
 		var joined = false;
 		$scope.isShowSmileys=false;
 		$scope.chatFormCls="chat-form";
 		$scope.smileySrc="../images/smiley.png";
-		$scope.vidSrc=[
-					{src: $sce.trustAsResourceUrl("http://localhost:3000/IMG_2603.MOV"), type: "video/MP4"}
-				];
 		
     	$scope.upload = function (files) {
 	        if (files && files.length) {

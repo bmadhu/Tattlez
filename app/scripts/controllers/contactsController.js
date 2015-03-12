@@ -4,14 +4,42 @@
 
 define(['../modules/controller'], function (controllers) {
     'use strict';
-    controllers.controller('ContactsCtrl', function ($scope, $state, contactsSrvc, joinSrvc) {
+    controllers.controller('ContactsCtrl', function ($scope, $state, contactsSrvc, joinSrvc, chatSrvc,$timeout,$rootScope) {
     	$scope.showModal = 'display-none';
+    	var userNumber;
     	contactsSrvc.getallContacts().then(function (result) {
     		if(result!==null){
     			$scope.contacts = result;
     		}
     	});
-
+    	if(joinSrvc.mobileAndOtp.mobileNumber){
+			userNumber = joinSrvc.mobileAndOtp.mobileNumber;
+		}
+		else{
+			joinSrvc.getUserByUserId().then(function(userdata){
+				userNumber = userdata.mobileNumber;
+			});	
+		}
+		/**
+	     * Start Audio/Video
+	     */
+	    $scope.Call=function(contactId){
+	    	chatSrvc.getContactCommunicationIdMappings(contactId).then(function (result) {
+        		$scope.communicationId = result[0].communicationId;
+        		//get the contact details to display the name on screen
+				contactsSrvc.getChatContactDetails(contactId).then(function(data){
+					$scope.contactDetails=data[0];
+					$timeout(function () {
+						//Broadcast Out going call to global window(appController).
+						$rootScope.$broadcast("OUT_GOING_CALL",{ContactData:$scope.contactDetails,communicationId:$scope.communicationId,userNumber:userNumber});
+					}, 0);
+				});
+      		});
+	    	
+	    };
+	    /**
+	     * End Audio/Video
+	     */
         /**
          * Clicking on Home and Back button will navigate to history page
          */

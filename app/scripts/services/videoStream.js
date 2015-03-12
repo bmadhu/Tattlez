@@ -10,6 +10,8 @@ define(['../modules/services'], function (services) {
 	        if (stream) {
 	          return $q.when(stream);
 	        } else {
+	        	navigator.getUserMedia = navigator.getUserMedia || navigator.mozGetUserMedia ||
+               navigator.webkitGetUserMedia || navigator.msGetUserMedia;
 	          var d = $q.defer();
 	          navigator.getUserMedia({
 	            video: true,

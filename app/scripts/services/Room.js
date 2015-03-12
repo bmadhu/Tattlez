@@ -3,7 +3,7 @@
 */
 define(['../modules/services'], function (services) {
     'use strict';
-    services.factory('Room', function ($q,socketroom) {
+    services.factory('Room', function ($q,socketroom,$timeout,$rootScope) {
     	var servers= {iceServers: [{"url": "stun:stun.l.google.com:19302"}]};
 		var constraints = {optional: [{"DtlsSrtpKeyAgreement": true}]};
     	var iceConfig = { 'iceServers': [{ 'url': 'stun:stun.l.google.com:19302' }]},
@@ -51,7 +51,7 @@ define(['../modules/services'], function (services) {
         if(!err){
           console.log("Creating an offer...");
           console.log(offer);
-          console.log(currentId);
+          
           socketroom.emit('msg', { by: currentId, to: id, sdp: offer, type: 'sdp-offer' });
         }
       }
@@ -63,25 +63,32 @@ define(['../modules/services'], function (services) {
       var pc = getPeerConnection(data.by);
       switch (data.type) {
         case 'sdp-offer':
-          pc.setRemoteDescription(new RTCSessionDescription(data.sdp), function () {
-            console.log('Setting remote description by offer');
-            pc.createAnswer(function (sdp) {
-              pc.setLocalDescription(sdp);
-              socketroom.emit('msg', { by: currentId, to: data.by, sdp: sdp, type: 'sdp-answer' });
-            });
-          });
+	        pc.handleOffer(data.sdp, function (err) {
+		        if (err) {
+		            // handle error
+		            console.log(err);
+		            return;
+		        }
+		        // you can call answer with contstraints
+		        pc.answer(function (err, answer) {
+		            if(!err){
+				      console.log("Creating the answer...");console.log(answer);
+				      socketroom.emit('msg', { by: currentId, to: data.by, sdp: answer, type: 'sdp-answer' });
+				    }
+				    else{
+				    	console.log('error');
+				    	console.log(err);
+				    }
+		        });
+	    	}); 
           break;
         case 'sdp-answer':
-          pc.setRemoteDescription(new RTCSessionDescription(data.sdp), function () {
-            console.log('Setting remote description by answer');
-          }, function (e) {
-            console.error(e);
-          });
+          pc.handleAnswer(data.sdp);
           break;
         case 'ice':
           if (data.ice) {
             console.log('Adding ice candidates');
-            pc.addIceCandidate(new RTCIceCandidate(data.ice));
+            pc.processIce(data.ice);
           }
           break;
       }
