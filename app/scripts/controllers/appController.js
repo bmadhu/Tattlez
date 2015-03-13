@@ -3,8 +3,8 @@
  */
 define(['../modules/controller'], function (controllers) {
     'use strict';
-    controllers.controller('appCtrl', ['$scope','$rootScope', 'configSrvc', 'contactsSrvc', 'chatSrvc', '$q', '$timeout', 'socketio','ngAudio','joinSrvc','$filter','socketiostream','Room','VideoStream',
-    function ($scope,$rootScope, configSrvc, contactsSrvc, chatSrvc, $q, $timeout,socketio, ngAudio,joinSrvc,$filter,socketiostream,Room,VideoStream) {
+    controllers.controller('appCtrl', ['$scope','$rootScope', 'configSrvc', 'contactsSrvc', 'chatSrvc', '$q', '$timeout', 'socketio','ngAudio','joinSrvc','$filter','socketiostream','Room','VideoStream','$sce',
+    function ($scope,$rootScope, configSrvc, contactsSrvc, chatSrvc, $q, $timeout,socketio, ngAudio,joinSrvc,$filter,socketiostream,Room,VideoStream,$sce) {
     	
     	$rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams) {
 	  		if(fromState.name=="" && toState.name != "join"){
@@ -24,16 +24,27 @@ define(['../modules/controller'], function (controllers) {
     	var localvid = document.getElementById('localVideo');
     	$scope.isNotification=false;
     	$scope.showCallModal='display-none';
+    	$scope.callImage=true;
     	var stream;
+    	$scope.callImageStyle = {'text-align':'center'};
+    	$scope.remoteCameraDivBG = {'background-color':'#fff'};
     	$scope.peers = [];
 	    $scope.$on("STREAM_RECEIVED", function (event,data) {
 	    	$scope.outCallAudio.stop();
 			  console.log('Client connected, adding new stream');
 		      $scope.peers.push({
 		        id: data[0].id,
-		        stream: URL.createObjectURL(data[0].stream)
+		        stream: $scope.getLocalVideo(URL.createObjectURL(data[0].stream))
 		      });
-		      
+		      if($scope.peers.length > 0){
+		      	$scope.callImageStyle ={};
+		      	$scope.isOutGoingCall=true;
+		      	localvid.src = URL.createObjectURL(stream);
+		 		 localvid.autoplay=true;
+		 		 $scope.callTitle = "Ongoing Call";
+		 		 $scope.callImage=false;
+		 		 $scope.remoteCameraDivBG = {'background-color':'#000'};
+		      }
 		});
 		$scope.$on("STREAM_ENDED", function (event,data) {
 			  console.log('Client disconnected, removing stream');
@@ -41,8 +52,8 @@ define(['../modules/controller'], function (controllers) {
 		        return p.id !== peer.id;
 		      });
 		});
-	    $scope.getLocalVideo = function () {
-	      return $sce.trustAsResourceUrl(stream);
+	    $scope.getLocalVideo = function (streamUrl) {
+	      return $sce.trustAsResourceUrl(streamUrl);
 	    };
     	$scope.$on("OUT_GOING_CALL", function (event,data) {
     		$scope.isOutGoingCall=true;
@@ -52,13 +63,12 @@ define(['../modules/controller'], function (controllers) {
     		  $scope.showCallModal='display-block';
     		  $scope.callName=data.ContactData.contactName;
     		  $scope.callPhoto = data.ContactData.photo;
+    		  $scope.callNumber = data.ContactData.contactNumber;
 			  $scope.outCallAudio.play();
     		VideoStream.get()
 	    .then(function (s) {
 	      stream = s;
 	      Room.init(stream);
-	      localvid.src = URL.createObjectURL(s);
-		  localvid.autoplay=true;
 	      Room.createRoom($scope.communicationId,$scope.userNumber)
 	        .then(function (roomId) {
 				//Emit calling to other user using socket.io
@@ -73,11 +83,15 @@ define(['../modules/controller'], function (controllers) {
 		});
 		$scope.endCall=function(){
 			$scope.showCallModal='display-none';
+			$scope.isOutGoingCall=false;
 			$scope.outCallAudio.stop();
+			$scope.stopStream();
+			socketio.emit('endcall', {communicationId:$scope.communicationId,from:$scope.userNumber});
+		};
+		$scope.stopStream=function(){
 			stream.stop();
 			localvid.pause();
 			localvid.src="";
-			socketio.emit('endcall', {communicationId:$scope.communicationId,from:$scope.userNumber});
 		};
 		$scope.answerCall=function(){
 			$scope.inCallAudio.stop();
@@ -85,8 +99,7 @@ define(['../modules/controller'], function (controllers) {
 	    .then(function (s) {
 	      stream = s;
 	      Room.init(stream);
-	      localvid.src = URL.createObjectURL(s);
-		  localvid.autoplay=true;
+	      
 	      Room.joinRoom($scope.communicationId,userNumber)
 	        .then(function (roomId) {
 				
@@ -154,9 +167,7 @@ define(['../modules/controller'], function (controllers) {
 		});
 		socketio.on('endcall', function (msg) {
 			$scope.inCallAudio.stop();
-			stream.stop();
-			localvid.pause();
-			localvid.src="";
+			$scope.stopStream();
     		$scope.showCallModal='display-none';
 		});
 		ss(socketiostream).on('image', function (data) {
@@ -195,18 +206,21 @@ define(['../modules/controller'], function (controllers) {
 		$scope.notifyCall=function(msg,userNumber,contacts){
 			if(msg.to == userNumber){
 				var contact = $filter('filter')(contacts,{contactNumber:msg.from},true);
-				msg.from = contact[0].contactName;
+				msg.fromName = contact[0].contactName;
 				msg.fromPhoto = contact[0].photo;
+				msg.callNumber = msg.from;
 	    		
 			}
 			else{
 				var contact = $filter('filter')(contacts,{contactNumber:msg.to},true);
-				msg.from = contact[0].contactName;
+				msg.fromName = contact[0].contactName;
 				msg.fromPhoto = contact[0].photo;
+				msg.callNumber = msg.to;
 			}
 			$scope.inCallAudio.play();
-			$scope.callName=msg.from;
+			$scope.callName=msg.fromName;
     		$scope.callPhoto = msg.fromPhoto;
+    		$scope.callNumber = msg.callNumber;
     		$scope.showCallModal='display-block';
 		};
     	// Listen to ESTABLISH_COMMUNICATION event

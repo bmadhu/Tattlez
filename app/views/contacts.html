@@ -23,7 +23,8 @@
 		<div class="friendsdiv">
 			
 			<div style="float: left">
-				<img ng-src="{{contact.photo}}" class="img-default" width="35px" height="38px" />
+				<img ng-src="{{contact.photo}}" ng-if="contact.photo" class="img-default" width="35px" height="38px" />
+				<img src="../images/default_profile_M.jpg" ng-if="!contact.photo" class="img-default" width="35px" height="38px" />
 			</div>
 			
 			<div style="float: left; margin-left: 5px;">

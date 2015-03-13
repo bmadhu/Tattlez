@@ -7,9 +7,6 @@ define(['../modules/services'], function (services) {
     	var stream;
 	    return {
 	      get: function () {
-	        if (stream) {
-	          return $q.when(stream);
-	        } else {
 	        	navigator.getUserMedia = navigator.getUserMedia || navigator.mozGetUserMedia ||
                navigator.webkitGetUserMedia || navigator.msGetUserMedia;
 	          var d = $q.defer();
@@ -23,7 +20,7 @@ define(['../modules/services'], function (services) {
 	            d.reject(e);
 	          });
 	          return d.promise;
-	        }
+	        
 	      }
 	    };
     });
