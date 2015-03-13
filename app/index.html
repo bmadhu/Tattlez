@@ -32,18 +32,27 @@
         <div class="col-md-6 {{phoneTablet}}">
             <div class="{{phoneTablet}}-inner">
             	<div id="call-overlay" class="{{showCallModal}}">
-					<div class="modal-header">
-						<h3 class="modal-title">{{callTitle}}</h3>
+					<div class="modal-header" style="background-color: rgb(80, 150, 78);  padding: 0px 0px 10px 10px !important;">
+						<h3 class="modal-title" style="color: #fff;font-family: verdana;">{{callName}}</h3>
+						<span style="color:#FFF;font-family: monospace;">{{callNumber}}</span>
+						<span style="color:#FFF;font-size: 13px;font-family: cursive;float:right;padding-right: 20px;">{{callTitle}}......</span>
 					</div>
-					<div class="modal-body" style="display:inline-block;">
-						<video id="localVideo" class="camera-local" autoplay></video>
-						<img ng-src="{{callPhoto}}" class="img-default" width="95px" height="93px" />
-						<span class="text no-padding" ng-bind="callName"></span>
+					<div class="modal-body no-padding" style="height:195px;" ng-style="callImageStyle">
+						<video id="localVideo" ng-show="peers.length>0" class="camera-local" autoplay></video>
+						<img ng-src="{{callPhoto}}" ng-if="callImage" class="img-circle" style="margin-top: 5%;" width="150px" height="150px" />
 					</div>
-					<div class="modal-footer">
-						<button ng-if="!isOutGoingCall" class="btn btn-primary" ng-click="answerCall()">Accept</button>
-						<button ng-if="!isOutGoingCall" class="btn btn-warning" ng-click="rejectCall()">Reject</button>
-						<button ng-if="isOutGoingCall" class="btn btn-warning" ng-click="endCall()">End Call</button>
+					<div class="modal-body no-padding" style="height:75px;text-align:center;" ng-style="remoteCameraDivBG" >
+						<div  style="display: inline-block;" ng-if="peers.length>0" ng-repeat="peer in peers track by $index">
+						<video src="{{peer.stream}}" autoplay class="camera-remote"></video>
+						<div class="video-title">
+							<span>{{peer.id}}</span>
+						</div>
+					</div>
+					</div>
+					<div class="modal-footer" style="padding: 3px !important;background-color: rgb(80, 150, 78);  text-align: center;">
+						<button ng-if="!isOutGoingCall" class="btn btn-success" ng-click="answerCall()" style="border-radius: 50%;"><span class="glyphicon glyphicon-earphone"></span></button>
+						<button ng-if="!isOutGoingCall" class="btn btn-danger" ng-click="rejectCall()" style="border-radius: 50%;"><span class="glyphicon glyphicon-phone-alt"></span></button>
+						<button ng-if="isOutGoingCall" class="btn btn-danger" ng-click="endCall()" style="border-radius: 50%;"><span class="glyphicon glyphicon-phone-alt"></span></button>
 					</div>
 				</div>
 				<div id="fade" class="{{showCallModal}}"></div>
