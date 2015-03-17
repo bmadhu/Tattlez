@@ -73,13 +73,26 @@ define(['../modules/services'], function (services) {
         	});
         	return future.promise;
         }
+        function getHistoryByUser(){
+        	var future = $q.defer();
+        	var userId = joinSrvc.getUserId();
+        	var communicationMappings = JSON.parse(localStorage.getItem(userId + "_CCM"));
+        	$http.post('/messages/getHistoryByUser',communicationMappings).success(function (data) {
+        		future.resolve(data);
+        	}).error(function(errData){
+        		console.log(errData);
+        		future.reject(errData);
+        	});
+        	return future.promise;
+        }
         return {
             getCommunicationId: getCommunicationId,
             addMessage: addMessage,
             updateContactCommunicationIdMappings: updateContactCommunicationIdMappings,
             getContactCommunicationIdMappings: getContactCommunicationIdMappings,
             removeSelectedCommunicationIdForChat: removeSelectedCommunicationIdForChat,
-            getMessagesByCommunicationId: getMessagesByCommunicationId
+            getMessagesByCommunicationId: getMessagesByCommunicationId,
+            getHistoryByUser: getHistoryByUser
         };
     });
 });

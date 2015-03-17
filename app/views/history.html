@@ -6,8 +6,28 @@
     </div>
 </div>
 <!-- BODY SECTION -->
-<div class="content-vertical-middle div-otp content">
-    <span>This is history page.</span>
+<div class="content-vertical-middle content">
+   <div ng-repeat="hist in history| orderBy : '-on' : false" ng-click="chat(hist.contactId)">
+		<div class="friendsdiv">
+			<div style="float: left;width: 8%">
+				<img ng-src="{{hist.photo}}" ng-if="hist.photo" class="img-default" width="35px" height="38px" />
+				<img src="../images/default_profile_M.jpg" ng-if="!hist.photo" class="img-default" width="35px" height="38px" />
+			</div>
+			
+			<div style="float: left; margin-left: 5px;width:90%;">
+				<b ng-bind="hist.contactName"></b>
+				<div style="clear:both;">
+				<div style="float:left;width:60%;height:20px;overflow:hidden;">
+					<span ng-bind="hist.lastMessage"></span>
+				</div>
+				
+				<div style="float:left;width:40%;">
+					<span style="float:right;font-size: 12px;color:#747474;font-family: cursive;">{{hist.on|date:'medium'}}</span>
+				</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 <!--<div class="footer">
     <div class="pull-right">
