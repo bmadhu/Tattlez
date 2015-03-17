@@ -60,7 +60,6 @@ exports.addUser = function(db){
 // find everything
         var doc = req.body;
         db.users.find({mobileNumber:doc.mobileNumber},function(err,docs){
-            console.log(docs.length);
             if(docs.length<1){
                 db.users.insert(doc, function (err, docs) {
                 	// docs is an array of all the documents in users
