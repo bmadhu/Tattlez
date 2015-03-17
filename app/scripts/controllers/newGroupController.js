@@ -61,6 +61,7 @@ define(['../modules/controller'], function (controllers) {
 		            newGroup.contactName = $scope.groupName;
 		            newGroup.contactNumber = $scope.selectedContacts.join(",")+','+userNumber;
 		            newGroup.userId = response[key];
+		            newGroup.groupAdmin = userNumber;
 		            addContactPromises.push(
 		            	addContactSrvc.addContact(newGroup).then(function (result) {
 		            		return result;
@@ -75,6 +76,7 @@ define(['../modules/controller'], function (controllers) {
             newGroup.contactNumber = $scope.selectedContacts.join(",")+','+userNumber;
             newGroup.userId = joinSrvc.getUserId();
             console.log(newGroup.userId);
+            newGroup.groupAdmin = userNumber;
             addContactSrvc.addContact(newGroup).then(function (result) {
                 if (result == 'OK'){
                     contactsSrvc.refreshContacts().then(function(res){

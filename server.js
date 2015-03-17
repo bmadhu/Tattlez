@@ -264,6 +264,7 @@ app.get('/contacts/getChatContactDetails/:contactId', contactsData.getChatContac
 app.post('/messages/addMessage',messagesData.addMessage(db));
 app.post('/users/getUserByUserId/:userId',usersData.getUserByUserID(db,mongojs));
 app.get('/messages/getMessagesByCommunicationId/:communicationId',messagesData.getMessagesByCommunicationId(db));
+app.post('/messages/getHistoryByUser',messagesData.getHistoryByUser(db));
 /*Start express server*/
 var port = process.env.PORT||3000;
 server.listen(port);

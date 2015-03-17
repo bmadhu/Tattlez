@@ -59,6 +59,8 @@ exports.getContactsByUserId = function (db,mongojs) {
                 contact.id = doc._id.toString();
                 contact.ispoen = false; //to control drop-down menu in html page.
                 contact.group = doc.group;
+                if(doc.groupAdmin)
+                	contact.groupAdmin = doc.groupAdmin;
                 // if (doc.contactNumber) {
                 
                 db.users.find({ mobileNumber: doc.contactNumber }, function (uerr, udoc) {

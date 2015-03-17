@@ -28,7 +28,7 @@ define(['../modules/controller'], function (controllers) {
     	});
     	$scope.$watch('$scope.contacts', function (newVal) {
     		$scope.contacts = $filter('orderBy')($scope.contacts, '+contactName', false);
-    		 }, true);
+		}, true);
     	if(joinSrvc.mobileAndOtp.mobileNumber){
 			userNumber = joinSrvc.mobileAndOtp.mobileNumber;
 		}
