@@ -275,15 +275,23 @@ define(['../modules/controller'], function (controllers) {
     				}));
     			}
     			$q.all(promises).then(function (response) {
+    				var cnt=0;
+    				var len = result.length;
     				for (var idx in result) {
     					var obj = {};
     					obj.contactId = result[idx].id;
     					obj.communicationId = response[idx];
     					chatSrvc.updateContactCommunicationIdMappings(obj);
+    					
     					/**
 						* Connect to chat with each contact to get the notifications.
 						*/
     					socketio.emit('connected to chat', response[idx]);
+    					cnt++;
+    					if(len == cnt){
+    						//Emit to historyController to load history based on Contact and cCommunicationID Mappings.
+    						$rootScope.$broadcast("LOAD_HISTORY",{});
+    					}
     				}
     			});
     		}
