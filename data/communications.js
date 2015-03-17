@@ -4,7 +4,6 @@
 exports.getCommunicationId = function (db) {
 	return function (req, res) {
 		var doc = {};
-		console.log(req.params.loginNumber);
 		doc.loginNumber = req.params.loginNumber;
 		doc.contactNumber = req.params.contactNumber;
 		db.communications.find({loginNumber: doc.loginNumber, contactNumber: doc.contactNumber}, function (err, udoc) {

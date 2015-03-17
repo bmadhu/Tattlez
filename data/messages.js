@@ -29,12 +29,9 @@ exports.getHistoryByUser=function(db){
 		CommIds.forEach(function(comm,index){
 			
 			if(comm){
-				console.log('comm');
-				console.log(comm);
 				db.messages.find({communicationId:comm.communicationId}).limit(1).sort({on:-1},function(err,msgDocs){
 					if(msgDocs.length>0){
 						recentMsgOfEachContact.push(msgDocs[0]);
-						
 					}
 					cnt ++;
 					if(cnt == CommIds.length){

@@ -56,7 +56,6 @@ var Chat = io
 
     socket.on('init', function (data, fn) {
       currentRoom = data.room;
-      console.log(data.room);
       id=data.userId;
       var room = rooms[currentRoom];
       if (!data.joiner) {
@@ -64,7 +63,6 @@ var Chat = io
         userIds[currentRoom] = [data.userId];
         
         fn(currentRoom, id);
-        console.log('Room created, with #', currentRoom);
       } else {
         if (!room) {
           return;
@@ -76,8 +74,6 @@ var Chat = io
           s.emit('peer.connected', { id: id });
         });
         room.push(socket);
-        console.log(userIds);
-        console.log('Peer connected to room', currentRoom, 'with #', id);
       }
     });
 
@@ -85,9 +81,7 @@ var Chat = io
       var to = data.to;
       
       if (rooms[currentRoom] && userIds[currentRoom].indexOf(to) > -1) {
-        console.log('Redirecting message to', to, 'by', data.by);
         var socketIndex = userIds[currentRoom].indexOf(to);
-        console.log(socketIndex);
         rooms[currentRoom][socketIndex].emit('msg', data);
       } else {
         console.warn('Invalid user');
@@ -95,7 +89,6 @@ var Chat = io
     });
 
     socket.on('disconnectRoom', function (fn) {
-    	console.log(currentRoom);
       if (!currentRoom || !rooms[currentRoom]) {
         return;
       }
@@ -120,15 +113,10 @@ var Chat = io
           socket.join(data);
           joinedRoom[data] = data;
           addedUser=true;
-          console.log('connect');
-          console.log(data);
       });
       socket.on('message', function (data) {
       	if (joinedRoom[data.communicationId]) {
-      		console.log('comm id');
-              console.log(joinedRoom[data.communicationId]);
       		// Broadcasts the message to the other contact
-      		console.log(joinedRoom);
       		socket.broadcast.to(joinedRoom[data.communicationId]).send(data);
           } else {
               socket.send(
@@ -139,10 +127,7 @@ var Chat = io
       });
       socket.on('call', function (data) {
       	if (joinedRoom[data.communicationId]) {
-      		console.log('comm id');
-              console.log(joinedRoom[data.communicationId]);
       		// Broadcasts the message to the other contact
-      		console.log(joinedRoom);
       		socket.broadcast.to(joinedRoom[data.communicationId]).emit('call',data);
           } else {
               socket.send(
@@ -153,10 +138,7 @@ var Chat = io
       });
       socket.on('endcall', function (data) {
       	if (joinedRoom[data.communicationId]) {
-      		console.log('comm id');
-              console.log(joinedRoom[data.communicationId]);
       		// Broadcasts the message to the other contact
-      		console.log(joinedRoom);
       		socket.broadcast.to(joinedRoom[data.communicationId]).emit('endcall',data);
           } else {
               socket.send(
@@ -168,11 +150,8 @@ var Chat = io
       socket.on('disconnect', function () {
 		// remove the username from global usernames list
 		if (addedUser) {
-			console.log(joinedRoom);
 			socket.leave(socket.username);
 			delete joinedRoom[socket.username];
-			console.log('disconnect');
-			console.log(joinedRoom);
 		}
 	 });
 	 
@@ -213,9 +192,7 @@ var str = io.of('/user').on('connection', function (socket) {
             }
 
         });
-		/*console.log(data.name);
-		console.log(stream);
-		stream.pipe(fs.createWriteStream("app/files/profile-pics/"+data.profileId+"/"+filename));*/
+		
 	});
 	ss(socket).on('communication-files', function (stream, data) {
 		var filename = path.basename(data.name);
