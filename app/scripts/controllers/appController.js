@@ -277,6 +277,7 @@ define(['../modules/controller'], function (controllers) {
     			$q.all(promises).then(function (response) {
     				var cnt=0;
     				var len = result.length;
+    				chatSrvc.clearContactCommunicationsArray();
     				for (var idx in result) {
     					var obj = {};
     					obj.contactId = result[idx].id;

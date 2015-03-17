@@ -92,7 +92,8 @@ define(['../modules/services'], function (services) {
             getContactCommunicationIdMappings: getContactCommunicationIdMappings,
             removeSelectedCommunicationIdForChat: removeSelectedCommunicationIdForChat,
             getMessagesByCommunicationId: getMessagesByCommunicationId,
-            getHistoryByUser: getHistoryByUser
+            getHistoryByUser: getHistoryByUser,
+            clearContactCommunicationsArray: clearContactCommunicationsArray
         };
     });
 });
