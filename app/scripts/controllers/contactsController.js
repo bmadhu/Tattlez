@@ -4,14 +4,31 @@
 
 define(['../modules/controller'], function (controllers) {
     'use strict';
-    controllers.controller('ContactsCtrl', function ($scope, $state, contactsSrvc, joinSrvc, chatSrvc,$timeout,$rootScope) {
+    controllers.controller('ContactsCtrl', function ($scope, $state, contactsSrvc, joinSrvc, chatSrvc,$timeout,$rootScope,$filter) {
     	$scope.showModal = 'display-none';
     	var userNumber;
     	contactsSrvc.getallContacts().then(function (result) {
     		if(result!==null){
-    			$scope.contacts = result;
+    			var contacts = [];
+    			angular.forEach(result,function(v,k){
+    				if(v.group){
+    					var groupContactNumbers = v.contactNumber;
+    					contactsSrvc.getContactNamesInGroup(groupContactNumbers,result).then(function(names){
+    						v.contactNumber =names;
+    						contacts.push(v);
+    					});
+    				}
+    				else
+    					contacts.push(v);
+    				
+    			});
+    			
+    			$scope.contacts = contacts;
     		}
     	});
+    	$scope.$watch('$scope.contacts', function (newVal) {
+    		$scope.contacts = $filter('orderBy')($scope.contacts, '+contactName', false);
+    		 }, true);
     	if(joinSrvc.mobileAndOtp.mobileNumber){
 			userNumber = joinSrvc.mobileAndOtp.mobileNumber;
 		}
