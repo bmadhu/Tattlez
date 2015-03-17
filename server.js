@@ -185,6 +185,10 @@ var str = io.of('/user').on('connection', function (socket) {
         var directory = "app/files/profile-pics/"+data.profileId;
         fs.exists(directory,function(exists){
             if(exists){
+            	fs.readdirSync(directory).forEach(function(file,index){
+			      var curPath = directory + "/" + file;
+			        fs.unlinkSync(curPath);
+			    });
                 stream.pipe(fs.createWriteStream(directory+"/"+filename));
                 fs.watchFile(directory+"/"+filename, function (curr, prev) {
                     fs.readFile(directory+"/"+filename, function (err, buffer) {
