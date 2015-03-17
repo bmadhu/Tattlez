@@ -3,7 +3,7 @@
  */
 define(['../modules/services'], function (services) {
     'use strict';
-    services.factory('contactsSrvc', function ($http, $q, joinSrvc, configSrvc,$rootScope) {
+    services.factory('contactsSrvc', function ($http, $q, joinSrvc, configSrvc,$rootScope,$filter) {
         //get all contacts
     	function getallContacts() {
     		var userId = joinSrvc.getUserId();
@@ -72,6 +72,20 @@ define(['../modules/services'], function (services) {
             });
             return future.promise;
         }
+        function getContactNamesInGroup(groupContactNumbers,Contacts){
+        	var future = $q.defer();
+    		var contactNumbers = groupContactNumbers.split(',');
+    		var names = [];
+    		angular.forEach(contactNumbers,function(v,k){
+    			var contact = $filter('filter')(Contacts,{contactNumber:v},true)[0];
+				if(contact)
+					names.push(contact.contactName);
+				else
+					names.push(v);
+			});
+			future.resolve(names.join(','));
+    		return future.promise;
+    	};
         return {
             getallContacts: getallContacts,
             deleteContact: deleteContact,
@@ -79,7 +93,8 @@ define(['../modules/services'], function (services) {
             getSelectedContactForChat: getSelectedContactForChat,
             removeSelectedContactForChat: removeSelectedContactForChat,
             getChatContactDetails: getChatContactDetails,
-            refreshContacts: refreshContacts
+            refreshContacts: refreshContacts,
+            getContactNamesInGroup: getContactNamesInGroup
         };
     });
 });

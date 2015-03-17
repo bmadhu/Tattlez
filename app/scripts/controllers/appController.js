@@ -31,9 +31,15 @@ define(['../modules/controller'], function (controllers) {
     	$scope.peers = [];
 	    $scope.$on("STREAM_RECEIVED", function (event,data) {
 	    	$scope.outCallAudio.stop();
-			  console.log('Client connected, adding new stream');
+	    	contactsSrvc.getallContacts().then(function(contacts){
+				var calleeName = data[0].id;
+				var contact = $filter('filter')(contacts,{contactNumber:data[0].id},true)[0];
+				if(contact)
+					calleeName = contact.contactName;
+				console.log('Client connected, adding new stream');
 		      $scope.peers.push({
 		        id: data[0].id,
+		        name:calleeName,
 		        stream: $scope.getLocalVideo(URL.createObjectURL(data[0].stream))
 		      });
 		      if($scope.peers.length > 0){
@@ -44,12 +50,14 @@ define(['../modules/controller'], function (controllers) {
 		 		 $scope.callTitle = "Ongoing Call";
 		 		 $scope.callImage=false;
 		 		 $scope.remoteCameraDivBG = {'background-color':'#000'};
-		      }
+		      }		
+			});
+				
 		});
 		$scope.$on("STREAM_ENDED", function (event,data) {
 			  console.log('Client disconnected, removing stream');
 		      $scope.peers = $scope.peers.filter(function (p) {
-		        return p.id !== peer.id;
+		        return p.id !== data[0].id;
 		      });
 		});
 	    $scope.getLocalVideo = function (streamUrl) {
@@ -63,6 +71,13 @@ define(['../modules/controller'], function (controllers) {
     		  $scope.showCallModal='display-block';
     		  $scope.callName=data.ContactData.contactName;
     		  $scope.callPhoto = data.ContactData.photo;
+    		  if(data.ContactData.group){
+    		  	contactsSrvc.getallContacts().then(function(contacts){
+    		  		contactsSrvc.getContactNamesInGroup(data.ContactData.contactNumber,contacts).then(function(names){
+						$scope.callNumber = names;
+					});
+    		  	});
+    		  }
     		  $scope.callNumber = data.ContactData.contactNumber;
 			  $scope.outCallAudio.play();
     		VideoStream.get()
@@ -87,9 +102,13 @@ define(['../modules/controller'], function (controllers) {
 			$scope.outCallAudio.stop();
 			$scope.stopStream();
 			socketio.emit('endcall', {communicationId:$scope.communicationId,from:$scope.userNumber});
+			Room.leaveRoom().then(function(roomId){
+				console.log('disconnected');
+			});
 		};
 		$scope.stopStream=function(){
-			stream.stop();
+			if(stream)
+				stream.stop();
 			localvid.pause();
 			localvid.src="";
 		};
@@ -111,7 +130,10 @@ define(['../modules/controller'], function (controllers) {
 			
 		};
 		$scope.rejectCall=function(){
-			
+			$scope.showCallModal='display-none';
+			$scope.isOutGoingCall=false;
+			$scope.inCallAudio.stop();
+			socketio.emit('endcall', {communicationId:$scope.communicationId,from:$scope.userNumber});
 		};
     	/**
 		* Receive messages from the other user
@@ -167,6 +189,7 @@ define(['../modules/controller'], function (controllers) {
 		});
 		socketio.on('endcall', function (msg) {
 			$scope.inCallAudio.stop();
+			$scope.outCallAudio.stop();
 			$scope.stopStream();
     		$scope.showCallModal='display-none';
 		});
@@ -216,6 +239,9 @@ define(['../modules/controller'], function (controllers) {
 				msg.fromName = contact[0].contactName;
 				msg.fromPhoto = contact[0].photo;
 				msg.callNumber = msg.to;
+				contactsSrvc.getContactNamesInGroup(msg.to,contacts).then(function(names){
+					$scope.callNumber = names;
+				});
 			}
 			$scope.inCallAudio.play();
 			$scope.callName=msg.fromName;
