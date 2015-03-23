@@ -6,13 +6,22 @@ define(['../modules/services'], function (services) {
     services.factory('VideoStream', function ($q) {
     	var stream;
 	    return {
-	      get: function () {
+	      get: function (type) {
+	      	var isAudio = false;
+	      	var isVideo = false;
+	      	if(type=='audio'){
+	      		isAudio = true;
+	      	}
+	      	if(type=='video'){
+	      		isAudio = true;
+	      		isVideo = true;
+	      	}
 	        	navigator.getUserMedia = navigator.getUserMedia || navigator.mozGetUserMedia ||
                navigator.webkitGetUserMedia || navigator.msGetUserMedia;
 	          var d = $q.defer();
 	          navigator.getUserMedia({
-	            video: true,
-	            audio: true
+	            video: isVideo,
+	            audio: isAudio
 	          }, function (s) {
 	            stream = s;
 	            d.resolve(stream);

@@ -560,4 +560,18 @@ video{
   	z-index: 0;
   	transition: left 0.3s ease-in-out;
 }
+.image-title{
+	position: absolute;
+  /* right: 15%; */
+  bottom: 0px;
+  /* left: 15%; */
+  z-index: 10;
+  /* padding-top: 20px; */
+  /* padding-bottom: 20px; */
+  color: #fff;
+  text-align: center;
+  width: 100px;
+  background-color: rgba(0,0,0,0);
+  border: 1px solid rgba(0, 0, 0, 0);
+}
 

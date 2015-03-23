@@ -38,19 +38,25 @@
 						<span style="color:#FFF;font-size: 13px;font-family: cursive;float:right;padding-right: 20px;">{{callTitle}}......</span>
 					</div>
 					<div class="modal-body no-padding" style="height:195px;" ng-style="callImageStyle">
-						<video id="localVideo" ng-show="peers.length>0" class="camera-local" autoplay></video>
+						<video id="localVideo" src="{{localVideo.src}}" ng-show="showLocalVideo" class="camera-local" autoplay></video>
 						<img ng-src="{{callPhoto}}" ng-if="callImage" class="img-circle" style="margin-top: 5%;" width="150px" height="150px" />
+						<img ng-src="{{audioCall.image}}" ng-if="isAudioCall" class="img-circle" style="margin-top: 5%;" width="150px" height="150px" />
 					</div>
 					<div class="modal-body no-padding" style="height:75px;text-align:center;" ng-style="remoteCameraDivBG" >
 						<div  style="display: inline-block;" ng-if="peers.length>0" ng-repeat="peer in peers track by $index">
-						<video src="{{peer.stream}}" autoplay class="camera-remote"></video>
-						<div class="video-title">
+						<video src="{{peer.stream}}" autoplay ng-show="peer.isRemoteVideo" class="camera-remote"></video>
+						<img ng-src="{{peer.image}}" style="position:relative;" ng-if="!peer.isRemoteVideo" class="img-default" width="100px" height="75px" />
+						<div class="video-title" ng-if="peer.isRemoteVideo">
+							<span>{{peer.name}}</span>
+						</div>
+						<div class="image-title" ng-if="!peer.isRemoteVideo">
 							<span>{{peer.name}}</span>
 						</div>
 					</div>
 					</div>
 					<div class="modal-footer" style="padding: 3px !important;background-color: rgb(80, 150, 78);  text-align: center;">
-						<button ng-if="!isOutGoingCall" class="btn btn-success" ng-click="answerCall()" style="border-radius: 50%;"><span class="glyphicon glyphicon-earphone"></span></button>
+						<button ng-if="!isOutGoingCall" class="btn btn-success" ng-click="answerCall('audio')" style="border-radius: 50%;"><span class="glyphicon glyphicon-earphone"></span></button>
+						<button ng-if="!isOutGoingCall" class="btn btn-success" ng-click="answerCall('video')" style="border-radius: 50%;"><span class="glyphicon glyphicon-facetime-video"></span></button>
 						<button ng-if="!isOutGoingCall" class="btn btn-danger" ng-click="rejectCall()" style="border-radius: 50%;"><span class="glyphicon glyphicon-phone-alt"></span></button>
 						<button ng-if="isOutGoingCall" class="btn btn-danger" ng-click="endCall()" style="border-radius: 50%;"><span class="glyphicon glyphicon-phone-alt"></span></button>
 					</div>

@@ -11,7 +11,6 @@ define(['../modules/controller'], function (controllers) {
 		$scope.btnDisabled=false;
 		$scope.msg='';
         joinSrvc.getUserByUserId().then(function(userdata){
-            console.log(userdata);
             userNumber = userdata.mobileNumber;
             $scope.userProfile.profileImgUrl = userdata.profilePic;
             $scope.userProfile.profileName = userdata.profileName;

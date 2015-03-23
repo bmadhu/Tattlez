@@ -11,6 +11,9 @@ define(['../modules/controller'], function (controllers) {
 	  			$rootScope.$broadcast("ESTABLISH_COMMUNICATION");
 	  		}
 	  	});
+	  	$scope.showLocalVideo=false;
+	  	$scope.localVideo={};
+	  	$scope.isAudioCall=false;
     	$scope.phoneTablet = configSrvc.phoneTablet;
     	$scope.timeFormat="h:mm a";
     	$scope.audio = ngAudio.load('../sounds/2.mp3');
@@ -29,24 +32,51 @@ define(['../modules/controller'], function (controllers) {
     	$scope.callImageStyle = {'text-align':'center'};
     	$scope.remoteCameraDivBG = {'background-color':'#fff'};
     	$scope.peers = [];
+    	$scope.audioCall={};
 	    $scope.$on("STREAM_RECEIVED", function (event,data) {
 	    	$scope.outCallAudio.stop();
 	    	contactsSrvc.getallContacts().then(function(contacts){
 				var calleeName = data[0].id;
+				var remoteVideoTracks = (data[0].stream).getVideoTracks();
+				var isRemoteVideo=false;
+				console.log('video tracks');
+				console.log(remoteVideoTracks);
+				if(remoteVideoTracks.length > 0){
+					isRemoteVideo=true;
+				}
+				else{
+					isRemoteVideo=false;
+				}
 				var contact = $filter('filter')(contacts,{contactNumber:data[0].id},true)[0];
+				console.log(contact);
 				if(contact)
 					calleeName = contact.contactName;
 				console.log('Client connected, adding new stream');
 		      $scope.peers.push({
 		        id: data[0].id,
 		        name:calleeName,
+		        image:contact.photo,
+		        isRemoteVideo: isRemoteVideo,
 		        stream: $scope.getLocalVideo(URL.createObjectURL(data[0].stream))
 		      });
 		      if($scope.peers.length > 0){
 		      	$scope.callImageStyle ={};
 		      	$scope.isOutGoingCall=true;
-		      	localvid.src = URL.createObjectURL(stream);
-		 		 localvid.autoplay=true;
+		      	var localVideoTracks = stream.getVideoTracks();
+		      	$scope.localVideo['src'] = $scope.getLocalVideo(URL.createObjectURL(stream));
+		      	if(localVideoTracks.length>0){
+		 		 	$scope.showLocalVideo=true;
+		      	}
+		      	else{
+		      		$scope.showLocalVideo=false;
+		      		 joinSrvc.getUserByUserId().then(function(userdata){
+			            $scope.audioCall.image = userdata.profilePic;
+			            $scope.audioCall.name = userdata.profileName;
+			        });
+			        $scope.callImageStyle = {'text-align':'center'};
+			        $scope.isAudioCall=true;
+		      	}
+		      	
 		 		 $scope.callTitle = "Ongoing Call";
 		 		 $scope.callImage=false;
 		 		 $scope.remoteCameraDivBG = {'background-color':'#000'};
@@ -56,14 +86,28 @@ define(['../modules/controller'], function (controllers) {
 		});
 		$scope.$on("STREAM_ENDED", function (event,data) {
 			  console.log('Client disconnected, removing stream');
+			  $scope.remoteCameraDivBG = {'background-color':'#fff'};
 		      $scope.peers = $scope.peers.filter(function (p) {
 		        return p.id !== data[0].id;
 		      });
+		      if($scope.peers.length == 0){
+		      	$scope.remoteCameraDivBG = {'background-color':'#fff'};
+				$scope.callImage=true;
+				$scope.callImageStyle = {'text-align':'center'};
+				$scope.showCallModal='display-none';
+				$scope.isOutGoingCall=false;
+				Room.disconnect().then(function(connected){
+					console.log(connected);
+				});
+				$scope.audioCall={};
+				$scope.isAudioCall=false;
+		      }
 		});
 	    $scope.getLocalVideo = function (streamUrl) {
 	      return $sce.trustAsResourceUrl(streamUrl);
 	    };
     	$scope.$on("OUT_GOING_CALL", function (event,data) {
+    		var callType = data.callType;
     		$scope.isOutGoingCall=true;
     		$scope.callTitle = "Calling";
     		$scope.communicationId = data.communicationId;
@@ -80,14 +124,14 @@ define(['../modules/controller'], function (controllers) {
     		  }
     		  $scope.callNumber = data.ContactData.contactNumber;
 			  $scope.outCallAudio.play();
-    		VideoStream.get()
+    		VideoStream.get(callType)
 	    .then(function (s) {
 	      stream = s;
 	      Room.init(stream);
 	      Room.createRoom($scope.communicationId,$scope.userNumber)
 	        .then(function (roomId) {
 				//Emit calling to other user using socket.io
-	          socketio.emit('call', {communicationId:$scope.communicationId,from:$scope.userNumber,to:data.ContactData.contactNumber});
+	          socketio.emit('call', {communicationId:$scope.communicationId,from:$scope.userNumber,to:data.ContactData.contactNumber,callType:callType});
 	        });
 	    }, function () {
 	      $scope.AVerror = 'No audio/video permissions. Please refresh your browser and allow the audio/video capturing.';
@@ -105,6 +149,12 @@ define(['../modules/controller'], function (controllers) {
 			Room.leaveRoom().then(function(roomId){
 				console.log('disconnected');
 			});
+			$scope.peers=[];
+			$scope.remoteCameraDivBG = {'background-color':'#fff'};
+			$scope.callImage=true;
+			$scope.callImageStyle = {'text-align':'center'};
+			$scope.audioCall={};
+			$scope.isAudioCall=false;
 		};
 		$scope.stopStream=function(){
 			if(stream)
@@ -112,13 +162,12 @@ define(['../modules/controller'], function (controllers) {
 			localvid.pause();
 			localvid.src="";
 		};
-		$scope.answerCall=function(){
+		$scope.answerCall=function(type){
 			$scope.inCallAudio.stop();
-			VideoStream.get()
+			VideoStream.get(type)
 	    .then(function (s) {
 	      stream = s;
 	      Room.init(stream);
-	      
 	      Room.joinRoom($scope.communicationId,userNumber)
 	        .then(function (roomId) {
 				
@@ -169,6 +218,7 @@ define(['../modules/controller'], function (controllers) {
 		* Add the messages to array
 		*/
 		socketio.on('call', function (msg) {
+			$scope.callType= msg.callType;
 			$scope.communicationId = msg.communicationId;
 			$scope.callTitle = "Incoming Call";
 				contactsSrvc.getallContacts().then(function(contacts){

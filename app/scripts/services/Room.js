@@ -143,12 +143,20 @@ var connected;
       },
       leaveRoom:function(){
       	 var d = $q.defer();
+      	 peerConnections = {};
         socketroom.emit('disconnectRoom', function (roomid, id) {
           d.resolve(roomid);
           roomId = roomid;
           currentId = id;
           connected = false;
         });
+        return d.promise;
+      },
+      disconnect:function(){
+      	var d = $q.defer();
+        connected = false;
+        peerConnections = {};
+        d.resolve(connected);
         return d.promise;
       },
       init: function (s) {
