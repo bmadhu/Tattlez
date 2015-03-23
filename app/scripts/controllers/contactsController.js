@@ -40,7 +40,7 @@ define(['../modules/controller'], function (controllers) {
 		/**
 	     * Start Audio/Video
 	     */
-	    $scope.Call=function(contactId){
+	    $scope.Call=function(contactId,type){
 	    	chatSrvc.getContactCommunicationIdMappings(contactId).then(function (result) {
         		$scope.communicationId = result[0].communicationId;
         		//get the contact details to display the name on screen
@@ -48,7 +48,7 @@ define(['../modules/controller'], function (controllers) {
 					$scope.contactDetails=data[0];
 					$timeout(function () {
 						//Broadcast Out going call to global window(appController).
-						$rootScope.$broadcast("OUT_GOING_CALL",{ContactData:$scope.contactDetails,communicationId:$scope.communicationId,userNumber:userNumber});
+						$rootScope.$broadcast("OUT_GOING_CALL",{ContactData:$scope.contactDetails,communicationId:$scope.communicationId,userNumber:userNumber,callType:type});
 					}, 0);
 				});
       		});
