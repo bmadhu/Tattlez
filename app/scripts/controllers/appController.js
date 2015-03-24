@@ -24,7 +24,7 @@ define(['../modules/controller'], function (controllers) {
     	$scope.inCallAudio.loop=true;
     	$scope.busyCallAudio = ngAudio.load('../sounds/Busy_Signal.mp3');
     	$scope.busyCallAudio.loop=true;
-    	var localvid = document.getElementById('localVideo');
+    	var localvid;
     	$scope.isNotification=false;
     	$scope.showCallModal='display-none';
     	$scope.callImage=true;
@@ -66,6 +66,8 @@ define(['../modules/controller'], function (controllers) {
 		      	$scope.localVideo['src'] = $scope.getLocalVideo(URL.createObjectURL(stream));
 		      	if(localVideoTracks.length>0){
 		 		 	$scope.showLocalVideo=true;
+		 		 	localvid = document.getElementById('localVideo');
+		 		 	$scope.rotateVideo(localvid);
 		      	}
 		      	else{
 		      		$scope.showLocalVideo=false;
@@ -155,12 +157,15 @@ define(['../modules/controller'], function (controllers) {
 			$scope.callImageStyle = {'text-align':'center'};
 			$scope.audioCall={};
 			$scope.isAudioCall=false;
+			$scope.showLocalVideo=false;
 		};
 		$scope.stopStream=function(){
 			if(stream)
 				stream.stop();
-			localvid.pause();
-			localvid.src="";
+			if(localvid){
+				localvid.pause();
+				localvid.src="";
+			}
 		};
 		$scope.answerCall=function(type){
 			$scope.inCallAudio.stop();
@@ -242,6 +247,8 @@ define(['../modules/controller'], function (controllers) {
 			$scope.outCallAudio.stop();
 			$scope.stopStream();
     		$scope.showCallModal='display-none';
+    		$scope.showLocalVideo=false;
+    		
 		});
 		ss(socketiostream).on('image', function (data) {
 			console.log('image');
@@ -298,6 +305,13 @@ define(['../modules/controller'], function (controllers) {
     		$scope.callPhoto = msg.fromPhoto;
     		$scope.callNumber = msg.callNumber;
     		$scope.showCallModal='display-block';
+		};
+		$scope.rotateVideo=function(video) {
+			console.log(video);
+			video.style[navigator.mozGetUserMedia ? 'transform' : '-webkit-transform'] = 'rotate(0deg)';
+			setTimeout(function() {
+				video.style[navigator.mozGetUserMedia ? 'transform' : '-webkit-transform'] = 'rotate(360deg)';
+			}, 1000);
 		};
     	// Listen to ESTABLISH_COMMUNICATION event
     	$scope.$on("ESTABLISH_COMMUNICATION", function (event) {
