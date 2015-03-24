@@ -10,7 +10,7 @@ define([
 	'./socketio',
 	'./socketio-stream',
 	'./guid',
-	'./VideoStream',
+	'./videoStream',
 	'./Room',
 	'./socketRoom'
 ], function () {
