@@ -41,6 +41,9 @@ exports.getUserIdByMobileNumber=function(db){
           else{
           	var user={};
           	user.mobileNumber = req.params.mobileNumber;
+          	user.profilePic = "../images/default_profile_M.jpg";
+            user.profileName = "Guest";
+            user.profileStatus = "Hey there! I'm using Tattlez.";
           	db.users.insert(user, function (err, doc) {
                  res.send(doc._id.toString());
                  res.end();
