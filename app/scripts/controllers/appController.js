@@ -37,6 +37,7 @@ define(['../modules/controller'], function (controllers) {
 	    	$scope.outCallAudio.stop();
 	    	contactsSrvc.getallContacts().then(function(contacts){
 				var calleeName = data[0].id;
+				var calleePhoto = '../images/default_profile_M.jpg';
 				var remoteVideoTracks = (data[0].stream).getVideoTracks();
 				var isRemoteVideo=false;
 				console.log('video tracks');
@@ -49,17 +50,20 @@ define(['../modules/controller'], function (controllers) {
 				}
 				var contact = $filter('filter')(contacts,{contactNumber:data[0].id},true)[0];
 				console.log(contact);
-				if(contact)
+				if(contact){
 					calleeName = contact.contactName;
+					calleePhoto = contact.photo;
+				}
 				console.log('Client connected, adding new stream');
 		      $scope.peers.push({
 		        id: data[0].id,
 		        name:calleeName,
-		        image:contact.photo,
+		        image:calleePhoto,
 		        isRemoteVideo: isRemoteVideo,
 		        stream: $scope.getLocalVideo(URL.createObjectURL(data[0].stream))
 		      });
 		      if($scope.peers.length > 0){
+		      	
 		      	$scope.callImageStyle ={};
 		      	$scope.isOutGoingCall=true;
 		      	var localVideoTracks = stream.getVideoTracks();
@@ -74,11 +78,12 @@ define(['../modules/controller'], function (controllers) {
 		      		 joinSrvc.getUserByUserId().then(function(userdata){
 			            $scope.audioCall.image = userdata.profilePic;
 			            $scope.audioCall.name = userdata.profileName;
+			            console.log($scope.audioCall);
 			        });
 			        $scope.callImageStyle = {'text-align':'center'};
 			        $scope.isAudioCall=true;
 		      	}
-		      	
+		      	$scope.isCallStarted = true;
 		 		 $scope.callTitle = "Ongoing Call";
 		 		 $scope.callImage=false;
 		 		 $scope.remoteCameraDivBG = {'background-color':'#000'};
@@ -86,6 +91,29 @@ define(['../modules/controller'], function (controllers) {
 			});
 				
 		});
+		$scope.mutedAudio=false;
+		$scope.mutedVideo=false;
+		$scope.muteAudioToggle=function(){
+			var audioTracks = stream.getAudioTracks();
+			if(audioTracks.length>0){
+				$scope.mutedAudio= !$scope.mutedAudio;
+				for(var i=0;i<audioTracks.length;i++){
+					audioTracks[i].enabled = !audioTracks[i].enabled;
+					
+				}
+			}
+		};
+		
+		$scope.muteVideoToggle=function(){
+			var videoTracks = stream.getVideoTracks();
+			if(videoTracks.length>0){
+				$scope.mutedVideo= !$scope.mutedVideo;
+				for(var i=0;i<videoTracks.length;i++){
+					videoTracks[i].enabled = !videoTracks[i].enabled;
+					
+				}
+			}
+		};
 		$scope.$on("STREAM_ENDED", function (event,data) {
 			  console.log('Client disconnected, removing stream');
 			  $scope.remoteCameraDivBG = {'background-color':'#fff'};
@@ -103,6 +131,9 @@ define(['../modules/controller'], function (controllers) {
 				});
 				$scope.audioCall={};
 				$scope.isAudioCall=false;
+				$scope.mutedAudio=false;
+				$scope.mutedVideo=false;
+				$scope.isCallStarted=false;
 		      }
 		});
 	    $scope.getLocalVideo = function (streamUrl) {
@@ -158,6 +189,9 @@ define(['../modules/controller'], function (controllers) {
 			$scope.audioCall={};
 			$scope.isAudioCall=false;
 			$scope.showLocalVideo=false;
+			$scope.mutedAudio=false;
+			$scope.mutedVideo=false;
+			$scope.isCallStarted=false;
 		};
 		$scope.stopStream=function(){
 			if(stream)
