@@ -11,6 +11,40 @@ define(['../modules/controller'], function (controllers) {
 	  			$rootScope.$broadcast("ESTABLISH_COMMUNICATION");
 	  		}
 	  	});
+	  	window.requestAnimFrame = (function(){
+	      return  window.requestAnimationFrame       ||
+	              window.webkitRequestAnimationFrame ||
+	              window.mozRequestAnimationFrame    ||
+	              function(callback, element){
+	                window.setTimeout(callback, 1000 / 60);
+	              };
+	    })();
+	
+	    window.AudioContext = (function(){
+	        return window.AudioContext || window.mozAudioContext;
+	    })();
+	    // Global Variables for Audio
+	    var sourceNode;
+	    var audioContext;
+	    var analyserNode;
+	    var javascriptNode;
+	    var sampleSize = 1024;  // number of samples to collect before analyzing
+	                            // decreasing this gives a faster sonogram, increasing it slows it down
+	    var amplitudeArray;     // array to hold frequency data
+	    var audioStream;
+	
+	    // Global Variables for Drawing
+	    var column = 0;
+	    var canvasWidth  = 487;
+	    var canvasHeight = 156;
+	    var ctx;
+	    
+
+        try {
+            audioContext = new AudioContext();
+        } catch(e) {
+            alert('Web Audio API is not supported in this browser');
+        }
 	  	$scope.showLocalVideo=false;
 	  	$scope.localVideo={};
 	  	$scope.isAudioCall=false;
@@ -33,12 +67,24 @@ define(['../modules/controller'], function (controllers) {
     	$scope.remoteCameraDivBG = {'background-color':'#fff'};
     	$scope.peers = [];
     	$scope.audioCall={};
+    	contactsSrvc.getallContacts().then(function(contacts){
+			if(joinSrvc.mobileAndOtp.mobileNumber){
+				userNumber = joinSrvc.mobileAndOtp.mobileNumber;
+			}
+			else{
+				joinSrvc.getUserByUserId().then(function(userdata){
+					userNumber = userdata.mobileNumber;
+				});	
+			}
+			
+		});
 	    $scope.$on("STREAM_RECEIVED", function (event,data) {
 	    	$scope.outCallAudio.stop();
 	    	contactsSrvc.getallContacts().then(function(contacts){
 				var calleeName = data[0].id;
 				var calleePhoto = '../images/default_profile_M.jpg';
 				var remoteVideoTracks = (data[0].stream).getVideoTracks();
+				var remoteAudioTracks = (data[0].stream).getAudioTracks();
 				var isRemoteVideo=false;
 				console.log('video tracks');
 				console.log(remoteVideoTracks);
@@ -91,15 +137,19 @@ define(['../modules/controller'], function (controllers) {
 			});
 				
 		});
+		$scope.$watchCollection('peers',function(oldValue,newValue){
+			console.log(oldValue);
+			console.log(newValue);
+		},true);
 		$scope.mutedAudio=false;
 		$scope.mutedVideo=false;
 		$scope.muteAudioToggle=function(){
 			var audioTracks = stream.getAudioTracks();
 			if(audioTracks.length>0){
 				$scope.mutedAudio= !$scope.mutedAudio;
+				Room.muteAudioToggle({audioMuted:$scope.mutedAudio,communicationId:$scope.communicationId,userNumber:userNumber,contactNumber:$scope.callNumber});
 				for(var i=0;i<audioTracks.length;i++){
 					audioTracks[i].enabled = !audioTracks[i].enabled;
-					
 				}
 			}
 		};
@@ -108,12 +158,45 @@ define(['../modules/controller'], function (controllers) {
 			var videoTracks = stream.getVideoTracks();
 			if(videoTracks.length>0){
 				$scope.mutedVideo= !$scope.mutedVideo;
+				Room.muteVideoToggle({videoMuted:$scope.mutedVideo,communicationId:$scope.communicationId,userNumber:userNumber,contactNumber:$scope.callNumber});
 				for(var i=0;i<videoTracks.length;i++){
 					videoTracks[i].enabled = !videoTracks[i].enabled;
-					
 				}
 			}
+			
 		};
+		socketio.on('muteCall', function (data) {
+			switch (data.type) {
+        		case 'audio-muted':
+        			for(var i=0;i<$scope.peers.length;i++){
+						if($scope.peers[i]['id'] == data.from){
+							console.log($scope.peers[i]);
+						}
+					}
+					break;
+				case 'audio-unmuted':
+        			for(var i=0;i<$scope.peers.length;i++){
+						if($scope.peers[i]['id'] == data.from){
+							console.log($scope.peers[i]);
+						}
+					}
+					break;
+				case 'video-muted':
+        			for(var i=0;i<$scope.peers.length;i++){
+						if($scope.peers[i]['id'] == data.from){
+							$scope.peers[i]['isRemoteVideo'] = false;
+						}
+					}
+					break;
+				case 'video-unmuted':
+        			for(var i=0;i<$scope.peers.length;i++){
+						if($scope.peers[i]['id'] == data.from){
+							$scope.peers[i]['isRemoteVideo'] = true;
+						}
+					}
+					break;
+			}
+		});
 		$scope.$on("STREAM_ENDED", function (event,data) {
 			  console.log('Client disconnected, removing stream');
 			  $scope.remoteCameraDivBG = {'background-color':'#fff'};
@@ -139,7 +222,85 @@ define(['../modules/controller'], function (controllers) {
 	    $scope.getLocalVideo = function (streamUrl) {
 	      return $sce.trustAsResourceUrl(streamUrl);
 	    };
+	    $scope.clearCanvas = function() {
+	        column = 0;
+	        ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+	        // ctx.beginPath();
+	        ctx.strokeStyle = '#f00';
+	        var y = (canvasHeight / 2) + 0.5;
+	        ctx.moveTo(0, y);
+	        ctx.lineTo(canvasWidth-1, y);
+	        ctx.stroke();
+    	};
+    	$scope.setupAudioNodes = function(stream) {
+	        // create the media stream from the audio input source (microphone)
+	        sourceNode = audioContext.createMediaStreamSource(stream);
+	        audioStream = stream;
+	
+	        analyserNode   = audioContext.createAnalyser();
+	        javascriptNode = audioContext.createScriptProcessor(sampleSize, 1, 1);
+	
+	        // Create the array for the data values
+	        amplitudeArray = new Uint8Array(analyserNode.frequencyBinCount);
+	
+	        // setup the event handler that is triggered every time enough samples have been collected
+	        // trigger the audio analysis and draw one column in the display based on the results
+	        javascriptNode.onaudioprocess = function () {
+	
+	            amplitudeArray = new Uint8Array(analyserNode.frequencyBinCount);
+	            analyserNode.getByteTimeDomainData(amplitudeArray);
+	
+	            // draw one column of the display
+	            requestAnimFrame($scope.drawTimeDomain);
+	        };
+	
+	        // Now connect the nodes together
+	        // Do not connect source node to destination - to avoid feedback
+	        sourceNode.connect(analyserNode);
+	        analyserNode.connect(javascriptNode);
+	        javascriptNode.connect(audioContext.destination);
+	    };
+	    $scope.drawTimeDomain = function() {
+	        var minValue = 9999999;
+	        var maxValue = 0;
+	
+	        for (var i = 0; i < amplitudeArray.length; i++) {
+	            var value = amplitudeArray[i] / 256;
+	            if(value > maxValue) {
+	                maxValue = value;
+	            } else if(value < minValue) {
+	                minValue = value;
+	            }
+	        }
+	
+	        var y_lo = canvasHeight - (canvasHeight * minValue) - 1;
+	        var y_hi = canvasHeight - (canvasHeight * maxValue) - 1;
+	
+	        ctx.fillStyle = '#ffffff';
+	        console.log(column);
+	        console.log(y_lo);
+	        console.log(1);
+	        console.log(y_hi - y_lo);
+	        ctx.fillRect(column,y_lo, 1, y_hi - y_lo);
+	
+	        // loop around the canvas when we reach the end
+	        column += 1;
+	        if(column >= canvasWidth-400){
+	        	//Stop the process
+	            javascriptNode.onaudioprocess = null;
+	            if(audioStream) audioStream.stop();
+	            if(sourceNode)  sourceNode.disconnect();
+	        }
+	        if(column >= canvasWidth) {
+	            column = 0;
+	            $scope.clearCanvas();
+	            
+	        }
+	    };
     	$scope.$on("OUT_GOING_CALL", function (event,data) {
+    		ctx = $("#canvas").get()[0].getContext("2d");
+    		$scope.clearCanvas();
+    		
     		var callType = data.callType;
     		$scope.isOutGoingCall=true;
     		$scope.callTitle = "Calling";
@@ -160,6 +321,7 @@ define(['../modules/controller'], function (controllers) {
     		VideoStream.get(callType)
 	    .then(function (s) {
 	      stream = s;
+	      $scope.setupAudioNodes(stream);
 	      Room.init(stream);
 	      Room.createRoom($scope.communicationId,$scope.userNumber)
 	        .then(function (roomId) {

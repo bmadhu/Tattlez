@@ -4,6 +4,7 @@
 		<span style="color:#FFF;font-family: monospace;" ng-bind="callNumber"></span>
 		<span style="color:#FFF;font-size: 13px;font-family: cursive;float:right;padding-right: 20px;" ng-bind="callTitle"></span>
 	</div>
+	<canvas id="canvas" width="487" height="156" style="background-color: black;"></canvas>
 	<div class="modal-body no-padding" style="height:195px;" ng-style="callImageStyle">
 		<video id="localVideo" src="{{localVideo.src}}" muted autoplay ng-show="showLocalVideo" class="camera-local"></video>
 		<img ng-src="{{callPhoto}}" ng-if="callImage" class="img-circle" style="margin-top: 5%;" width="150px" height="150px" />

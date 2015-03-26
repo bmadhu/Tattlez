@@ -3,7 +3,7 @@
 */
 define(['../modules/services'], function (services) {
     'use strict';
-    services.factory('Room', function ($q,socketroom,$timeout,$rootScope) {
+    services.factory('Room', function ($q,socketroom,$timeout,$rootScope,socketio) {
     	var servers= {iceServers: [{"url": "stun:stun.l.google.com:19302"}]};
 		var constraints = {optional: [{"DtlsSrtpKeyAgreement": true}]};
     	var iceConfig = { 'iceServers': [{ 'url': 'stun:stun.l.google.com:19302' }]},
@@ -151,6 +151,22 @@ var connected;
           connected = false;
         });
         return d.promise;
+      },
+      muteAudioToggle: function(data){
+      	if(data.audioMuted){
+      		socketio.emit('muteCall', {communicationId:data.communicationId,from:data.userNumber,to:data.contactNumber,type:'audio-muted'});
+      	}
+      	else{
+      		socketio.emit('muteCall', {communicationId:data.communicationId,from:data.userNumber,to:data.contactNumber,type:'audio-unmuted'});
+      	}
+      },
+      muteVideoToggle:function(data){
+      	if(data.videoMuted){
+      		socketio.emit('muteCall', {communicationId:data.communicationId,from:data.userNumber,to:data.contactNumber,type:'video-muted'});
+      	}
+      	else{
+      		socketio.emit('muteCall', {communicationId:data.communicationId,from:data.userNumber,to:data.contactNumber,type:'video-unmuted'});
+      	}
       },
       disconnect:function(){
       	var d = $q.defer();
