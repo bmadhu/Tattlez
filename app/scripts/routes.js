@@ -36,6 +36,12 @@ define(['./app'], function (app) {
             	controller: 'ContactsCtrl',
             	module: 'private'
             })
+            .state('contactInfo', {
+                url: '/contactInfo',
+                templateUrl: '../views/contactInfo.html',
+                controller: 'ContactInfoCtrl',
+                module: 'private'
+            })
             .state('addContact', {
             	url: '/addContact',
             	templateUrl: '../views/addNewContact.html',

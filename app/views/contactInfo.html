@@ -1,0 +1,62 @@
+<div class="heading">
+    <span class="text">{{contactInfo.group ? 'Group Info' : 'Contact Info'}}</span>
+</div>
+
+<div class="content" style="padding-left: 15px;padding-right: 15px">
+    <div style="border-bottom: solid 1px gray; padding-top: 15px;padding-bottom: 15px;">
+        <img id="contactImage" ng-src="{{ contactInfo.photo }}" class="img-default" width="50px" height="50px" />
+        <b ng-bind="contactInfo.contactName"></b>
+    </div>
+    <div ng-if="!contactInfo.group" style="border-bottom: solid 1px gray; padding-top: 15px;padding-bottom: 15px;">
+        <div style="padding-bottom: 4px;">
+            <b>Status</b>
+        </div>
+        <span> {{ contactInfo.status }} </span>
+    </div>
+    <div style="border-bottom: solid 1px gray; padding-top: 15px;padding-bottom: 15px;">
+        <div style="padding-bottom: 4px;">
+            <b>Phone</b>
+        </div>
+        <span> {{ contactInfo.contactNumber }} </span>
+    </div>
+</div>
+<!--<div class="content" style="padding-left: 10px;padding-right: 10px">
+    <div style="border-bottom: solid 1px gray; padding-top: 15px;padding-bottom: 15px;">
+        <img id="contactImage" ng-src="{{ contactInfo.photo }}" class="img-default" width="50px" height="50px" />
+        <b ng-bind="contactInfo.contactName"></b>
+    </div>
+    <div style="border-bottom: solid 1px gray; padding-top: 15px;padding-bottom: 15px;">
+        <b>Status</b>
+        <span> {{ contactInfo.status }} </span>
+    </div>
+    <div style="border-bottom: solid 1px gray; padding-top: 15px;padding-bottom: 15px;">
+        <b>Phone</b>
+        <span> {{ contactInfo.contactNumber }} </span>
+    </div>
+</div>-->
+
+<!-- FOOTER SECTION -->
+<div class="footer" data-align="center">
+    <div class="pull-right padding-top-small padding-right-mini">
+        <button type="button" class="btn btn-default dropdown-toggle btn-custom" ng-click="gotoContacts()">
+            <i class="fa fa-mail-reply"></i>
+        </button>
+        <!--<a class="fa fa-undo"></a>-->
+    </div>
+    <div class="btn-group dropup pull-left padding-top-small padding-left-mini" dropdown is-open="status.isopen">
+        <button type="button" class="btn btn-default dropdown-toggle btn-custom"  ng-disabled="true">
+            <i class="fa fa-align-justify"></i>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+            <li><a ng-click="tellFriend()"><i class="fa fa-share-alt"></i>&nbsp;Tell a friend</a></li>
+            <li><a ng-click="goToPhoneContactsPage()"><i class="fa fa-th-list"></i>&nbsp;Contacts</a></li>
+            <li><a ng-click="refreshContacts()"><i class="fa fa-refresh"></i>&nbsp;Refresh</a></li>
+            <li><a ng-click="goToHelpPage()"><i class="fa fa-question-circle"></i>&nbsp;Help</a></li>
+        </ul>
+    </div>
+    <div class="padding-top-small" style="text-align: center;padding-left: 2px;">
+        <button type="button" class="btn btn-default dropdown-toggle btn-custom" ng-click="gotoHistory()">
+            <i class="fa fa-home"></i>
+        </button>
+    </div>
+</div>

@@ -177,6 +177,7 @@ define(['../modules/controller'], function (controllers) {
         };
 		//get the contactId of the user to which we are trying to start chat.
 		$scope.contactId = contactsSrvc.getSelectedContactForChat();
+        console.log($scope.contactId);
 		
 		if(joinSrvc.mobileAndOtp.mobileNumber){
 			userNumber = joinSrvc.mobileAndOtp.mobileNumber;

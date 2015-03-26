@@ -70,6 +70,16 @@ define(['../modules/controller'], function (controllers) {
             $state.go('addContact');
         };
 
+        /**
+         * Displays contact information of the contact
+         * @param contactId
+         */
+        $scope.contactInfo = function (contactId, isGroup) {
+            var contact = {contactId: contactId, isGroup: isGroup};
+            contactsSrvc.setSelectedContactForInfo(contactId);
+            $state.go('contactInfo');
+        };
+
     	/**
 		* Loads chatting page from contacts
 		**/

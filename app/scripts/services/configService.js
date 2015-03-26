@@ -11,6 +11,7 @@ define(['../modules/services'], function (services) {
 			uidLocalStorage: "_id_tattlez",
 			cidLocalStorage: "_cid_tattlez",
 			cmidLocalStorage: "_cmid_tattlez",
+            cinfoLocalStorage: "_cinfo_tattlez",
 			serverURL:"http://localhost:3000",
 			communicationFilesUplaodPath:"files/communication-files/",
             userProfilePicsUploadPath: "files/profile-pics/",

@@ -58,6 +58,15 @@ define(['../modules/services'], function (services) {
         function getSelectedContactForChat() {
             return localStorage.getItem(configSrvc.cidLocalStorage);
         }
+        //set Selected Contact for info.
+        function setSelectedContactForInfo(contactId) {
+            localStorage.setItem(configSrvc.cinfoLocalStorage, contactId);
+        }
+        //get Selected Contact for info.
+        function getSelectedContactForInfo() {
+            return localStorage.getItem(configSrvc.cinfoLocalStorage);
+        }
+
         //remove Selected Contact for chat
         function removeSelectedContactForChat(){
         	localStorage.removeItem(configSrvc.cidLocalStorage);
@@ -91,6 +100,8 @@ define(['../modules/services'], function (services) {
             deleteContact: deleteContact,
             setSelectedContactForChat: setSelectedContactForChat,
             getSelectedContactForChat: getSelectedContactForChat,
+            setSelectedContactForInfo: setSelectedContactForInfo,
+            getSelectedContactForInfo: getSelectedContactForInfo,
             removeSelectedContactForChat: removeSelectedContactForChat,
             getChatContactDetails: getChatContactDetails,
             refreshContacts: refreshContacts,

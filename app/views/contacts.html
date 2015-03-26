@@ -39,12 +39,15 @@
 					<button type="button" class="btn btn-default dropdown-toggle btn-custom">
 						<span class="caret"></span>
 					</button>
-					<ul class="dropdown-menu dropdown-menu-custom" role="menu">
+					<ul class="dropdown-menu dropdown-menu-custom" role="menu" ng-switch="contact.group">
 						<li><a ng-click="chat(contact.id)"><span class="glyphicon glyphicon-comment"></span>&nbsp;Chat</a></li>
 						<li class="divider"></li>
 						<li><a ng-click="Call(contact.id,'audio')"><span class="glyphicon glyphicon-earphone"></span>&nbsp;Audio Call</a></li>
 						<li class="divider"></li>
 						<li><a ng-click="Call(contact.id,'video')"><span class="glyphicon glyphicon-facetime-video"></span>&nbsp;Video Call</a></li>
+                        <li class="divider"></li>
+                        <li ng-switch-when="false"><a ng-click="contactInfo(contact.id, contact.group)"><span class="glyphicon glyphicon-user"></span>&nbsp;Contact Info</a></li>
+                        <li ng-switch-when="true"><a ng-click="contactInfo(contact.id, contact.group)"><span class="fa fa-group"></span>&nbsp;Group Info</a></li>
 						<li class="divider"></li>
 						<li><a ng-click="deleteContact($index)"><span class="glyphicon glyphicon-trash"></span>&nbsp;Delete {{contact.group ? 'Group' : 'Contact'}}</a></li>
 					</ul>
