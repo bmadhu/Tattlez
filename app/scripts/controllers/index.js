@@ -8,6 +8,7 @@ define([
     './otpController',
     './historyController',
     './contactsController',
+    './contactInfoController',
     './addContactController',
 	'./chatController',
     './newGroupController',

@@ -88,9 +88,10 @@ define(['../modules/services'], function (services) {
 			});
 			return future.promise;
 		}
-		function getUserByUserId(){
+		function getUserByUserId(userId){
 			var future=$q.defer();
-			$http.post('/users/getUserByUserId/'+localStorage.getItem(configSrvc.uidLocalStorage)).success(function(data){
+            var userId = userId ? userId : localStorage.getItem(configSrvc.uidLocalStorage);
+			$http.post('/users/getUserByUserId/'+ userId).success(function(data){
 				if(data!=null){
 					future.resolve(data);
 				}
