@@ -3,7 +3,7 @@
  */
 var express = require('express');
 var bodyParser = require('body-parser');
-var databaseUrl = "mongodb://srikanth:6036@proximus.modulusmongo.net:27017/yvubA7jy";
+var databaseUrl = "mongodb://srikanth:6036@proximus.modulusmongo.net:27017/pipyjY6g";
 var collections = ["users", "contacts", "communications", "messages"];
 var mongojs = require("mongojs");
 var db = mongojs.connect(databaseUrl, collections);
@@ -129,6 +129,17 @@ var Chat = io
       	if (joinedRoom[data.communicationId]) {
       		// Broadcasts the message to the other contact
       		socket.broadcast.to(joinedRoom[data.communicationId]).emit('call',data);
+          } else {
+              socket.send(
+			   "you're not connected to chat." +
+			   "select a contact and then start chat."
+			);
+          }
+      });
+      socket.on('muteCall', function (data) {
+      	if (joinedRoom[data.communicationId]) {
+      		// Broadcasts the message to the other contact
+      		socket.broadcast.to(joinedRoom[data.communicationId]).emit('muteCall',data);
           } else {
               socket.send(
 			   "you're not connected to chat." +
