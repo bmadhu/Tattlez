@@ -2,22 +2,42 @@
     <span class="text">{{contactInfo.group ? 'Group Info' : 'Contact Info'}}</span>
 </div>
 
-<div class="content" style="padding-left: 15px;padding-right: 15px">
+<div class="content" style="padding-left: 15px;padding-right: 15px" ng-switch="contactInfo.group">
     <div style="border-bottom: solid 1px gray; padding-top: 15px;padding-bottom: 15px;">
         <img id="contactImage" ng-src="{{ contactInfo.photo }}" class="img-default" width="50px" height="50px" />
-        <b ng-bind="contactInfo.contactName"></b>
+        <b style="margin-left: 10px" ng-bind="contactInfo.contactName"></b>
     </div>
+    <!-- Status For non-group members -->
     <div ng-if="!contactInfo.group" style="border-bottom: solid 1px gray; padding-top: 15px;padding-bottom: 15px;">
         <div style="padding-bottom: 4px;">
             <b>Status</b>
         </div>
         <span> {{ contactInfo.status }} </span>
     </div>
-    <div style="border-bottom: solid 1px gray; padding-top: 15px;padding-bottom: 15px;">
+    <div ng-switch-when="false" style="border-bottom: solid 1px gray; padding-top: 15px;padding-bottom: 15px;">
         <div style="padding-bottom: 4px;">
             <b>Phone</b>
         </div>
         <span> {{ contactInfo.contactNumber }} </span>
+    </div>
+    <!-- All participants of Group -->
+    <div ng-switch-when="true" style="padding-top: 10px;padding-bottom: 10px;height: 72%">
+        <div style="padding-bottom: 4px;">
+            <b>Participants</b>
+        </div>
+        <div style="height:92%;overflow-y: scroll;">
+            <div ng-repeat="grpContact in groupContactInfoArray" class="friendsdiv" style="padding-top: 5px;padding-bottom: 5px;">
+                <div style="float: left;width: 14%">
+                    <img ng-src="{{ grpContact.photo }}" class="img-default" width="50px" height="50px" />
+                </div>
+                <div style="margin-left: 65px;width:80%;padding-top: 3px;">
+                    <b ng-bind="grpContact.contactName"></b>
+                    <div style="clear: right">
+                        <span style="color: #808080" ng-bind="grpContact.contactNumber"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
